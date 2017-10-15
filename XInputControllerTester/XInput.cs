@@ -22,16 +22,22 @@ namespace XInputControllerTester
         /// </summary>
         void GetGamepad()
         {
-            //XInput Device Array
+            ///XInput Device Array
             var devices = new[] { new Controller(UserIndex.One), new Controller(UserIndex.Two), new Controller(UserIndex.Three), new Controller(UserIndex.Four) };
 
             foreach (var gamepad in devices)
             {
-                if (gamepad.IsConnected)
+                if (gamepad.IsConnected && gamepad != null)
                 {
                     _gamepad = gamepad;
                     Print("New Controller Found! Index Number = " + gamepad.UserIndex, true, true, ConsoleColor.Yellow);
+                    Print(gamepad.ToString(), true, true, ConsoleColor.DarkGray);
                     break;
+                }
+                else
+                {
+                    Print("No Controller Found", true, true, ConsoleColor.Red);
+                    Console.ReadLine();
                 }
             }
         }
@@ -41,6 +47,8 @@ namespace XInputControllerTester
         /// </summary>
         void GetGamePadState()
         {
+            if (_gamepad == null) return;
+
             while (_gamepad.IsConnected)
             {
                 var state = _gamepad.GetState().Gamepad;

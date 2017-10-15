@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/// XInputControllerTester
+/// Wordt gebruikt om de connectie van de gamepad/controller te testen en om input/output te zien.
+/// API: SharpDX
+/// Author: Dominic Kleeven
 
 namespace XInputControllerTester
 {
