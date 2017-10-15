@@ -12,6 +12,9 @@ namespace DefuseIT_Game
 
         Gamepad _controller = new Gamepad();
 
+        /// <summary>
+        /// Initialize alle onderdelen/methods.
+        /// </summary>
         public StartScherm()
         {
             InitializeComponent();
@@ -21,7 +24,9 @@ namespace DefuseIT_Game
             StartWorkers();
         }
 
-        //Import, Values + Draggable Window.
+        /// <summary>
+        /// Import user32.dll, dit is nodig voor het draggen van de Form.
+        /// </summary>
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
         [DllImportAttribute("user32.dll")]
@@ -29,14 +34,20 @@ namespace DefuseIT_Game
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        //Drag Window Function
+        /// <summary>
+        /// Zorgt ervoor dat de Form draggable is.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartSchermBackground_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
 
-        //Get Controller Status
+        /// <summary>
+        /// Haalt de status van de controller op.
+        /// </summary>
         private void GetControllerStatus()
         {
             if (_controller.IsConnected)
@@ -45,7 +56,9 @@ namespace DefuseIT_Game
             }
         }
 
-        //Start BackgroundWorkers
+        /// <summary>
+        /// Start de backgroundworkers (ListenToController).
+        /// </summary>
         private void StartWorkers()
         {
             BackgroundWorker w1 = new BackgroundWorker();
@@ -53,7 +66,11 @@ namespace DefuseIT_Game
             w1.RunWorkerAsync();
         }
 
-        //BackgroundWorker w1 start listening to controller
+        /// <summary>
+        /// BackgroundWorker W1 (ListenToController) zorgt ervoor dat de applicatie naar de controller output luisterd.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListenToController(object sender, DoWorkEventArgs e)
         {
             if (_controller._gamepad == null) return;
@@ -68,6 +85,9 @@ namespace DefuseIT_Game
             }
         }
 
+        /// <summary>
+        /// Luistert naar alle UI events.
+        /// </summary>
         private void UiEvents()
         {
 
@@ -102,7 +122,11 @@ namespace DefuseIT_Game
            
         }
 
-        //Invoke ControlScherm
+        /// <summary>
+        /// Invoke new Form, dit zorgt ervoor dat als het spel gestart wordt via de Controller dat het op de main thread gebeurd (controller zit op de 2de thread).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartButton_Click(object sender, MouseEventArgs e)
         {
             MethodInvoker startForm = delegate
@@ -123,37 +147,11 @@ namespace DefuseIT_Game
 
 
 
+        #region UI Elements
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      /// <summary>
-      /// UI Elements Events
-      /// </summary>
-
+        /// <summary>
+        /// UI Elements Events.
+        /// </summary>
         //StartButton.
         private void StartButton_MouseLeave(object sender, EventArgs e)
         {
@@ -222,4 +220,5 @@ namespace DefuseIT_Game
         }
 
     }
+        #endregion
 }

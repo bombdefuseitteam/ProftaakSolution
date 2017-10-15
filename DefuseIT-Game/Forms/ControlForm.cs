@@ -8,18 +8,24 @@ namespace DefuseIT_Game
 {
     public partial class ControlScherm : Form
     {
-        Gamepad _controller = new Gamepad();
+        Gamepad Controller = new Gamepad();
+
+        /// <summary>
+        /// Initialize alle onderdelen/methods.
+        /// </summary>
         public ControlScherm()
         {
             InitializeComponent();
             //WindowState = FormWindowState.Maximized; < Uncomment for P1 Event
             PlayWebcamStream();
-            _controller.Initialize();
+            Controller.Initialize();
             GetControllerStatus();
             UiEvents();
         }
 
-        //Import, Values for Draggable Window.
+        /// <summary>
+        /// Import user32.dll, dit is nodig voor het draggen van de Form.
+        /// </summary>
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
         [DllImportAttribute("user32.dll")]
@@ -27,23 +33,31 @@ namespace DefuseIT_Game
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        //Drag Window Function
+        /// <summary>
+        /// Zorgt ervoor dat de Form draggable is.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartSchermBackground_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
 
-        //GetController Status
+        /// <summary>
+        /// Haalt de status van de controller op.
+        /// </summary>
         private void GetControllerStatus()
         {
-            if (_controller.IsConnected)
+            if (Controller.IsConnected)
             {
                 ControllerStatus.Image = Properties.Resources.Controller_icon_CONNECTED;
             }
         }
 
-        //Listen to UI Events
+        /// <summary>
+        /// Luistert naar alle UI events.
+        /// </summary>
         private void UiEvents()
         {
 
@@ -71,6 +85,9 @@ namespace DefuseIT_Game
             Minimize.MouseClick += Minimize_Click;     
         }
 
+        /// <summary>
+        /// Speelt de webcamstream af binnen VLC.
+        /// </summary>
         private void PlayWebcamStream()
         {
             WebcamStream.playlist.add("https://www.youtube.com/watch?v=th4Czv1j3F8");
@@ -78,6 +95,10 @@ namespace DefuseIT_Game
         }
 
 
+        #region UI Elements
+        /// <summary>
+        /// UI Elements/Events.
+        /// </summary>
         //Maximize Button.
         private void Maximize_Click(object sender, EventArgs e)
         {
@@ -133,8 +154,14 @@ namespace DefuseIT_Game
         {
             CloseApplication.ForeColor = Color.Yellow;
         }
+        #endregion
 
-        //Indien er iets mis gaat kan het spel hiermee opnieuw opgestart worden. (Sluit het huidige form)
+        
+        /// <summary>
+        /// Restart het spel, sluit huidige form en start het StartScherm op.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RestartGame_Click(object sender, EventArgs e)
         {
             Hide();
