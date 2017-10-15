@@ -5,12 +5,8 @@
 
 namespace XInputControllerTester
 {
-
-    /// XInputControllerTester
-    /// Author: Dominic Kleeven
     class Init
     {
-
         /// <summary>
         /// Initialize XinputControllerTester
         /// </summary>
