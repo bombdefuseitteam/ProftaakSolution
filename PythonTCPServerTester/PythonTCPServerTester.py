@@ -36,6 +36,6 @@ def threaded_client(conn):
 while True:
 
     conn, addr = s.accept()
-    print("connected to: "+addr[0]+":"+str(addr[1]))
+    print("Connected to: "+addr[0]+":"+str(addr[1]))
 
     start_new_thread(threaded_client,(conn,))

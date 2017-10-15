@@ -9,8 +9,15 @@ namespace DefuseIT_Game
 {
     public partial class StartScherm : Form
     {
+        /// <summary>
+        /// XInput Device
+        /// </summary>
+        Gamepad Controller = new Gamepad();
 
-        Gamepad _controller = new Gamepad();
+        /// <summary>
+        /// BackgroundWorker (Listen to Controller)
+        /// </summary>
+        BackgroundWorker w1 = new BackgroundWorker();
 
         /// <summary>
         /// Initialize alle onderdelen/methods.
@@ -19,7 +26,7 @@ namespace DefuseIT_Game
         {
             InitializeComponent();
             UiEvents();
-            _controller.Initialize();
+            Controller.Initialize();
             GetControllerStatus();
             StartWorkers();
         }
@@ -50,7 +57,7 @@ namespace DefuseIT_Game
         /// </summary>
         private void GetControllerStatus()
         {
-            if (_controller.IsConnected)
+            if (Controller.IsConnected)
             {
                 ControllerStatus.Image = Properties.Resources.Controller_icon_CONNECTED;
             }
@@ -61,8 +68,8 @@ namespace DefuseIT_Game
         /// </summary>
         private void StartWorkers()
         {
-            BackgroundWorker w1 = new BackgroundWorker();
             w1.DoWork += ListenToController;
+            w1.WorkerSupportsCancellation = true;
             w1.RunWorkerAsync();
         }
 
@@ -73,11 +80,19 @@ namespace DefuseIT_Game
         /// <param name="e"></param>
         private void ListenToController(object sender, DoWorkEventArgs e)
         {
-            if (_controller._gamepad == null) return;
+            BackgroundWorker worker = sender as BackgroundWorker;
 
-            while (_controller._gamepad.IsConnected)
+            if (Controller.GamePad == null) return;
+
+            while (Controller.GamePad.IsConnected)
             {
-                if (_controller.PressedButton ==  "A")
+                if (worker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+
+                if (Controller.PressedButton ==  "A")
                 {
                     StartButton_Click(StartButton, null);
                     break;
@@ -93,8 +108,11 @@ namespace DefuseIT_Game
 
             //Remove Borders from Buttons.
             CloseApplication.FlatAppearance.BorderSize = 0;
+            CloseApplication.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
             Maximize.FlatAppearance.BorderSize = 0;
+            Maximize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
             Minimize.FlatAppearance.BorderSize = 0;
+            Minimize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
 
             //Drag Window.
             StartSchermBackground.MouseDown += StartSchermBackground_MouseDown;
@@ -132,13 +150,15 @@ namespace DefuseIT_Game
             MethodInvoker startForm = delegate
             {
                 Hide();
+                w1.CancelAsync();                       //Kill Gamepad Listener Backgroundworker
+                Controller.DisconnectGamepad();         //Kill Gamepad Backgroundworker
                 ControlScherm cS = new ControlScherm();
                 cS.Closed += (s, args) => Close();
                 cS.Show();
-
             };
             Invoke(startForm);
         }
+
 
         private void StartScherm_Load(object sender, EventArgs e)
         {
@@ -221,4 +241,6 @@ namespace DefuseIT_Game
 
     }
         #endregion
+
+
 }

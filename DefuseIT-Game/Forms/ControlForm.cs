@@ -3,12 +3,22 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using DefuseIT_Game.XInput;
+using DefuseIT_Game.Sockets;
+using System.Threading;
 
 namespace DefuseIT_Game
 {
     public partial class ControlScherm : Form
     {
+        /// <summary>
+        /// XInput Device
+        /// </summary>
         Gamepad Controller = new Gamepad();
+
+        /// <summary>
+        /// Socket Connection
+        /// </summary>
+        SocketConnection Socket = new SocketConnection();
 
         /// <summary>
         /// Initialize alle onderdelen/methods.
@@ -20,6 +30,8 @@ namespace DefuseIT_Game
             PlayWebcamStream();
             Controller.Initialize();
             GetControllerStatus();
+            Socket.Initialize();
+            GetSocketStatus();
             UiEvents();
         }
 
@@ -56,6 +68,17 @@ namespace DefuseIT_Game
         }
 
         /// <summary>
+        /// Haalt de status van de Socket Server op.
+        /// </summary>
+        private void GetSocketStatus()
+        {
+            Thread.Sleep(100);
+            if (Socket.SocketClient.Connected)
+            {
+                SocketStatus.Image = Properties.Resources.WIFICONNECTED;
+            }
+        }
+        /// <summary>
         /// Luistert naar alle UI events.
         /// </summary>
         private void UiEvents()
@@ -63,8 +86,11 @@ namespace DefuseIT_Game
 
             //Remove Borders from Buttons.
             CloseApplication.FlatAppearance.BorderSize = 0;
+            CloseApplication.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
             Maximize.FlatAppearance.BorderSize = 0;
+            Maximize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
             Minimize.FlatAppearance.BorderSize = 0;
+            Minimize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
 
             //Drag Window.
             ControlSchermBackground.MouseDown += StartSchermBackground_MouseDown;
@@ -143,6 +169,7 @@ namespace DefuseIT_Game
         //Close Button.
         private void CloseApplication_Click(object sender, EventArgs e)
         {
+            Socket.DisconnectStream();
             Application.Exit();
 
         }

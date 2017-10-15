@@ -114,9 +114,6 @@
     <None Include="Resources\StartButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\StartButtonHover.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\AButton.png" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bomb.ico" />
+    <None Include="Resources\StartButtonHover.png" />
     <None Include="Resources\WIFICONNECTED.png" />
     <None Include="Resources\Controller_icon_CONNECTED.png" />
     <None Include="Resources\WiFi-Not.png" />

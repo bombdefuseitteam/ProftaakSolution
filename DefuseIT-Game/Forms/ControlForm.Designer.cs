@@ -35,11 +35,11 @@
             this.CloseApplication = new System.Windows.Forms.Button();
             this.RestartGame = new System.Windows.Forms.Label();
             this.ControlSchermBackground = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.SocketStatus = new System.Windows.Forms.PictureBox();
             this.WebcamStream = new AxAXVLC.AxVLCPlugin2();
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ControlSchermBackground)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SocketStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WebcamStream)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,14 +117,14 @@
             this.ControlSchermBackground.TabIndex = 0;
             this.ControlSchermBackground.TabStop = false;
             // 
-            // pictureBox2
+            // SocketStatus
             // 
-            this.pictureBox2.Image = global::DefuseIT_Game.Properties.Resources.WiFi_Not;
-            this.pictureBox2.Location = new System.Drawing.Point(1775, 1011);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(63, 62);
-            this.pictureBox2.TabIndex = 9;
-            this.pictureBox2.TabStop = false;
+            this.SocketStatus.Image = global::DefuseIT_Game.Properties.Resources.WiFi_Not;
+            this.SocketStatus.Location = new System.Drawing.Point(1775, 1011);
+            this.SocketStatus.Name = "SocketStatus";
+            this.SocketStatus.Size = new System.Drawing.Size(63, 62);
+            this.SocketStatus.TabIndex = 9;
+            this.SocketStatus.TabStop = false;
             // 
             // WebcamStream
             // 
@@ -132,7 +132,7 @@
             this.WebcamStream.Location = new System.Drawing.Point(657, 267);
             this.WebcamStream.Name = "WebcamStream";
             this.WebcamStream.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("WebcamStream.OcxState")));
-            this.WebcamStream.Size = new System.Drawing.Size(1191, 728);
+            this.WebcamStream.Size = new System.Drawing.Size(1192, 729);
             this.WebcamStream.TabIndex = 8;
             // 
             // ControlScherm
@@ -141,7 +141,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.SocketStatus);
             this.Controls.Add(this.WebcamStream);
             this.Controls.Add(this.ControllerStatus);
             this.Controls.Add(this.Maximize);
@@ -155,7 +155,7 @@
             this.Text = "DefuseIT-Control";
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ControlSchermBackground)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SocketStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WebcamStream)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -170,7 +170,7 @@
         private System.Windows.Forms.Button Minimize;
         private System.Windows.Forms.Button Maximize;
         private System.Windows.Forms.PictureBox ControllerStatus;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox SocketStatus;
         private AxAXVLC.AxVLCPlugin2 WebcamStream;
     }
 }
