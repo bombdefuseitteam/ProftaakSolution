@@ -7,4 +7,5 @@ Deze solution bestaat uit meerdere onderdelen namelijk:
 - XInputControllerTester
 
 # Eind Product
-DefuseIT
+- DefuseIT-Game
+- DefuseIT-EV3
