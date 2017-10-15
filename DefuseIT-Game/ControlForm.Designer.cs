@@ -109,6 +109,7 @@
             // 
             // ControlSchermBackground
             // 
+            this.ControlSchermBackground.ErrorImage = ((System.Drawing.Image)(resources.GetObject("ControlSchermBackground.ErrorImage")));
             this.ControlSchermBackground.Image = ((System.Drawing.Image)(resources.GetObject("ControlSchermBackground.Image")));
             this.ControlSchermBackground.Location = new System.Drawing.Point(0, 0);
             this.ControlSchermBackground.Name = "ControlSchermBackground";
