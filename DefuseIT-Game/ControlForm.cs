@@ -133,5 +133,15 @@ namespace DefuseIT_Game
         {
             CloseApplication.ForeColor = Color.Yellow;
         }
+
+        //Indien er iets mis gaat kan het spel hiermee opnieuw opgestart worden. (Sluit het huidige form)
+        private void RestartGame_Click(object sender, EventArgs e)
+        {
+            Hide();
+            StartScherm sScherm = new StartScherm();
+            sScherm.Closed += (s, args) => Close();
+            sScherm.Show();
+            WebcamStream.playlist.stop();
+        }
     }
 }

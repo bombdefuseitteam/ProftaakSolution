@@ -33,7 +33,7 @@
             this.Maximize = new System.Windows.Forms.Button();
             this.Minimize = new System.Windows.Forms.Button();
             this.CloseApplication = new System.Windows.Forms.Button();
-            this.AssemblyName = new System.Windows.Forms.Label();
+            this.RestartGame = new System.Windows.Forms.Label();
             this.ControlSchermBackground = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.WebcamStream = new AxAXVLC.AxVLCPlugin2();
@@ -94,17 +94,18 @@
             this.CloseApplication.UseVisualStyleBackColor = false;
             this.CloseApplication.Click += new System.EventHandler(this.CloseApplication_Click);
             // 
-            // AssemblyName
+            // RestartGame
             // 
-            this.AssemblyName.AutoSize = true;
-            this.AssemblyName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.AssemblyName.Font = new System.Drawing.Font("Back In The USSR DL", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AssemblyName.Image = global::DefuseIT_Game.Properties.Resources.background;
-            this.AssemblyName.Location = new System.Drawing.Point(12, 10);
-            this.AssemblyName.Name = "AssemblyName";
-            this.AssemblyName.Size = new System.Drawing.Size(111, 23);
-            this.AssemblyName.TabIndex = 2;
-            this.AssemblyName.Text = "DefuseIT";
+            this.RestartGame.AutoSize = true;
+            this.RestartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.RestartGame.Font = new System.Drawing.Font("Back In The USSR DL", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RestartGame.Image = global::DefuseIT_Game.Properties.Resources.background;
+            this.RestartGame.Location = new System.Drawing.Point(12, 10);
+            this.RestartGame.Name = "RestartGame";
+            this.RestartGame.Size = new System.Drawing.Size(111, 23);
+            this.RestartGame.TabIndex = 2;
+            this.RestartGame.Text = "DefuseIT";
+            this.RestartGame.Click += new System.EventHandler(this.RestartGame_Click);
             // 
             // ControlSchermBackground
             // 
@@ -145,7 +146,7 @@
             this.Controls.Add(this.Maximize);
             this.Controls.Add(this.Minimize);
             this.Controls.Add(this.CloseApplication);
-            this.Controls.Add(this.AssemblyName);
+            this.Controls.Add(this.RestartGame);
             this.Controls.Add(this.ControlSchermBackground);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -163,7 +164,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox ControlSchermBackground;
-        private System.Windows.Forms.Label AssemblyName;
+        private System.Windows.Forms.Label RestartGame;
         private System.Windows.Forms.Button CloseApplication;
         private System.Windows.Forms.Button Minimize;
         private System.Windows.Forms.Button Maximize;

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using DefuseIT_Game.XInput;
+using System.ComponentModel;
 
 namespace DefuseIT_Game
 {
@@ -17,6 +18,7 @@ namespace DefuseIT_Game
             UiEvents();
             _controller.Initialize();
             GetControllerStatus();
+            StartWorkers();
         }
 
         //Import, Values + Draggable Window.
@@ -41,9 +43,28 @@ namespace DefuseIT_Game
             {
                 ControllerStatus.Image = Properties.Resources.Controller_icon_CONNECTED;
             }
-            else
+        }
+
+        //Start BackgroundWorkers
+        private void StartWorkers()
+        {
+            BackgroundWorker w1 = new BackgroundWorker();
+            w1.DoWork += ListenToController;
+            w1.RunWorkerAsync();
+        }
+
+        //BackgroundWorker w1 start listening to controller
+        private void ListenToController(object sender, DoWorkEventArgs e)
+        {
+            if (_controller._gamepad == null) return;
+
+            while (_controller._gamepad.IsConnected)
             {
-                MessageBox.Show("Geen Controller Gevonden! Hierdoor kan de Robot geen acties uitvoeren. Is de controller toch aangesloten? Neem dan contact op met iemand van het DefuseIT Team.", "DefuseIT-Game Foutmelding");
+                if (_controller.PressedButton ==  "A")
+                {
+                    StartButton_Click(StartButton, null);
+                    break;
+                }
             }
         }
 
@@ -81,12 +102,18 @@ namespace DefuseIT_Game
            
         }
 
+        //Invoke ControlScherm
         private void StartButton_Click(object sender, MouseEventArgs e)
         {
-            ControlScherm cS = new ControlScherm();
-            cS.Show();
-            Hide();
+            MethodInvoker startForm = delegate
+            {
+                Hide();
+                ControlScherm cS = new ControlScherm();
+                cS.Closed += (s, args) => Close();
+                cS.Show();
 
+            };
+            Invoke(startForm);
         }
 
         private void StartScherm_Load(object sender, EventArgs e)
