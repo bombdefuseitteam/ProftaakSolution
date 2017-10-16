@@ -1,4 +1,5 @@
 ﻿using SharpDX.XInput;
+using System;
 using System.ComponentModel;
 using System.Threading;
 
@@ -96,48 +97,59 @@ namespace DefuseIT_Game.XInput
 
             while (GamePad.IsConnected)
             {
-                var state = GamePad.GetState().Gamepad;
-                var button = state.Buttons.ToString();
-                int delay = 100;
-                int deadzone = 5000;
-
-                if (w2.CancellationPending == true)
+                try
                 {
-                    e.Cancel = true;
+                    var state = GamePad.GetState().Gamepad;
+                    var button = state.Buttons.ToString();
+
+                    int delay = 100;
+                    int deadzone = 5000;
+
+                    if (w2.CancellationPending == true) //Check for Cancellation Request
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+
+                    if (button != "None")
+                    {
+                        PressedButton = button;
+                        Thread.Sleep(delay);
+                        PressedButton = "None";
+                    }
+
+                    if (state.LeftThumbX > deadzone || state.LeftThumbX < -deadzone)
+                    {
+                        LefthumbX = NormalizeValue(state.LeftThumbX);
+                        Thread.Sleep(delay);
+                        LefthumbX = null;
+                    }
+                    else
+                    {
+                        LefthumbX = 0;
+                    }
+
+                    if (state.LeftTrigger > 0 && LefthumbX < 1)
+                    {
+                        LTrigger = state.LeftTrigger;
+                        Thread.Sleep(delay);
+                        LTrigger = null;
+                    }
+
+                    if (state.RightTrigger > 0 && LefthumbX < 1)
+                    {
+                        RTrigger = state.RightTrigger;
+                        Thread.Sleep(delay);
+                        RTrigger = null;
+                    }
+                }
+                catch (Exception)
+                {
+
                     break;
                 }
 
-                if (button == "A" || button == "B" || button == "Y" || button == "X")
-                {
-                    PressedButton = button;
-                    Thread.Sleep(delay);
-                    PressedButton = "None";
-                }
 
-                if (state.LeftThumbX > deadzone || state.LeftThumbX < -deadzone)
-                {
-                    LefthumbX = NormalizeValue(state.LeftThumbX);
-                    Thread.Sleep(delay);
-                    LefthumbX = null;
-                }
-                else
-                {
-                    LefthumbX = 0;
-                }
-
-                if (state.LeftTrigger > 0 && LefthumbX < 1)
-                {
-                    LTrigger = state.LeftTrigger;
-                    Thread.Sleep(delay);
-                    LTrigger = null;
-                }
-
-                if (state.RightTrigger > 0 && LefthumbX < 1)
-                {
-                    RTrigger = state.RightTrigger;
-                    Thread.Sleep(delay);
-                    RTrigger = null;
-                }
             }
         }
 

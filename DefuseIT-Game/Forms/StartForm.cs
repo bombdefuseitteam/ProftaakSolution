@@ -168,10 +168,6 @@ namespace DefuseIT_Game
 
 
         #region UI Elements
-
-        /// <summary>
-        /// UI Elements Events.
-        /// </summary>
         //StartButton.
         private void StartButton_MouseLeave(object sender, EventArgs e)
         {

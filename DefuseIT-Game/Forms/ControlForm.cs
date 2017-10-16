@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DefuseIT_Game.XInput;
 using DefuseIT_Game.Sockets;
 using System.Threading;
+using System.Diagnostics;
 
 namespace DefuseIT_Game
 {
@@ -27,12 +28,21 @@ namespace DefuseIT_Game
         {
             InitializeComponent();
             //WindowState = FormWindowState.Maximized; < Uncomment for P1 Event
+            Initialize();
+
+        }
+
+        /// <summary>
+        /// call all required Methods
+        /// </summary>
+        private void Initialize()
+        {
             PlayWebcamStream();
             Controller.Initialize();
             GetControllerStatus();
             Socket.Initialize();
-            GetSocketStatus();
             UiEvents();
+            GetSocketStatus();
         }
 
         /// <summary>
@@ -61,6 +71,7 @@ namespace DefuseIT_Game
         /// </summary>
         private void GetControllerStatus()
         {
+
             if (Controller.IsConnected)
             {
                 ControllerStatus.Image = Properties.Resources.Controller_icon_CONNECTED;
@@ -69,15 +80,25 @@ namespace DefuseIT_Game
 
         /// <summary>
         /// Haalt de status van de Socket Server op.
+        /// Gebruikt Stopwatch i.v.m. Delay tussen het opstarten van de connectie.
         /// </summary>
         private void GetSocketStatus()
         {
-            Thread.Sleep(100);
-            if (Socket.SocketClient.Connected)
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            for (int i = 0; ; i++)
             {
-                SocketStatus.Image = Properties.Resources.WIFICONNECTED;
+                if (Socket.SocketClient.Connected && sw.ElapsedMilliseconds > 100)
+                {
+                    SocketStatus.Image = Properties.Resources.WIFICONNECTED;
+                    break;
+                }
+                else if (sw.ElapsedMilliseconds > 101) break;
             }
+
         }
+
         /// <summary>
         /// Luistert naar alle UI events.
         /// </summary>
@@ -91,9 +112,11 @@ namespace DefuseIT_Game
             Maximize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
             Minimize.FlatAppearance.BorderSize = 0;
             Minimize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
+            Reload.FlatAppearance.BorderSize = 0;
+            Reload.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
 
             //Drag Window.
-            ControlSchermBackground.MouseDown += StartSchermBackground_MouseDown;
+            Refresh.MouseDown += StartSchermBackground_MouseDown;
 
             //Close Button.
             CloseApplication.MouseEnter += CloseApplication_MouseEnter;
@@ -108,7 +131,12 @@ namespace DefuseIT_Game
             //Minimize.
             Minimize.MouseEnter += Minimize_MouseEnter;
             Minimize.MouseLeave += Minimize_MouseLeave;
-            Minimize.MouseClick += Minimize_Click;     
+            Minimize.MouseClick += Minimize_Click;
+
+            //Refresh
+            Reload.MouseEnter += Refresh_MouseEnter;
+            Reload.MouseLeave += Refresh_MouseLeave;
+            Reload.MouseClick += Refresh_Click;
         }
 
         /// <summary>
@@ -120,11 +148,22 @@ namespace DefuseIT_Game
             WebcamStream.playlist.play();
         }
 
+        /// <summary>
+        /// Restart het spel, sluit huidige form en start het StartScherm op.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RestartGame_Click(object sender, EventArgs e)
+        {
+            Hide();
+            Socket.DisconnectStream();
+            StartScherm sScherm = new StartScherm();
+            sScherm.Closed += (s, args) => Close();
+            sScherm.Show();
+            WebcamStream.playlist.stop();
+        }
 
         #region UI Elements
-        /// <summary>
-        /// UI Elements/Events.
-        /// </summary>
         //Maximize Button.
         private void Maximize_Click(object sender, EventArgs e)
         {
@@ -165,7 +204,7 @@ namespace DefuseIT_Game
         {
             Minimize.ForeColor = Color.Yellow;
         }
-        
+
         //Close Button.
         private void CloseApplication_Click(object sender, EventArgs e)
         {
@@ -181,21 +220,29 @@ namespace DefuseIT_Game
         {
             CloseApplication.ForeColor = Color.Yellow;
         }
-        #endregion
 
-        
-        /// <summary>
-        /// Restart het spel, sluit huidige form en start het StartScherm op.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RestartGame_Click(object sender, EventArgs e)
+        //Refresh Button Control Scherm Only
+        private void Refresh_Click(object sender, MouseEventArgs e)
         {
             Hide();
-            StartScherm sScherm = new StartScherm();
+            Controller.DisconnectGamepad();
+            Socket.DisconnectStream();
+            ControlScherm sScherm = new ControlScherm();
             sScherm.Closed += (s, args) => Close();
             sScherm.Show();
             WebcamStream.playlist.stop();
         }
+
+        private void Refresh_MouseLeave(object sender, EventArgs e)
+        {
+            Reload.ForeColor = Color.Black;
+        }
+
+        private void Refresh_MouseEnter(object sender, EventArgs e)
+        {
+            Reload.ForeColor = Color.Yellow;
+        }
+        #endregion
+
     }
 }

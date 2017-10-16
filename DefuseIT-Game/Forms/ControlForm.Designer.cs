@@ -34,11 +34,12 @@
             this.Minimize = new System.Windows.Forms.Button();
             this.CloseApplication = new System.Windows.Forms.Button();
             this.RestartGame = new System.Windows.Forms.Label();
-            this.ControlSchermBackground = new System.Windows.Forms.PictureBox();
+            this.Refresh = new System.Windows.Forms.PictureBox();
             this.SocketStatus = new System.Windows.Forms.PictureBox();
             this.WebcamStream = new AxAXVLC.AxVLCPlugin2();
+            this.Reload = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ControlSchermBackground)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Refresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SocketStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WebcamStream)).BeginInit();
             this.SuspendLayout();
@@ -107,15 +108,15 @@
             this.RestartGame.Text = "DefuseIT";
             this.RestartGame.Click += new System.EventHandler(this.RestartGame_Click);
             // 
-            // ControlSchermBackground
+            // Refresh
             // 
-            this.ControlSchermBackground.ErrorImage = ((System.Drawing.Image)(resources.GetObject("ControlSchermBackground.ErrorImage")));
-            this.ControlSchermBackground.Image = ((System.Drawing.Image)(resources.GetObject("ControlSchermBackground.Image")));
-            this.ControlSchermBackground.Location = new System.Drawing.Point(0, 0);
-            this.ControlSchermBackground.Name = "ControlSchermBackground";
-            this.ControlSchermBackground.Size = new System.Drawing.Size(1920, 1080);
-            this.ControlSchermBackground.TabIndex = 0;
-            this.ControlSchermBackground.TabStop = false;
+            this.Refresh.ErrorImage = ((System.Drawing.Image)(resources.GetObject("Refresh.ErrorImage")));
+            this.Refresh.Image = ((System.Drawing.Image)(resources.GetObject("Refresh.Image")));
+            this.Refresh.Location = new System.Drawing.Point(0, 0);
+            this.Refresh.Name = "Refresh";
+            this.Refresh.Size = new System.Drawing.Size(1920, 1080);
+            this.Refresh.TabIndex = 0;
+            this.Refresh.TabStop = false;
             // 
             // SocketStatus
             // 
@@ -135,12 +136,27 @@
             this.WebcamStream.Size = new System.Drawing.Size(1192, 729);
             this.WebcamStream.TabIndex = 8;
             // 
+            // Reload
+            // 
+            this.Reload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.Reload.BackgroundImage = global::DefuseIT_Game.Properties.Resources.background;
+            this.Reload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Reload.Font = new System.Drawing.Font("Back In The USSR DL", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Reload.Location = new System.Drawing.Point(1695, 8);
+            this.Reload.Name = "Reload";
+            this.Reload.Size = new System.Drawing.Size(90, 33);
+            this.Reload.TabIndex = 10;
+            this.Reload.Text = "Reload";
+            this.Reload.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.Reload.UseVisualStyleBackColor = false;
+            // 
             // ControlScherm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.Reload);
             this.Controls.Add(this.SocketStatus);
             this.Controls.Add(this.WebcamStream);
             this.Controls.Add(this.ControllerStatus);
@@ -148,13 +164,13 @@
             this.Controls.Add(this.Minimize);
             this.Controls.Add(this.CloseApplication);
             this.Controls.Add(this.RestartGame);
-            this.Controls.Add(this.ControlSchermBackground);
+            this.Controls.Add(this.Refresh);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ControlScherm";
             this.Text = "DefuseIT-Control";
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ControlSchermBackground)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Refresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SocketStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WebcamStream)).EndInit();
             this.ResumeLayout(false);
@@ -164,7 +180,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox ControlSchermBackground;
+        private System.Windows.Forms.PictureBox Refresh;
         private System.Windows.Forms.Label RestartGame;
         private System.Windows.Forms.Button CloseApplication;
         private System.Windows.Forms.Button Minimize;
@@ -172,6 +188,7 @@
         private System.Windows.Forms.PictureBox ControllerStatus;
         private System.Windows.Forms.PictureBox SocketStatus;
         private AxAXVLC.AxVLCPlugin2 WebcamStream;
+        private System.Windows.Forms.Button Reload;
     }
 }
 

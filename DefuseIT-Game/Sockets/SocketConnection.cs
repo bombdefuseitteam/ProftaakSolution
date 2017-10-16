@@ -42,17 +42,27 @@ namespace DefuseIT_Game.Sockets
         internal void Initialize()
         {
             Controller.Initialize();
-            StartWorkers();
+            StartWorker3();
         }
 
         /// <summary>
-        /// Start BackgroundWorker
+        /// Start BackgroundWorker3 (SocketConnection Receiving/Sending)
         /// </summary>
-        private void StartWorkers()
+        private void StartWorker3()
         {
             w3.DoWork += StartStream;
             w3.WorkerSupportsCancellation = true;
             w3.RunWorkerAsync();
+        }
+
+        /// <summary>
+        /// Start BackgroundWorker4 (Controller)
+        /// </summary>
+        private void StartWorker4()
+        {
+            w4.DoWork += ListenToController;
+            w4.WorkerSupportsCancellation = true;
+            w4.RunWorkerAsync();
         }
 
         /// <summary>
@@ -134,10 +144,7 @@ namespace DefuseIT_Game.Sockets
         /// </summary>
         private void SocketStream(DoWorkEventArgs args)
         {
-            //Start W4 (ListenToController)
-            w4.DoWork += ListenToController;
-            w4.WorkerSupportsCancellation = true;
-            w4.RunWorkerAsync();
+            StartWorker4();
 
             while (SocketClient.Connected)
             {
@@ -170,7 +177,7 @@ namespace DefuseIT_Game.Sockets
         /// <param name="message"></param>
         private void SendMessage(string message)
         {
-            if (NStream != null)
+            if (NStream != null && SocketClient.Connected)
             {
                 byte[] Sending = Encoding.ASCII.GetBytes(message);
                 NStream.Write(Sending, 0, Sending.Length);
@@ -189,7 +196,7 @@ namespace DefuseIT_Game.Sockets
             w3.CancelAsync();
             if (w4.WorkerSupportsCancellation) //Omdat W4 aangemaakt wordt in W3
             w4.CancelAsync();
-            SocketClient.Close();
+            SocketClient.Close();            
             NStream = null;
         }
     }
