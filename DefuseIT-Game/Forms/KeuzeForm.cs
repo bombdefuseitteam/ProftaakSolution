@@ -159,8 +159,6 @@ namespace DefuseIT_Game
                             CurrentPosition = "BottomRight";
                         }
                         break;
-                    default:
-                        break;
                 }
             }
         }
@@ -226,14 +224,17 @@ namespace DefuseIT_Game
                             answer = "A";
                     }
                     break;
-                default:
-                    break;
             }
 
 
             return answer;
         }
 
+        /// <summary>
+        /// Verandert een picturebox UI op de UI Thread
+        /// </summary>
+        /// <param name="answerbox"></param>
+        /// <param name="img"></param>
         private void InvokeUIChange(PictureBox answerbox, Image img)
         {
             MethodInvoker UI = delegate
@@ -243,6 +244,13 @@ namespace DefuseIT_Game
             Invoke(UI);
         }
 
+        /// <summary>
+        /// Revert to default iamges
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="B"></param>
+        /// <param name="C"></param>
+        /// <param name="D"></param>
         private void RevertUIChanges(bool A, bool B, bool C, bool D)
         {
             if (A) InvokeUIChange(AntwoordABox, Properties.Resources.AntwoordBoxA);
