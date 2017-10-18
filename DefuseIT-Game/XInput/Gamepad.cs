@@ -33,6 +33,11 @@ namespace DefuseIT_Game.XInput
         internal int? LefthumbX;
 
         /// <summary>
+        /// LeftThumbY value
+        /// </summary>
+        internal int? LeftThumbY;
+
+        /// <summary>
         /// LeftTrigger Value
         /// </summary>
         internal int? LTrigger;
@@ -41,6 +46,7 @@ namespace DefuseIT_Game.XInput
         /// RightTrigger Value
         /// </summary>
         internal int? RTrigger;
+
 
         /// <summary>
         /// Initialize
@@ -103,7 +109,7 @@ namespace DefuseIT_Game.XInput
                     var button = state.Buttons.ToString();
 
                     int delay = 100;
-                    int deadzone = 5000;
+                    int deadzone = 4000;
 
                     if (w2.CancellationPending == true) //Check for Cancellation Request
                     {
@@ -122,12 +128,22 @@ namespace DefuseIT_Game.XInput
                     {
                         LefthumbX = NormalizeValue(state.LeftThumbX);
                         Thread.Sleep(delay);
-                        LefthumbX = null;
                     }
                     else
                     {
                         LefthumbX = 0;
                     }
+
+                    if (state.LeftThumbY > deadzone || state.LeftThumbY < -deadzone)
+                    {
+                        LeftThumbY = NormalizeValue(state.LeftThumbY);
+                        Thread.Sleep(delay / 2);
+                    }
+                    else
+                    {
+                        LeftThumbY = 0;
+                    }
+
 
                     if (state.LeftTrigger > 0 && LefthumbX < 1)
                     {

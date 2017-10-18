@@ -60,6 +60,12 @@
     <Compile Include="Forms\ControlForm.Designer.cs">
       <DependentUpon>ControlForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\KeuzeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\KeuzeForm.Designer.cs">
+      <DependentUpon>KeuzeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\StartForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     <Compile Include="XInput\Gamepad.cs" />
     <EmbeddedResource Include="Forms\ControlForm.resx">
       <DependentUpon>ControlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\KeuzeForm.resx">
+      <DependentUpon>KeuzeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
@@ -127,6 +136,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bomb.ico" />
+    <None Include="Resources\AntwoordBoxA.png" />
+    <None Include="Resources\AntwoordenDSelectedBox.png" />
+    <None Include="Resources\AntwoordenDBox.png" />
+    <None Include="Resources\AntwoordenCSelectedBox.png" />
+    <None Include="Resources\AntwoordenCBox.png" />
+    <None Include="Resources\AntwoordenBSelectedBox.png" />
+    <None Include="Resources\AntwoordenASelectedBox.png" />
+    <None Include="Resources\AntwoordBoxB.png" />
     <None Include="Resources\StartButtonHover.png" />
     <None Include="Resources\WIFICONNECTED.png" />
     <None Include="Resources\Controller_icon_CONNECTED.png" />
@@ -153,6 +170,8 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ScoreManager\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

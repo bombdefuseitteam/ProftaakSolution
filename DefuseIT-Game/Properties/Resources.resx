@@ -118,26 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Controller_icon_NOT_CONNECTED" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Controller_icon_NOT_CONNECTED.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Controller_icon_CONNECTED" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Controller_icon_CONNECTED.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="AButton1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AButton1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Controller_icon_CONNECTED1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Controller_icon_CONNECTED1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="background" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StartButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StartButtonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Controller_icon_CONNECTED" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller_icon_CONNECTED.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="StartButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StartButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,10 +130,49 @@
   <data name="bomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bomb.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="WiFi-Not" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WiFi-Not.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Controller_icon_CONNECTED1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller_icon_CONNECTED1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WIFICONNECTED" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WIFICONNECTED.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StartButtonHover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StartButtonHover.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Controller_icon_NOT_CONNECTED" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Controller_icon_NOT_CONNECTED.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WiFi-Not" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WiFi-Not.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\background.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenCBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenCBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordBoxB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordBoxB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenDBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenDBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordBoxA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordBoxA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenASelectedBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenASelectedBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenBSelectedBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenBSelectedBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenCSelectedBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenCSelectedBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenDSelectedBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenDSelectedBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

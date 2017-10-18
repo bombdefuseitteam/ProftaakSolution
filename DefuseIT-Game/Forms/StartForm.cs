@@ -152,7 +152,7 @@ namespace DefuseIT_Game
                 Hide();
                 w1.CancelAsync();                       //Kill Gamepad Listener Backgroundworker
                 Controller.DisconnectGamepad();         //Kill Gamepad Backgroundworker
-                ControlScherm cS = new ControlScherm();
+                KeuzeScherm cS = new KeuzeScherm();
                 cS.Closed += (s, args) => Close();
                 cS.Show();
             };
@@ -166,8 +166,6 @@ namespace DefuseIT_Game
         }
 
 
-
-        #region UI Elements
         //StartButton.
         private void StartButton_MouseLeave(object sender, EventArgs e)
         {
@@ -236,7 +234,6 @@ namespace DefuseIT_Game
         }
 
     }
-        #endregion
 
 
 }

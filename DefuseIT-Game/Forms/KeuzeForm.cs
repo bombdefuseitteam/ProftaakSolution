@@ -5,10 +5,12 @@ using System.Windows.Forms;
 using DefuseIT_Game.XInput;
 using DefuseIT_Game.Sockets;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Threading;
 
 namespace DefuseIT_Game
 {
-    public partial class ControlScherm : Form
+    public partial class KeuzeScherm : Form
     {
         /// <summary>
         /// XInput Device
@@ -21,9 +23,14 @@ namespace DefuseIT_Game
         SocketConnection Socket = new SocketConnection();
 
         /// <summary>
+        /// W6 ListenToController
+        /// </summary>
+        BackgroundWorker w5 = new BackgroundWorker();
+
+        /// <summary>
         /// Initialize alle onderdelen/methods.
         /// </summary>
-        public ControlScherm()
+        public KeuzeScherm()
         {
             InitializeComponent();
             //WindowState = FormWindowState.Maximized; < Uncomment for P1 Event
@@ -36,12 +43,11 @@ namespace DefuseIT_Game
         /// </summary>
         private void Initialize()
         {
-            PlayWebcamStream();
             Controller.Initialize();
             GetControllerStatus();
-            Socket.Initialize();
             UiEvents();
             GetSocketStatus();
+            StartWorker();
         }
 
         /// <summary>
@@ -78,6 +84,174 @@ namespace DefuseIT_Game
         }
 
         /// <summary>
+        /// Start W5
+        /// </summary>
+        private void StartWorker()
+        {
+            if (Controller.IsConnected)
+            {
+                w5.DoWork += GamepadSelectAnswer;
+                w5.WorkerSupportsCancellation = true;
+                w5.RunWorkerAsync();
+            }
+        }
+
+        /// <summary>
+        /// Current Position (SelectedPosition)
+        /// </summary>
+        string CurrentPosition;
+
+        /// <summary>
+        /// Select Answer using Gamepad
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void GamepadSelectAnswer(object sender, DoWorkEventArgs args)
+        {
+
+            Thread.Sleep(1000);
+
+            while (Controller.IsConnected)
+            {
+                int? X = Controller.LefthumbX;
+                int? Y = Controller.LeftThumbY;
+
+                if (w5.CancellationPending == true) //Check for Cancellation Request
+                {
+                    args.Cancel = true;
+                    break;
+                }
+
+
+                switch (SelectedAnswer(X, Y))
+                {
+                    case "None":
+                        {
+
+                        }
+                        break;
+                    case "A":
+                        {
+                            InvokeUIChange(AntwoordABox, Properties.Resources.AntwoordenASelectedBox);
+                            RevertUIChanges(false, true, true, true);
+                            CurrentPosition = "TopLeft";
+                        }
+                        break;
+                    case "B":
+                        {
+                            InvokeUIChange(AntwoordBBox, Properties.Resources.AntwoordenBSelectedBox);
+                            RevertUIChanges(true, false, true, true);
+                            CurrentPosition = "BottomLeft";
+                        }
+                        break;
+                    case "C":
+                        {
+                            InvokeUIChange(AntwoordCBox, Properties.Resources.AntwoordenCSelectedBox);
+                            RevertUIChanges(true, true, false, true);
+                            CurrentPosition = "TopRight";
+
+                        }
+                        break;
+                    case "D":
+                        {
+                            InvokeUIChange(AntwoordDBox, Properties.Resources.AntwoordenDSelectedBox);
+                            RevertUIChanges(true, true, true, false);
+                            CurrentPosition = "BottomRight";
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns Selected Answer
+        /// </summary>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
+        /// <returns></returns>
+        private string SelectedAnswer(int? X, int? Y)
+        {
+
+            string answer = "None";
+            if (X > 0 && X < 10 && Y > 11)
+                answer = "A";
+
+            if (X < 10 && Y < 10 && Y > 0 && X > 0) 
+                answer = "B";
+
+            if (X > 10 && Y > 11)
+                answer = "C";
+
+            if (X > 10 && Y < 9 && Y > 0)
+                answer = "D";
+
+
+            //Take in account current Position
+            switch (CurrentPosition)
+            {
+
+                case "TopRight": //C
+                    {
+                        if (X < 9 && X > 0)
+                            answer = "A";
+
+                        if (Y < 10 && Y > 0)
+                            answer = "D";
+                    }
+                    break;
+                case "BottomRight": //D
+                    {
+                        if (X < 9 && X > 0)
+                            answer = "B";
+                        if (Y > 10)
+                            answer = "C";
+                    }
+                    break;
+
+                case "TopLeft": //A
+                    {
+                        if (X > 10)
+                            answer = "C";
+                        if (Y < 10 && Y > 0)
+                            answer = "B";
+                    }
+                    break;
+                case "BottomLeft": //B
+                    {
+                        if (X > 10)
+                            answer = "D";
+                        if (Y > 10)
+                            answer = "A";
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
+            return answer;
+        }
+
+        private void InvokeUIChange(PictureBox answerbox, Image img)
+        {
+            MethodInvoker UI = delegate
+            {
+                answerbox.Image = img;
+            };
+            Invoke(UI);
+        }
+
+        private void RevertUIChanges(bool A, bool B, bool C, bool D)
+        {
+            if (A) InvokeUIChange(AntwoordABox, Properties.Resources.AntwoordBoxA);
+            if (B) InvokeUIChange(AntwoordBBox, Properties.Resources.AntwoordBoxB);
+            if (C) InvokeUIChange(AntwoordCBox, Properties.Resources.AntwoordenCBox);
+            if (D) InvokeUIChange(AntwoordDBox, Properties.Resources.AntwoordenDBox);
+        }
+
+        /// <summary>
         /// Haalt de status van de Socket Server op.
         /// Gebruikt Stopwatch i.v.m. Delay tussen het opstarten van de connectie.
         /// </summary>
@@ -103,6 +277,9 @@ namespace DefuseIT_Game
         /// </summary>
         private void UiEvents()
         {
+            Color Yellow = ColorTranslator.FromHtml("#e7af03");
+            Color Gray = ColorTranslator.FromHtml("#2b2b2b");
+            Color LightGray = ColorTranslator.FromHtml("#969696");
 
             //Remove Borders from Buttons.
             CloseApplication.FlatAppearance.BorderSize = 0;
@@ -111,8 +288,11 @@ namespace DefuseIT_Game
             Maximize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
             Minimize.FlatAppearance.BorderSize = 0;
             Minimize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
-            Reload.FlatAppearance.BorderSize = 0;
-            Reload.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
+
+            //SetVraagLabel Color
+            VraagLabel.ForeColor = Yellow;
+            VraagLabel.BackColor = Gray;
+            
 
             //Drag Window.
             Refresh.MouseDown += StartSchermBackground_MouseDown;
@@ -132,20 +312,8 @@ namespace DefuseIT_Game
             Minimize.MouseLeave += Minimize_MouseLeave;
             Minimize.MouseClick += Minimize_Click;
 
-            //Refresh
-            Reload.MouseEnter += Refresh_MouseEnter;
-            Reload.MouseLeave += Refresh_MouseLeave;
-            Reload.MouseClick += Refresh_Click;
         }
 
-        /// <summary>
-        /// Speelt de webcamstream af binnen VLC.
-        /// </summary>
-        private void PlayWebcamStream()
-        {
-            WebcamStream.playlist.add("https://www.youtube.com/watch?v=th4Czv1j3F8");
-            WebcamStream.playlist.play();
-        }
 
         /// <summary>
         /// Restart het spel, sluit huidige form en start het StartScherm op.
@@ -155,11 +323,10 @@ namespace DefuseIT_Game
         private void RestartGame_Click(object sender, EventArgs e)
         {
             Hide();
-            Socket.DisconnectStream();                  //Disconnect van de Socket Stream
+            Controller.DisconnectGamepad();
             StartScherm sScherm = new StartScherm();
             sScherm.Closed += (s, args) => Close();
             sScherm.Show();
-            WebcamStream.playlist.stop();               //Stop VLC (VLC speelt in een aparte thread)
         }
 
         //Maximize Button.
@@ -206,7 +373,6 @@ namespace DefuseIT_Game
         //Close Button.
         private void CloseApplication_Click(object sender, EventArgs e)
         {
-            Socket.DisconnectStream();
             Application.Exit();
 
         }
@@ -219,27 +385,6 @@ namespace DefuseIT_Game
             CloseApplication.ForeColor = Color.Yellow;
         }
 
-        //Refresh Button Control Scherm Only
-        private void Refresh_Click(object sender, MouseEventArgs e)
-        {
-            Hide();
-            Controller.DisconnectGamepad();         //Disconnect Gamepad Thread
-            Socket.DisconnectStream();              //Disconnect van Socket Stream
-            ControlScherm sScherm = new ControlScherm();
-            sScherm.Closed += (s, args) => Close();
-            sScherm.Show();
-            WebcamStream.playlist.stop();           //Stop VLC
-        }
-
-        private void Refresh_MouseLeave(object sender, EventArgs e)
-        {
-            Reload.ForeColor = Color.Black;
-        }
-
-        private void Refresh_MouseEnter(object sender, EventArgs e)
-        {
-            Reload.ForeColor = Color.Yellow;
-        }
 
     }
 }
