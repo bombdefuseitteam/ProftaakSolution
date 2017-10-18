@@ -51,6 +51,13 @@ namespace DefuseIT_Game
         }
 
         /// <summary>
+        /// UI Color Hexcodes
+        /// </summary>
+        Color Yellow = ColorTranslator.FromHtml("#e7af03");
+        Color Gray = ColorTranslator.FromHtml("#2b2b2b");
+        Color LightGray = ColorTranslator.FromHtml("#969696");
+
+        /// <summary>
         /// Import user32.dll, dit is nodig voor het draggen van de Form.
         /// </summary>
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -122,7 +129,6 @@ namespace DefuseIT_Game
                     break;
                 }
 
-
                 switch (SelectedAnswer(X, Y))
                 {
                     case "None":
@@ -132,21 +138,21 @@ namespace DefuseIT_Game
                         break;
                     case "A":
                         {
-                            InvokeUIChange(AntwoordABox, Properties.Resources.AntwoordenASelectedBox);
+                            InvokeUIChange(AntwoordABox, Properties.Resources.AntwoordenASelectedBox, AntwoordLabelA, Yellow);
                             RevertUIChanges(false, true, true, true);
                             CurrentPosition = "TopLeft";
                         }
                         break;
                     case "B":
                         {
-                            InvokeUIChange(AntwoordBBox, Properties.Resources.AntwoordenBSelectedBox);
+                            InvokeUIChange(AntwoordBBox, Properties.Resources.AntwoordenBSelectedBox, AntwoordLabelB, Yellow);
                             RevertUIChanges(true, false, true, true);
                             CurrentPosition = "BottomLeft";
                         }
                         break;
                     case "C":
                         {
-                            InvokeUIChange(AntwoordCBox, Properties.Resources.AntwoordenCSelectedBox);
+                            InvokeUIChange(AntwoordCBox, Properties.Resources.AntwoordenCSelectedBox, AntwoordLabelC, Yellow);
                             RevertUIChanges(true, true, false, true);
                             CurrentPosition = "TopRight";
 
@@ -154,7 +160,7 @@ namespace DefuseIT_Game
                         break;
                     case "D":
                         {
-                            InvokeUIChange(AntwoordDBox, Properties.Resources.AntwoordenDSelectedBox);
+                            InvokeUIChange(AntwoordDBox, Properties.Resources.AntwoordenDSelectedBox, AntwoordLabelD, Yellow);
                             RevertUIChanges(true, true, true, false);
                             CurrentPosition = "BottomRight";
                         }
@@ -194,7 +200,6 @@ namespace DefuseIT_Game
                     {
                         if (X < 9 && X > 0)
                             answer = "A";
-
                         if (Y < 10 && Y > 0)
                             answer = "D";
                     }
@@ -235,11 +240,12 @@ namespace DefuseIT_Game
         /// </summary>
         /// <param name="answerbox"></param>
         /// <param name="img"></param>
-        private void InvokeUIChange(PictureBox answerbox, Image img)
+        private void InvokeUIChange(PictureBox answerbox, Image img, [Optional]Label label, [Optional]Color color)
         {
             MethodInvoker UI = delegate
             {
                 answerbox.Image = img;
+                label.ForeColor = color;        
             };
             Invoke(UI);
         }
@@ -253,10 +259,10 @@ namespace DefuseIT_Game
         /// <param name="D"></param>
         private void RevertUIChanges(bool A, bool B, bool C, bool D)
         {
-            if (A) InvokeUIChange(AntwoordABox, Properties.Resources.AntwoordBoxA);
-            if (B) InvokeUIChange(AntwoordBBox, Properties.Resources.AntwoordBoxB);
-            if (C) InvokeUIChange(AntwoordCBox, Properties.Resources.AntwoordenCBox);
-            if (D) InvokeUIChange(AntwoordDBox, Properties.Resources.AntwoordenDBox);
+            if (A) InvokeUIChange(AntwoordABox, Properties.Resources.AntwoordBoxA, AntwoordLabelA, LightGray);
+            if (B) InvokeUIChange(AntwoordBBox, Properties.Resources.AntwoordBoxB, AntwoordLabelB, LightGray);
+            if (C) InvokeUIChange(AntwoordCBox, Properties.Resources.AntwoordenCBox, AntwoordLabelC, LightGray);
+            if (D) InvokeUIChange(AntwoordDBox, Properties.Resources.AntwoordenDBox, AntwoordLabelD, LightGray);
         }
 
         /// <summary>
@@ -280,15 +286,12 @@ namespace DefuseIT_Game
 
         }
 
+
         /// <summary>
         /// Luistert naar alle UI events.
         /// </summary>
         private void UiEvents()
         {
-            Color Yellow = ColorTranslator.FromHtml("#e7af03");
-            Color Gray = ColorTranslator.FromHtml("#2b2b2b");
-            Color LightGray = ColorTranslator.FromHtml("#969696");
-
             //Remove Borders from Buttons.
             CloseApplication.FlatAppearance.BorderSize = 0;
             CloseApplication.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
@@ -300,7 +303,20 @@ namespace DefuseIT_Game
             //SetVraagLabel Color
             VraagLabel.ForeColor = Yellow;
             VraagLabel.BackColor = Gray;
-            
+
+            //SetAntwoord Colors
+            AntwoordLabelA.ForeColor = LightGray;
+            AntwoordLabelA.BackColor = Gray;
+
+            AntwoordLabelB.ForeColor = LightGray;
+            AntwoordLabelB.BackColor = Gray;
+
+            AntwoordLabelC.ForeColor = LightGray;
+            AntwoordLabelC.BackColor = Gray;
+
+            AntwoordLabelD.ForeColor = LightGray;
+            AntwoordLabelD.BackColor = Gray;
+
 
             //Drag Window.
             Refresh.MouseDown += StartSchermBackground_MouseDown;

@@ -41,6 +41,10 @@
             this.AntwoordCBox = new System.Windows.Forms.PictureBox();
             this.AntwoordBBox = new System.Windows.Forms.PictureBox();
             this.AntwoordDBox = new System.Windows.Forms.PictureBox();
+            this.AntwoordLabelA = new System.Windows.Forms.Label();
+            this.AntwoordLabelB = new System.Windows.Forms.Label();
+            this.AntwoordLabelC = new System.Windows.Forms.Label();
+            this.AntwoordLabelD = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Refresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SocketStatus)).BeginInit();
@@ -179,12 +183,56 @@
             this.AntwoordDBox.TabIndex = 14;
             this.AntwoordDBox.TabStop = false;
             // 
+            // AntwoordLabelA
+            // 
+            this.AntwoordLabelA.AutoSize = true;
+            this.AntwoordLabelA.Font = new System.Drawing.Font("Back In The USSR DL", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AntwoordLabelA.Location = new System.Drawing.Point(448, 487);
+            this.AntwoordLabelA.Name = "AntwoordLabelA";
+            this.AntwoordLabelA.Size = new System.Drawing.Size(422, 72);
+            this.AntwoordLabelA.TabIndex = 15;
+            this.AntwoordLabelA.Text = "antwoord a";
+            // 
+            // AntwoordLabelB
+            // 
+            this.AntwoordLabelB.AutoSize = true;
+            this.AntwoordLabelB.Font = new System.Drawing.Font("Back In The USSR DL", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AntwoordLabelB.Location = new System.Drawing.Point(448, 662);
+            this.AntwoordLabelB.Name = "AntwoordLabelB";
+            this.AntwoordLabelB.Size = new System.Drawing.Size(427, 72);
+            this.AntwoordLabelB.TabIndex = 16;
+            this.AntwoordLabelB.Text = "antwoord B";
+            // 
+            // AntwoordLabelC
+            // 
+            this.AntwoordLabelC.AutoSize = true;
+            this.AntwoordLabelC.Font = new System.Drawing.Font("Back In The USSR DL", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AntwoordLabelC.Location = new System.Drawing.Point(1117, 487);
+            this.AntwoordLabelC.Name = "AntwoordLabelC";
+            this.AntwoordLabelC.Size = new System.Drawing.Size(427, 72);
+            this.AntwoordLabelC.TabIndex = 17;
+            this.AntwoordLabelC.Text = "antwoord C";
+            // 
+            // AntwoordLabelD
+            // 
+            this.AntwoordLabelD.AutoSize = true;
+            this.AntwoordLabelD.Font = new System.Drawing.Font("Back In The USSR DL", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AntwoordLabelD.Location = new System.Drawing.Point(1117, 662);
+            this.AntwoordLabelD.Name = "AntwoordLabelD";
+            this.AntwoordLabelD.Size = new System.Drawing.Size(427, 72);
+            this.AntwoordLabelD.TabIndex = 18;
+            this.AntwoordLabelD.Text = "antwoord D";
+            // 
             // KeuzeScherm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.AntwoordLabelD);
+            this.Controls.Add(this.AntwoordLabelC);
+            this.Controls.Add(this.AntwoordLabelB);
+            this.Controls.Add(this.AntwoordLabelA);
             this.Controls.Add(this.AntwoordDBox);
             this.Controls.Add(this.AntwoordBBox);
             this.Controls.Add(this.AntwoordCBox);
@@ -227,6 +275,10 @@
         private System.Windows.Forms.PictureBox AntwoordCBox;
         private System.Windows.Forms.PictureBox AntwoordBBox;
         private System.Windows.Forms.PictureBox AntwoordDBox;
+        private System.Windows.Forms.Label AntwoordLabelA;
+        private System.Windows.Forms.Label AntwoordLabelB;
+        private System.Windows.Forms.Label AntwoordLabelC;
+        private System.Windows.Forms.Label AntwoordLabelD;
     }
 }
 
