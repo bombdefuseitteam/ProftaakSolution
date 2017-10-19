@@ -28,7 +28,7 @@ namespace DefuseIT_Game
             UiEvents();
             Controller.Initialize();
             GetControllerStatus();
-            StartWorkers();
+            StartWorker();
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace DefuseIT_Game
         }
 
         /// <summary>
-        /// Start de backgroundworkers (ListenToController).
+        /// Start de backgroundworker (ListenToController).
         /// </summary>
-        private void StartWorkers()
+        private void StartWorker()
         {
             w1.DoWork += ListenToController;
             w1.WorkerSupportsCancellation = true;
@@ -141,7 +141,7 @@ namespace DefuseIT_Game
         }
 
         /// <summary>
-        /// Invoke new Form, dit zorgt ervoor dat als het spel gestart wordt via de Controller dat het op de main thread gebeurd (controller zit op de 2de thread).
+        /// Invoke New Form, dit is nodig omdat deze method gecalled wordt vanuit de Gamepad thread.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -158,13 +158,6 @@ namespace DefuseIT_Game
             };
             Invoke(startForm);
         }
-
-
-        private void StartScherm_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
         //StartButton.
         private void StartButton_MouseLeave(object sender, EventArgs e)

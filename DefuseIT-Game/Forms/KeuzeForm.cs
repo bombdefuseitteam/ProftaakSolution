@@ -28,6 +28,16 @@ namespace DefuseIT_Game
         BackgroundWorker w5 = new BackgroundWorker();
 
         /// <summary>
+        /// Het geselecteerde antwoord
+        /// </summary>
+        string Answer = "None";
+
+        /// <summary>
+        /// Current Position (SelectedPosition)
+        /// </summary>
+        string CurrentPosition;
+
+        /// <summary>
         /// Initialize alle onderdelen/methods.
         /// </summary>
         public KeuzeScherm()
@@ -39,7 +49,7 @@ namespace DefuseIT_Game
         }
 
         /// <summary>
-        /// call all required Methods
+        /// Roep alle methods aan
         /// </summary>
         private void Initialize()
         {
@@ -56,6 +66,7 @@ namespace DefuseIT_Game
         Color Yellow = ColorTranslator.FromHtml("#e7af03");
         Color Gray = ColorTranslator.FromHtml("#2b2b2b");
         Color LightGray = ColorTranslator.FromHtml("#969696");
+        Color Red = ColorTranslator.FromHtml("#de0100");
 
         /// <summary>
         /// Import user32.dll, dit is nodig voor het draggen van de Form.
@@ -103,19 +114,15 @@ namespace DefuseIT_Game
             }
         }
 
-        /// <summary>
-        /// Current Position (SelectedPosition)
-        /// </summary>
-        string CurrentPosition;
+
 
         /// <summary>
-        /// Select Answer using Gamepad
+        /// Kies en bevestig aan antwoord door middel van de controller
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
         private void GamepadSelectAnswer(object sender, DoWorkEventArgs args)
         {
-
             Thread.Sleep(1000);
 
             while (Controller.IsConnected)
@@ -138,21 +145,30 @@ namespace DefuseIT_Game
                         break;
                     case "A":
                         {
-                            InvokeUIChange(AntwoordABox, Properties.Resources.AntwoordenASelectedBox, AntwoordLabelA, Yellow);
+                           // if (Controller.PressedButton == "A")
+                           //    ConfirmAnswer("A");
+
+                            ChangeButtonAndLabel(AntwoordABox, Properties.Resources.AntwoordenASelectedBox, AntwoordLabelA, Yellow);
                             RevertUIChanges(false, true, true, true);
                             CurrentPosition = "TopLeft";
                         }
                         break;
                     case "B":
                         {
-                            InvokeUIChange(AntwoordBBox, Properties.Resources.AntwoordenBSelectedBox, AntwoordLabelB, Yellow);
+                           // if (Controller.PressedButton == "A")
+                           //     ConfirmAnswer("B");
+
+                            ChangeButtonAndLabel(AntwoordBBox, Properties.Resources.AntwoordenBSelectedBox, AntwoordLabelB, Yellow);
                             RevertUIChanges(true, false, true, true);
                             CurrentPosition = "BottomLeft";
                         }
                         break;
                     case "C":
                         {
-                            InvokeUIChange(AntwoordCBox, Properties.Resources.AntwoordenCSelectedBox, AntwoordLabelC, Yellow);
+                          //  if (Controller.PressedButton == "A")
+                          //     ConfirmAnswer("C");
+
+                            ChangeButtonAndLabel(AntwoordCBox, Properties.Resources.AntwoordenCSelectedBox, AntwoordLabelC, Yellow);
                             RevertUIChanges(true, true, false, true);
                             CurrentPosition = "TopRight";
 
@@ -160,7 +176,9 @@ namespace DefuseIT_Game
                         break;
                     case "D":
                         {
-                            InvokeUIChange(AntwoordDBox, Properties.Resources.AntwoordenDSelectedBox, AntwoordLabelD, Yellow);
+                           // if (Controller.PressedButton == "A")
+                           //     ConfirmAnswer("D");  
+                            ChangeButtonAndLabel(AntwoordDBox, Properties.Resources.AntwoordenDSelectedBox, AntwoordLabelD, Yellow);
                             RevertUIChanges(true, true, true, false);
                             CurrentPosition = "BottomRight";
                         }
@@ -169,70 +187,120 @@ namespace DefuseIT_Game
             }
         }
 
+
         /// <summary>
-        /// Returns Selected Answer
+        /// Returns het selecteerde antwoord dat geselecteerd is door middel van de controller
         /// </summary>
-        /// <param name="X"></param>
-        /// <param name="Y"></param>
+        /// <param name="X"> X Position</param>
+        /// <param name="Y"> Y Position</param>
         /// <returns></returns>
         private string SelectedAnswer(int? X, int? Y)
         {
-
-            string answer = "None";
             if (X > 0 && X < 10 && Y > 11)
-                answer = "A";
+                Answer = "A";
 
             if (X < 10 && Y < 10 && Y > 0 && X > 0) 
-                answer = "B";
+                Answer = "B";
 
             if (X > 10 && Y > 11)
-                answer = "C";
+                Answer = "C";
 
             if (X > 10 && Y < 9 && Y > 0)
-                answer = "D";
+                Answer = "D";
 
-
-            //Take in account current Position
             switch (CurrentPosition)
             {
 
                 case "TopRight": //C
                     {
                         if (X < 9 && X > 0)
-                            answer = "A";
+                            Answer = "A";
                         if (Y < 10 && Y > 0)
-                            answer = "D";
+                            Answer = "D";
                     }
                     break;
                 case "BottomRight": //D
                     {
                         if (X < 9 && X > 0)
-                            answer = "B";
+                            Answer = "B";
                         if (Y > 10)
-                            answer = "C";
+                            Answer = "C";
                     }
                     break;
 
                 case "TopLeft": //A
                     {
                         if (X > 10)
-                            answer = "C";
+                            Answer = "C";
                         if (Y < 10 && Y > 0)
-                            answer = "B";
+                            Answer = "B";
                     }
                     break;
                 case "BottomLeft": //B
                     {
                         if (X > 10)
-                            answer = "D";
+                            Answer = "D";
                         if (Y > 10)
-                            answer = "A";
+                            Answer = "A";
                     }
                     break;
             }
 
 
-            return answer;
+            return Answer;
+        }
+
+        /// <summary>
+        /// Bevestig het gekozen antwoord
+        /// </summary>
+        /// <param name="button"></param>
+        private void ConfirmAnswer(string button)
+        {
+            //GetAnswerFromSQL
+            var AnswerSQL = "None"; //ToDo: Haal antwoord op via SQL
+
+            switch (button)
+            {
+                case "A":
+                    {
+                        var AnswerA = AntwoordLabelA.Text;
+                        //if (AnswerA == AnswerSQL)
+                        //else do stuff if false;
+                    }
+                    break;
+                case "B":
+                    {
+                        var AnswerB = AntwoordLabelB.Text;
+                        //if (AnswerB == AnswerSQL)
+                        //else do stuff if false;
+                    }
+                    break;
+                case "C":
+                    {
+                        var AnswerC = AntwoordLabelC.Text;
+                        //if (AnswerC == AnswerSQL)
+                        //else do stuff if false;
+                    }
+                    break;
+                case "D":
+                    {
+                        var AnswerD = AntwoordLabelD.Text;
+                        //if (AnswerD == AnswerSQL)
+                       //else do stuff if false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        /// <summary>
+        /// Bepaald welk form als volgende moet komen
+        /// </summary>
+        private void NextForm()
+        {
+
         }
 
         /// <summary>
@@ -240,7 +308,7 @@ namespace DefuseIT_Game
         /// </summary>
         /// <param name="answerbox"></param>
         /// <param name="img"></param>
-        private void InvokeUIChange(PictureBox answerbox, Image img, [Optional]Label label, [Optional]Color color)
+        private void ChangeButtonAndLabel(PictureBox answerbox, Image img, [Optional]Label label, [Optional]Color color)
         {
             MethodInvoker UI = delegate
             {
@@ -251,7 +319,7 @@ namespace DefuseIT_Game
         }
 
         /// <summary>
-        /// Revert to default iamges
+        /// Revert naar de default images
         /// </summary>
         /// <param name="A"></param>
         /// <param name="B"></param>
@@ -259,10 +327,10 @@ namespace DefuseIT_Game
         /// <param name="D"></param>
         private void RevertUIChanges(bool A, bool B, bool C, bool D)
         {
-            if (A) InvokeUIChange(AntwoordABox, Properties.Resources.AntwoordBoxA, AntwoordLabelA, LightGray);
-            if (B) InvokeUIChange(AntwoordBBox, Properties.Resources.AntwoordBoxB, AntwoordLabelB, LightGray);
-            if (C) InvokeUIChange(AntwoordCBox, Properties.Resources.AntwoordenCBox, AntwoordLabelC, LightGray);
-            if (D) InvokeUIChange(AntwoordDBox, Properties.Resources.AntwoordenDBox, AntwoordLabelD, LightGray);
+            if (A) ChangeButtonAndLabel(AntwoordABox, Properties.Resources.AntwoordBoxA, AntwoordLabelA, LightGray);
+            if (B) ChangeButtonAndLabel(AntwoordBBox, Properties.Resources.AntwoordBoxB, AntwoordLabelB, LightGray);
+            if (C) ChangeButtonAndLabel(AntwoordCBox, Properties.Resources.AntwoordenCBox, AntwoordLabelC, LightGray);
+            if (D) ChangeButtonAndLabel(AntwoordDBox, Properties.Resources.AntwoordenDBox, AntwoordLabelD, LightGray);
         }
 
         /// <summary>
@@ -301,7 +369,7 @@ namespace DefuseIT_Game
             Minimize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
 
             //SetVraagLabel Color
-            VraagLabel.ForeColor = Yellow;
+            VraagLabel.ForeColor = Red;
             VraagLabel.BackColor = Gray;
 
             //SetAntwoord Colors

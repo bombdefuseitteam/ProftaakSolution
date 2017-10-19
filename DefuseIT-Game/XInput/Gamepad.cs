@@ -59,7 +59,7 @@ namespace DefuseIT_Game.XInput
         }
 
         /// <summary>
-        /// Check for XInput devices and assign the Gamepad
+        /// Controlleer alle aangesloten devices en bepaal welke de controller is.
         /// </summary>
         private void GetGamepad()
         {
@@ -82,7 +82,7 @@ namespace DefuseIT_Game.XInput
         }
 
         /// <summary>
-        /// Start Gamepad Listening
+        /// Start Worker2 hierdoor luisterd de applicatie naar de controller
         /// </summary>
         private void StartWorker()
         {
@@ -93,7 +93,7 @@ namespace DefuseIT_Game.XInput
 
         /// <summary>
         /// Get Gamepad State
-        /// Thread.Sleep to prevent socket overflow
+        /// Thread.Sleep is om socket overflow te voorkomen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -170,7 +170,7 @@ namespace DefuseIT_Game.XInput
         }
 
         /// <summary>
-        /// Normalize LThumbX Value
+        /// Normalizeer de Thumbstick values (value tussen 1-20)
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
@@ -191,7 +191,7 @@ namespace DefuseIT_Game.XInput
         }
 
         /// <summary>
-        /// Disconnect Gamepad Thread;
+        /// Sluit de Gamepad Thread
         /// </summary>
         internal void DisconnectGamepad()
         {

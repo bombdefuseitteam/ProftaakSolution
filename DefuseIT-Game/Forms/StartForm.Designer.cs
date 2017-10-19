@@ -151,7 +151,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "StartScherm";
             this.Text = "DefuseIT-Game";
-            this.Load += new System.EventHandler(this.StartScherm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartSchermBackground)).EndInit();
