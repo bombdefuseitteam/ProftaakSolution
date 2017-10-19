@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using DefuseIT_Game.XInput;
+using DefuseIT_Game.GameEvents;
 using System.ComponentModel;
 
 namespace DefuseIT_Game
@@ -18,6 +19,7 @@ namespace DefuseIT_Game
         /// BackgroundWorker (Listen to Controller)
         /// </summary>
         BackgroundWorker w1 = new BackgroundWorker();
+        
 
         /// <summary>
         /// Initialize alle onderdelen/methods.

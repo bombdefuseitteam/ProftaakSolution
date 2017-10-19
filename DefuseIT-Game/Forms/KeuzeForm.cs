@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using DefuseIT_Game.XInput;
 using DefuseIT_Game.Sockets;
+using DefuseIT_Game.GameEvents;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
@@ -23,9 +24,21 @@ namespace DefuseIT_Game
         SocketConnection Socket = new SocketConnection();
 
         /// <summary>
-        /// W6 ListenToController
+        /// W5 ListenToController
         /// </summary>
         BackgroundWorker w5 = new BackgroundWorker();
+
+
+        /// <summary>
+        /// ScoreManager
+        /// </summary>
+        ScoreManager ScoreM = new ScoreManager();
+
+        /// <summary>
+        /// W7 Refresh Score
+        /// </summary>
+        BackgroundWorker w7 = new BackgroundWorker();
+        
 
         /// <summary>
         /// Het geselecteerde antwoord
@@ -57,7 +70,9 @@ namespace DefuseIT_Game
             GetControllerStatus();
             UiEvents();
             GetSocketStatus();
-            StartWorker();
+            ScoreM.Initialize(); //Remove
+            StartWorkers();
+
         }
 
         /// <summary>
@@ -66,6 +81,7 @@ namespace DefuseIT_Game
         Color Yellow = ColorTranslator.FromHtml("#e7af03");
         Color Gray = ColorTranslator.FromHtml("#2b2b2b");
         Color LightGray = ColorTranslator.FromHtml("#969696");
+        Color DarkGray = ColorTranslator.FromHtml("#222222");
         Color Red = ColorTranslator.FromHtml("#de0100");
 
         /// <summary>
@@ -104,7 +120,7 @@ namespace DefuseIT_Game
         /// <summary>
         /// Start W5
         /// </summary>
-        private void StartWorker()
+        private void StartWorkers()
         {
             if (Controller.IsConnected)
             {
@@ -112,6 +128,44 @@ namespace DefuseIT_Game
                 w5.WorkerSupportsCancellation = true;
                 w5.RunWorkerAsync();
             }
+
+            w7.DoWork += CheckScore;
+            w7.WorkerSupportsCancellation = true;
+            w7.RunWorkerAsync();
+
+        }
+
+        /// <summary>
+        /// Haal de huidige score op
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void CheckScore(object sender, DoWorkEventArgs args)
+        {
+            while (ScoreManager.Score > 0)
+            {
+                if (w7.CancellationPending == true) //Check for Cancellation Request
+                {
+                    args.Cancel = true;
+                    break;
+                }
+
+                Thread.Sleep(1000);
+                RefreshScore();
+
+            }
+        }
+
+        /// <summary>
+        /// Refresh het ScoreLabel
+        /// </summary>
+        private void RefreshScore()
+        {
+            MethodInvoker UI = delegate
+            {
+                ScoreLabel.Text = "Score: " + ScoreManager.Score;
+            };
+            Invoke(UI);
         }
 
 
@@ -295,13 +349,6 @@ namespace DefuseIT_Game
 
         }
 
-        /// <summary>
-        /// Bepaald welk form als volgende moet komen
-        /// </summary>
-        private void NextForm()
-        {
-
-        }
 
         /// <summary>
         /// Verandert een picturebox UI op de UI Thread
@@ -371,6 +418,10 @@ namespace DefuseIT_Game
             //SetVraagLabel Color
             VraagLabel.ForeColor = Red;
             VraagLabel.BackColor = Gray;
+
+            //ScoreLabel Color
+            ScoreLabel.ForeColor = Yellow;
+            ScoreLabel.BackColor = DarkGray;
 
             //SetAntwoord Colors
             AntwoordLabelA.ForeColor = LightGray;

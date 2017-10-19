@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="Init.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GameEvents\ScoreManager.cs" />
     <Compile Include="Sockets\SocketConnection.cs" />
     <Compile Include="SQL\SQLConnection.cs" />
     <Compile Include="XInput\Gamepad.cs" />
@@ -170,8 +171,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ScoreManager\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

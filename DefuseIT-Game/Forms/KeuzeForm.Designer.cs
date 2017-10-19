@@ -45,6 +45,7 @@
             this.AntwoordLabelB = new System.Windows.Forms.Label();
             this.AntwoordLabelC = new System.Windows.Forms.Label();
             this.AntwoordLabelD = new System.Windows.Forms.Label();
+            this.ScoreLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Refresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SocketStatus)).BeginInit();
@@ -223,12 +224,23 @@
             this.AntwoordLabelD.TabIndex = 18;
             this.AntwoordLabelD.Text = "antwoord D";
             // 
+            // ScoreLabel
+            // 
+            this.ScoreLabel.AutoSize = true;
+            this.ScoreLabel.Font = new System.Drawing.Font("Back In The USSR DL", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScoreLabel.Location = new System.Drawing.Point(12, 52);
+            this.ScoreLabel.Name = "ScoreLabel";
+            this.ScoreLabel.Size = new System.Drawing.Size(251, 41);
+            this.ScoreLabel.TabIndex = 19;
+            this.ScoreLabel.Text = "Score: 1000";
+            // 
             // KeuzeScherm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.ScoreLabel);
             this.Controls.Add(this.AntwoordLabelD);
             this.Controls.Add(this.AntwoordLabelC);
             this.Controls.Add(this.AntwoordLabelB);
@@ -279,6 +291,7 @@
         private System.Windows.Forms.Label AntwoordLabelB;
         private System.Windows.Forms.Label AntwoordLabelC;
         private System.Windows.Forms.Label AntwoordLabelD;
+        private System.Windows.Forms.Label ScoreLabel;
     }
 }
 

@@ -38,6 +38,7 @@
             this.SocketStatus = new System.Windows.Forms.PictureBox();
             this.WebcamStream = new AxAXVLC.AxVLCPlugin2();
             this.Reload = new System.Windows.Forms.Button();
+            this.ScoreLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Refresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SocketStatus)).BeginInit();
@@ -130,10 +131,10 @@
             // WebcamStream
             // 
             this.WebcamStream.Enabled = true;
-            this.WebcamStream.Location = new System.Drawing.Point(657, 267);
+            this.WebcamStream.Location = new System.Drawing.Point(620, 268);
             this.WebcamStream.Name = "WebcamStream";
             this.WebcamStream.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("WebcamStream.OcxState")));
-            this.WebcamStream.Size = new System.Drawing.Size(1192, 729);
+            this.WebcamStream.Size = new System.Drawing.Size(1191, 728);
             this.WebcamStream.TabIndex = 8;
             // 
             // Reload
@@ -150,12 +151,23 @@
             this.Reload.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.Reload.UseVisualStyleBackColor = false;
             // 
+            // ScoreLabel
+            // 
+            this.ScoreLabel.AutoSize = true;
+            this.ScoreLabel.Font = new System.Drawing.Font("Back In The USSR DL", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScoreLabel.Location = new System.Drawing.Point(12, 52);
+            this.ScoreLabel.Name = "ScoreLabel";
+            this.ScoreLabel.Size = new System.Drawing.Size(251, 41);
+            this.ScoreLabel.TabIndex = 20;
+            this.ScoreLabel.Text = "Score: 1000";
+            // 
             // ControlScherm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.ScoreLabel);
             this.Controls.Add(this.Reload);
             this.Controls.Add(this.SocketStatus);
             this.Controls.Add(this.WebcamStream);
@@ -189,6 +201,7 @@
         private System.Windows.Forms.PictureBox SocketStatus;
         private AxAXVLC.AxVLCPlugin2 WebcamStream;
         private System.Windows.Forms.Button Reload;
+        private System.Windows.Forms.Label ScoreLabel;
     }
 }
 

@@ -4,7 +4,10 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using DefuseIT_Game.XInput;
 using DefuseIT_Game.Sockets;
+using DefuseIT_Game.GameEvents;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Threading;
 
 namespace DefuseIT_Game
 {
@@ -19,6 +22,16 @@ namespace DefuseIT_Game
         /// Socket Connection
         /// </summary>
         SocketConnection Socket = new SocketConnection();
+
+        /// <summary>
+        /// ScoreManager
+        /// </summary>
+        ScoreManager ScoreManager = new ScoreManager();
+
+        /// <summary>
+        /// W7 Refresh Score
+        /// </summary>
+        BackgroundWorker w6 = new BackgroundWorker();
 
         /// <summary>
         /// Initialize alle onderdelen/methods.
@@ -42,6 +55,10 @@ namespace DefuseIT_Game
             Socket.Initialize();
             UiEvents();
             GetSocketStatus();
+            ScoreManager.Initialize();
+            ScoreManager.Score = 999;
+            StartWorker();
+            
         }
 
         /// <summary>
@@ -53,6 +70,15 @@ namespace DefuseIT_Game
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
+
+        /// <summary>
+        /// UI Color Hexcodes
+        /// </summary>
+        Color Yellow = ColorTranslator.FromHtml("#e7af03");
+        Color Gray = ColorTranslator.FromHtml("#2b2b2b");
+        Color LightGray = ColorTranslator.FromHtml("#969696");
+        Color DarkGray = ColorTranslator.FromHtml("#222222");
+        Color Red = ColorTranslator.FromHtml("#de0100");
 
         /// <summary>
         /// Zorgt ervoor dat de Form draggable is.
@@ -77,6 +103,13 @@ namespace DefuseIT_Game
             }
         }
 
+        private void StartWorker()
+        {
+            w6.DoWork += CheckScore;
+            w6.WorkerSupportsCancellation = true;
+            w6.RunWorkerAsync();
+        }
+
         /// <summary>
         /// Haalt de status van de Socket Server op.
         /// Gebruikt Stopwatch i.v.m. Delay tussen het opstarten van de connectie.
@@ -99,11 +132,44 @@ namespace DefuseIT_Game
         }
 
         /// <summary>
+        /// Haal de huidige score op
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void CheckScore(object sender, DoWorkEventArgs args)
+        {
+            while (ScoreManager.Score > 0)
+            {
+                if (w6.CancellationPending == true) //Check for Cancellation Request
+                {
+                    args.Cancel = true;
+                    break;
+                }
+
+                Thread.Sleep(1000);
+                RefreshScore();
+
+
+            }
+        }
+        /// <summary>
+        /// Refresh het ScoreLabel
+        /// </summary>
+        private void RefreshScore()
+        {
+            MethodInvoker UI = delegate
+            {
+                ScoreLabel.Text = "Score: " + ScoreManager.Score;
+            };
+            Invoke(UI);
+        }
+
+        /// <summary>
         /// Luistert naar alle UI events.
         /// </summary>
         private void UiEvents()
         {
-
+            
             //Remove Borders from Buttons.
             CloseApplication.FlatAppearance.BorderSize = 0;
             CloseApplication.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
@@ -113,6 +179,10 @@ namespace DefuseIT_Game
             Minimize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
             Reload.FlatAppearance.BorderSize = 0;
             Reload.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
+
+            //ScoreLabel Color
+            ScoreLabel.ForeColor = Yellow;
+            ScoreLabel.BackColor = DarkGray;
 
             //Drag Window.
             Refresh.MouseDown += StartSchermBackground_MouseDown;

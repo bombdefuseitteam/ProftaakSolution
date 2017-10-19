@@ -96,12 +96,6 @@ namespace DefuseIT_Game.Sockets
                     Thread.Sleep(delay);
                 }
 
-                if (Controller.LeftThumbY > 0)
-                {
-                    SendMessage("Y = " + Controller.LeftThumbY);
-                    Thread.Sleep(delay);
-                }
-
                 if (Controller.LTrigger != null)
                 {
                     SendMessage("B = " + Controller.LTrigger);
