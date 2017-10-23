@@ -49,7 +49,6 @@ namespace DefuseIT_Game
         /// </summary>
         private void Initialize()
         {
-            PlayWebcamStream();
             Controller.Initialize();
             GetControllerStatus();
             Socket.Initialize();
@@ -208,14 +207,6 @@ namespace DefuseIT_Game
             Reload.MouseClick += Refresh_Click;
         }
 
-        /// <summary>
-        /// Speelt de webcamstream af binnen VLC.
-        /// </summary>
-        private void PlayWebcamStream()
-        {
-            WebcamStream.playlist.add("https://www.youtube.com/watch?v=th4Czv1j3F8");
-            WebcamStream.playlist.play();
-        }
 
         /// <summary>
         /// Restart het spel, sluit huidige form en start het StartScherm op.
@@ -229,7 +220,6 @@ namespace DefuseIT_Game
             StartScherm sScherm = new StartScherm();
             sScherm.Closed += (s, args) => Close();
             sScherm.Show();
-            WebcamStream.playlist.stop();               //Stop VLC (VLC speelt in een aparte thread)
         }
 
         //Maximize Button.
@@ -298,7 +288,6 @@ namespace DefuseIT_Game
             ControlScherm sScherm = new ControlScherm();
             sScherm.Closed += (s, args) => Close();
             sScherm.Show();
-            WebcamStream.playlist.stop();           //Stop VLC
         }
 
         private void Refresh_MouseLeave(object sender, EventArgs e)

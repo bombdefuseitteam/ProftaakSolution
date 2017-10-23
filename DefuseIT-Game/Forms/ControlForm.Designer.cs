@@ -36,13 +36,12 @@
             this.RestartGame = new System.Windows.Forms.Label();
             this.Refresh = new System.Windows.Forms.PictureBox();
             this.SocketStatus = new System.Windows.Forms.PictureBox();
-            this.WebcamStream = new AxAXVLC.AxVLCPlugin2();
             this.Reload = new System.Windows.Forms.Button();
             this.ScoreLabel = new System.Windows.Forms.Label();
+            this.WebBrowser = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Refresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SocketStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WebcamStream)).BeginInit();
             this.SuspendLayout();
             // 
             // ControllerStatus
@@ -128,15 +127,6 @@
             this.SocketStatus.TabIndex = 9;
             this.SocketStatus.TabStop = false;
             // 
-            // WebcamStream
-            // 
-            this.WebcamStream.Enabled = true;
-            this.WebcamStream.Location = new System.Drawing.Point(620, 268);
-            this.WebcamStream.Name = "WebcamStream";
-            this.WebcamStream.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("WebcamStream.OcxState")));
-            this.WebcamStream.Size = new System.Drawing.Size(1191, 728);
-            this.WebcamStream.TabIndex = 8;
-            // 
             // Reload
             // 
             this.Reload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -161,16 +151,26 @@
             this.ScoreLabel.TabIndex = 20;
             this.ScoreLabel.Text = "Score: 1000";
             // 
+            // WebBrowser
+            // 
+            this.WebBrowser.Location = new System.Drawing.Point(620, 263);
+            this.WebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.WebBrowser.Name = "WebBrowser";
+            this.WebBrowser.ScriptErrorsSuppressed = true;
+            this.WebBrowser.Size = new System.Drawing.Size(1192, 731);
+            this.WebBrowser.TabIndex = 21;
+            this.WebBrowser.Url = new System.Uri("", System.UriKind.Relative);
+            // 
             // ControlScherm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.WebBrowser);
             this.Controls.Add(this.ScoreLabel);
             this.Controls.Add(this.Reload);
             this.Controls.Add(this.SocketStatus);
-            this.Controls.Add(this.WebcamStream);
             this.Controls.Add(this.ControllerStatus);
             this.Controls.Add(this.Maximize);
             this.Controls.Add(this.Minimize);
@@ -184,7 +184,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Refresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SocketStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WebcamStream)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,9 +198,9 @@
         private System.Windows.Forms.Button Maximize;
         private System.Windows.Forms.PictureBox ControllerStatus;
         private System.Windows.Forms.PictureBox SocketStatus;
-        private AxAXVLC.AxVLCPlugin2 WebcamStream;
         private System.Windows.Forms.Button Reload;
         private System.Windows.Forms.Label ScoreLabel;
+        private System.Windows.Forms.WebBrowser WebBrowser;
     }
 }
 
