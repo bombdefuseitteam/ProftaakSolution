@@ -8,6 +8,7 @@ using DefuseIT_Game.GameEvents;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
+using dmxcontrol;
 
 namespace DefuseIT_Game
 {
@@ -51,6 +52,7 @@ namespace DefuseIT_Game
         {
             Controller.Initialize();
             GetControllerStatus();
+            lightcontrol();
             Socket.Initialize();
             UiEvents();
             GetSocketStatus();
@@ -58,6 +60,19 @@ namespace DefuseIT_Game
             WebBrowser.Navigate("192.168.0.102");
             StartWorker();
             
+        }
+
+        internal effects dmxeffects = new effects();
+        internal color dmxcolor = new color();
+        internal dmxcon dmxcon = new dmxcon();
+        private void lightcontrol()
+        {
+            if (dmxcon.dmx.IsOpen)
+            {
+                dmxeffects.idle(4, "off");
+                dmxcolor.allwhite(4, 255);
+            }
+
         }
 
         /// <summary>
@@ -267,6 +282,7 @@ namespace DefuseIT_Game
         private void CloseApplication_Click(object sender, EventArgs e)
         {
             Socket.DisconnectStream();
+            dmxcon.allchannelsoff();
             Application.Exit();
 
         }

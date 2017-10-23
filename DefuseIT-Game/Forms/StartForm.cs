@@ -236,6 +236,7 @@ namespace DefuseIT_Game
         //Close Button.
         private void CloseApplication_Click(object sender, EventArgs e)
         {
+            dmxcon.allchannelsoff();
             Application.Exit();
 
         }
