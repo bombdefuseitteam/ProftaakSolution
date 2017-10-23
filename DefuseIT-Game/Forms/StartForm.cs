@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DefuseIT_Game.XInput;
 using DefuseIT_Game.GameEvents;
 using System.ComponentModel;
+using dmxcontrol;
 
 namespace DefuseIT_Game
 {
@@ -31,6 +32,7 @@ namespace DefuseIT_Game
             Controller.Initialize();
             GetControllerStatus();
             StartWorker();
+            lightcontrol();
         }
 
         /// <summary>
@@ -63,6 +65,17 @@ namespace DefuseIT_Game
             {
                 ControllerStatus.Image = Properties.Resources.Controller_icon_CONNECTED;
             }
+        }
+        /// <summary>
+        /// Set DMX idle effect.
+        /// </summary>
+        internal effects dmxeffects = new effects();
+        internal color dmxcolor = new color();
+        private void lightcontrol()
+        {
+            dmxcolor.allchannelsoff();
+            dmxcolor.alldimmer(2, 255);
+            dmxeffects.idle(4, "on");
         }
 
         /// <summary>

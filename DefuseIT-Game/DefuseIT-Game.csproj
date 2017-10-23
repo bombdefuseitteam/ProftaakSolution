@@ -37,6 +37,9 @@
     <ApplicationIcon>bomb.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LibUsbDotNet, Version=2.2.8.104, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibUsbDotNet.2.2.8\lib\LibUsbDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpDX.4.0.1\lib\net45\SharpDX.dll</HintPath>
     </Reference>
@@ -56,6 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DmxControl\color.cs" />
+    <Compile Include="DmxControl\dmxcon.cs" />
+    <Compile Include="DmxControl\effects.cs" />
+    <Compile Include="DmxControl\fixtures.cs" />
+    <Compile Include="DmxControl\uDMX.cs" />
     <Compile Include="Forms\ControlForm.cs">
       <SubType>Form</SubType>
     </Compile>
