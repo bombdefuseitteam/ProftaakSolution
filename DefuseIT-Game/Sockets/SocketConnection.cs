@@ -117,7 +117,7 @@ namespace DefuseIT_Game.Sockets
         /// <param name="args"></param>
         private void StartStream(object sender, DoWorkEventArgs args)
         {
-            StartConnection("127.0.0.1", 5555, args);
+            StartConnection("192.168.0.103", 1337, args);
         }
 
         /// <summary>

@@ -6,6 +6,7 @@ using DefuseIT_Game.XInput;
 using DefuseIT_Game.GameEvents;
 using System.ComponentModel;
 using dmxcontrol;
+using Gecko;
 
 namespace DefuseIT_Game
 {
@@ -28,6 +29,7 @@ namespace DefuseIT_Game
         public StartScherm()
         {
             InitializeComponent();
+            Xpcom.Initialize("Firefox");
             UiEvents();
             Controller.Initialize();
             GetControllerStatus();
@@ -71,11 +73,16 @@ namespace DefuseIT_Game
         /// </summary>
         internal effects dmxeffects = new effects();
         internal color dmxcolor = new color();
+        internal dmxcon dmxcon = new dmxcon();
         private void lightcontrol()
         {
-            dmxcolor.allchannelsoff();
-            dmxcolor.alldimmer(2, 255);
-            dmxeffects.idle(4, "on");
+            if (dmxcon.dmx.IsOpen)
+            {
+                dmxcolor.allchannelsoff();
+                dmxcolor.alldimmer(4, 255);
+                dmxeffects.idle(4, "on");
+            }
+
         }
 
         /// <summary>

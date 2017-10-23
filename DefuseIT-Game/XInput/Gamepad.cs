@@ -147,14 +147,14 @@ namespace DefuseIT_Game.XInput
 
                     if (state.LeftTrigger > 0 && LefthumbX < 1)
                     {
-                        LTrigger = state.LeftTrigger;
+                        LTrigger = state.LeftTrigger * 2;
                         Thread.Sleep(delay);
                         LTrigger = null;
                     }
 
                     if (state.RightTrigger > 0 && LefthumbX < 1)
                     {
-                        RTrigger = state.RightTrigger;
+                        RTrigger = state.RightTrigger * 2;
                         Thread.Sleep(delay);
                         RTrigger = null;
                     }

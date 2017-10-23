@@ -55,7 +55,7 @@ namespace DefuseIT_Game
             UiEvents();
             GetSocketStatus();
             ScoreManager.Initialize();
-            ScoreManager.Score = 999;
+            WebBrowser.Navigate("192.168.0.102");
             StartWorker();
             
         }

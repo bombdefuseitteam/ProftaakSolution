@@ -38,7 +38,7 @@
             this.SocketStatus = new System.Windows.Forms.PictureBox();
             this.Reload = new System.Windows.Forms.Button();
             this.ScoreLabel = new System.Windows.Forms.Label();
-            this.WebBrowser = new System.Windows.Forms.WebBrowser();
+            this.WebBrowser = new Gecko.GeckoWebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Refresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SocketStatus)).BeginInit();
@@ -153,13 +153,12 @@
             // 
             // WebBrowser
             // 
-            this.WebBrowser.Location = new System.Drawing.Point(620, 263);
-            this.WebBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.WebBrowser.FrameEventsPropagateToMainWindow = false;
+            this.WebBrowser.Location = new System.Drawing.Point(612, 267);
             this.WebBrowser.Name = "WebBrowser";
-            this.WebBrowser.ScriptErrorsSuppressed = true;
-            this.WebBrowser.Size = new System.Drawing.Size(1192, 731);
+            this.WebBrowser.Size = new System.Drawing.Size(1204, 729);
             this.WebBrowser.TabIndex = 21;
-            this.WebBrowser.Url = new System.Uri("", System.UriKind.Relative);
+            this.WebBrowser.UseHttpActivityObserver = false;
             // 
             // ControlScherm
             // 
@@ -200,7 +199,7 @@
         private System.Windows.Forms.PictureBox SocketStatus;
         private System.Windows.Forms.Button Reload;
         private System.Windows.Forms.Label ScoreLabel;
-        private System.Windows.Forms.WebBrowser WebBrowser;
+        private Gecko.GeckoWebBrowser WebBrowser;
     }
 }
 
