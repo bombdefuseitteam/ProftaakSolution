@@ -140,13 +140,13 @@
             // 
             // VraagLabel
             // 
-            this.VraagLabel.AutoSize = true;
-            this.VraagLabel.Font = new System.Drawing.Font("Back In The USSR DL", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VraagLabel.Location = new System.Drawing.Point(395, 319);
+            this.VraagLabel.Font = new System.Drawing.Font("Back In The USSR DL", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VraagLabel.Location = new System.Drawing.Point(349, 316);
             this.VraagLabel.Name = "VraagLabel";
-            this.VraagLabel.Size = new System.Drawing.Size(1139, 72);
+            this.VraagLabel.Size = new System.Drawing.Size(1228, 72);
             this.VraagLabel.TabIndex = 10;
-            this.VraagLabel.Text = "Wie is de uitvinder van Windows?";
+            this.VraagLabel.Text = "Vraag";
+            this.VraagLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // AntwoordABox
             // 
@@ -187,40 +187,40 @@
             // AntwoordLabelA
             // 
             this.AntwoordLabelA.AutoSize = true;
-            this.AntwoordLabelA.Font = new System.Drawing.Font("Back In The USSR DL", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AntwoordLabelA.Location = new System.Drawing.Point(448, 487);
+            this.AntwoordLabelA.Font = new System.Drawing.Font("Back In The USSR DL", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AntwoordLabelA.Location = new System.Drawing.Point(435, 504);
             this.AntwoordLabelA.Name = "AntwoordLabelA";
-            this.AntwoordLabelA.Size = new System.Drawing.Size(422, 72);
+            this.AntwoordLabelA.Size = new System.Drawing.Size(230, 39);
             this.AntwoordLabelA.TabIndex = 15;
             this.AntwoordLabelA.Text = "antwoord a";
             // 
             // AntwoordLabelB
             // 
             this.AntwoordLabelB.AutoSize = true;
-            this.AntwoordLabelB.Font = new System.Drawing.Font("Back In The USSR DL", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AntwoordLabelB.Location = new System.Drawing.Point(448, 662);
+            this.AntwoordLabelB.Font = new System.Drawing.Font("Back In The USSR DL", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AntwoordLabelB.Location = new System.Drawing.Point(435, 676);
             this.AntwoordLabelB.Name = "AntwoordLabelB";
-            this.AntwoordLabelB.Size = new System.Drawing.Size(427, 72);
+            this.AntwoordLabelB.Size = new System.Drawing.Size(233, 39);
             this.AntwoordLabelB.TabIndex = 16;
             this.AntwoordLabelB.Text = "antwoord B";
             // 
             // AntwoordLabelC
             // 
             this.AntwoordLabelC.AutoSize = true;
-            this.AntwoordLabelC.Font = new System.Drawing.Font("Back In The USSR DL", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AntwoordLabelC.Location = new System.Drawing.Point(1117, 487);
+            this.AntwoordLabelC.Font = new System.Drawing.Font("Back In The USSR DL", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AntwoordLabelC.Location = new System.Drawing.Point(1102, 504);
             this.AntwoordLabelC.Name = "AntwoordLabelC";
-            this.AntwoordLabelC.Size = new System.Drawing.Size(427, 72);
+            this.AntwoordLabelC.Size = new System.Drawing.Size(233, 39);
             this.AntwoordLabelC.TabIndex = 17;
             this.AntwoordLabelC.Text = "antwoord C";
             // 
             // AntwoordLabelD
             // 
             this.AntwoordLabelD.AutoSize = true;
-            this.AntwoordLabelD.Font = new System.Drawing.Font("Back In The USSR DL", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AntwoordLabelD.Location = new System.Drawing.Point(1117, 662);
+            this.AntwoordLabelD.Font = new System.Drawing.Font("Back In The USSR DL", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AntwoordLabelD.Location = new System.Drawing.Point(1102, 676);
             this.AntwoordLabelD.Name = "AntwoordLabelD";
-            this.AntwoordLabelD.Size = new System.Drawing.Size(427, 72);
+            this.AntwoordLabelD.Size = new System.Drawing.Size(233, 39);
             this.AntwoordLabelD.TabIndex = 18;
             this.AntwoordLabelD.Text = "antwoord D";
             // 

@@ -51,6 +51,61 @@ namespace DefuseIT_Game
         string CurrentPosition;
 
         /// <summary>
+        /// Randomizer van de vraag
+        /// </summary>
+        Random Randomizer = new Random();
+
+        /// <summary>
+        /// Question Template: Vraag, A, B, C, D, CorrectAntwoord
+        /// </summary>
+        static string[] Question1 = new string[] {
+            "Uit welke 2 cijfers bestaat binaire code?", //Vraag
+            "1 en 2", //A
+            "0 en 1", //B
+            "3 en 4", //C
+            "5 en 6", //D
+            "0 en 1"  //Antwoord
+        };
+
+        /// <summary>
+        /// Question Template: Vraag, A, B, C, D, CorrectAntwoord
+        /// </summary>
+        static string[] Question2 = new string[] {
+            "Wat krijg je als je mais verhit in een pan?",
+            "Ontplofte mais",
+            "Chips",
+            "Warme mais",
+            "Popcorn",
+            "Popcorn"
+        };
+
+        /// <summary>
+        /// Question Template: Vraag, A, B, C, D, CorrectAntwoord
+        /// </summary>
+        static string[] Question3 = new string[] {
+            "Wat is de kook temperatuur van water?",
+            "100 graden celcius",
+            "110 graden celcius",
+            "80 graden celcius",
+            "90 graden celcius",
+            "100 graden celcius"
+        };
+
+        /// <summary>
+        /// I heard you like arrays so we put an array inside of your array
+        /// </summary>
+        string[][] QuestionList = new string[][] { Question1, Question2, Question3 };
+
+
+        /// <summary>
+        /// Bombs Array
+        /// [0] = Bomb1
+        /// [1] = Bomb2
+        /// [2] = Bomb3
+        /// </summary>
+        static bool[] Bombs = new bool[]{false, false, false};
+
+        /// <summary>
         /// Initialize alle onderdelen/methods.
         /// </summary>
         public KeuzeScherm()
@@ -69,6 +124,7 @@ namespace DefuseIT_Game
             Controller.Initialize();
             GetControllerStatus();
             UiEvents();
+            TriviaInitialize();
             GetSocketStatus();
             ScoreM.Initialize(); //Remove
             StartWorkers();
@@ -168,7 +224,20 @@ namespace DefuseIT_Game
             Invoke(UI);
         }
 
+        /// <summary>
+        /// Initialize Trivia Game
+        /// </summary>
+        /// <param name="question"> string array </param>
+        private void TriviaInitialize()
+        {
+            string[] question = QuestionList[Randomizer.Next(0, QuestionList.Length)];
 
+            VraagLabel.Text = question[0];
+            AntwoordLabelA.Text = question[1];
+            AntwoordLabelB.Text = question[2];
+            AntwoordLabelC.Text = question[3];
+            AntwoordLabelD.Text = question[4];
+        }
 
         /// <summary>
         /// Kies en bevestig aan antwoord door middel van de controller
@@ -199,8 +268,8 @@ namespace DefuseIT_Game
                         break;
                     case "A":
                         {
-                           // if (Controller.PressedButton == "A")
-                           //    ConfirmAnswer("A");
+                           if (Controller.PressedButton == "A")
+                               ConfirmAnswer("A", Question1);
 
                             ChangeButtonAndLabel(AntwoordABox, Properties.Resources.AntwoordenASelectedBox, AntwoordLabelA, Yellow);
                             RevertUIChanges(false, true, true, true);
@@ -209,8 +278,8 @@ namespace DefuseIT_Game
                         break;
                     case "B":
                         {
-                           // if (Controller.PressedButton == "A")
-                           //     ConfirmAnswer("B");
+                           if (Controller.PressedButton == "A")
+                               ConfirmAnswer("B", Question1);
 
                             ChangeButtonAndLabel(AntwoordBBox, Properties.Resources.AntwoordenBSelectedBox, AntwoordLabelB, Yellow);
                             RevertUIChanges(true, false, true, true);
@@ -219,8 +288,8 @@ namespace DefuseIT_Game
                         break;
                     case "C":
                         {
-                          //  if (Controller.PressedButton == "A")
-                          //     ConfirmAnswer("C");
+                            if (Controller.PressedButton == "A")
+                                ConfirmAnswer("C", Question1);
 
                             ChangeButtonAndLabel(AntwoordCBox, Properties.Resources.AntwoordenCSelectedBox, AntwoordLabelC, Yellow);
                             RevertUIChanges(true, true, false, true);
@@ -230,8 +299,8 @@ namespace DefuseIT_Game
                         break;
                     case "D":
                         {
-                           // if (Controller.PressedButton == "A")
-                           //     ConfirmAnswer("D");  
+                           if (Controller.PressedButton == "A")
+                               ConfirmAnswer("D", Question1);  
                             ChangeButtonAndLabel(AntwoordDBox, Properties.Resources.AntwoordenDSelectedBox, AntwoordLabelD, Yellow);
                             RevertUIChanges(true, true, true, false);
                             CurrentPosition = "BottomRight";
@@ -304,43 +373,61 @@ namespace DefuseIT_Game
             return Answer;
         }
 
+
         /// <summary>
-        /// Bevestig het gekozen antwoord
+        /// Bevestig het antwoord.
         /// </summary>
         /// <param name="button"></param>
-        private void ConfirmAnswer(string button)
+        /// <param name="question"></param>
+        /// <param name="answerA"></param>
+        /// <param name="answerB"></param>
+        /// <param name="answerC"></param>
+        /// <param name="answerD"></param>
+        /// <param name="correctanswer"></param>
+        private void ConfirmAnswer(string button, string[] question)
         {
-            //GetAnswerFromSQL
-            var AnswerSQL = "None"; //ToDo: Haal antwoord op via SQL
+            var Correct1 = question[5];
 
             switch (button)
             {
                 case "A":
                     {
                         var AnswerA = AntwoordLabelA.Text;
-                        //if (AnswerA == AnswerSQL)
-                        //else do stuff if false;
+                        if (AnswerA == Correct1)
+                        {
+                            CorrectAnswer();
+                        }
+                        else WrongAnswer();
                     }
                     break;
                 case "B":
                     {
                         var AnswerB = AntwoordLabelB.Text;
-                        //if (AnswerB == AnswerSQL)
-                        //else do stuff if false;
+                        if (AnswerB == Correct1)
+                        {
+                            CorrectAnswer();
+                        }
+                        else WrongAnswer();
                     }
                     break;
                 case "C":
                     {
                         var AnswerC = AntwoordLabelC.Text;
-                        //if (AnswerC == AnswerSQL)
-                        //else do stuff if false;
+                        if (AnswerC == Correct1)
+                        {
+                            CorrectAnswer();
+                        }
+                        else WrongAnswer();
                     }
                     break;
                 case "D":
                     {
                         var AnswerD = AntwoordLabelD.Text;
-                        //if (AnswerD == AnswerSQL)
-                       //else do stuff if false;
+                        if (AnswerD == Correct1)
+                        {
+                            CorrectAnswer();
+                        }
+                        else WrongAnswer();
                     }
                     break;
                 default:
@@ -349,6 +436,27 @@ namespace DefuseIT_Game
 
         }
 
+        /// <summary>
+        /// Geeft score/doet dingen als het antwoord correct is.
+        /// </summary>
+        private void CorrectAnswer()
+        {
+            ScoreManager.Score += 200;
+            VraagLabel.Text = "Correct! + 200 score";
+            VraagLabel.ForeColor = Color.Green;
+        }
+
+        /// <summary>
+        /// Doet dingen als het antwoord fout is.
+        /// </summary>
+        private void WrongAnswer()
+        {
+            ScoreManager.Score -= 50;
+            var label = VraagLabel.Text;
+            VraagLabel.Text = "ERROR! Try again! - 50 score";
+            Thread.Sleep(2000);
+            VraagLabel.Text = label;
+        }
 
         /// <summary>
         /// Verandert een picturebox UI op de UI Thread
