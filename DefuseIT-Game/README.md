@@ -10,3 +10,7 @@
 - Sockets > SocketConnection.cs: Maakt de connectie naar de TCP server en stuurd de gamepad informatie er naar toe.
 - GameEvents > ScoreManager.cs: Houdt de score van de gebruiker bij.
 - [ToDO] SQL > SQLConnection.cs: Houdt de SQL connectie staande
+
+## Dependencies
+- Firefox 57
+- Windows 8+
