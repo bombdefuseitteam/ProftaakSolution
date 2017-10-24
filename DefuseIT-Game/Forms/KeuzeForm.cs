@@ -225,18 +225,22 @@ namespace DefuseIT_Game
         }
 
         /// <summary>
+        /// Main Question Array;
+        /// </summary>
+        string[] Question;
+
+        /// <summary>
         /// Initialize Trivia Game
         /// </summary>
         /// <param name="question"> string array </param>
         private void TriviaInitialize()
         {
-            string[] question = QuestionList[Randomizer.Next(0, QuestionList.Length)];
-
-            VraagLabel.Text = question[0];
-            AntwoordLabelA.Text = question[1];
-            AntwoordLabelB.Text = question[2];
-            AntwoordLabelC.Text = question[3];
-            AntwoordLabelD.Text = question[4];
+            Question = QuestionList[Randomizer.Next(0, QuestionList.Length)];
+            VraagLabel.Text = Question[0];
+            AntwoordLabelA.Text = Question[1];
+            AntwoordLabelB.Text = Question[2];
+            AntwoordLabelC.Text = Question[3];
+            AntwoordLabelD.Text = Question[4];
         }
 
         /// <summary>
@@ -269,7 +273,7 @@ namespace DefuseIT_Game
                     case "A":
                         {
                            if (Controller.PressedButton == "A")
-                               ConfirmAnswer("A", Question1);
+                               ConfirmAnswer("A", Question);
 
                             ChangeButtonAndLabel(AntwoordABox, Properties.Resources.AntwoordenASelectedBox, AntwoordLabelA, Yellow);
                             RevertUIChanges(false, true, true, true);
@@ -279,7 +283,7 @@ namespace DefuseIT_Game
                     case "B":
                         {
                            if (Controller.PressedButton == "A")
-                               ConfirmAnswer("B", Question1);
+                               ConfirmAnswer("B", Question);
 
                             ChangeButtonAndLabel(AntwoordBBox, Properties.Resources.AntwoordenBSelectedBox, AntwoordLabelB, Yellow);
                             RevertUIChanges(true, false, true, true);
@@ -289,7 +293,7 @@ namespace DefuseIT_Game
                     case "C":
                         {
                             if (Controller.PressedButton == "A")
-                                ConfirmAnswer("C", Question1);
+                                ConfirmAnswer("C", Question);
 
                             ChangeButtonAndLabel(AntwoordCBox, Properties.Resources.AntwoordenCSelectedBox, AntwoordLabelC, Yellow);
                             RevertUIChanges(true, true, false, true);
@@ -300,7 +304,7 @@ namespace DefuseIT_Game
                     case "D":
                         {
                            if (Controller.PressedButton == "A")
-                               ConfirmAnswer("D", Question1);  
+                               ConfirmAnswer("D", Question);  
                             ChangeButtonAndLabel(AntwoordDBox, Properties.Resources.AntwoordenDSelectedBox, AntwoordLabelD, Yellow);
                             RevertUIChanges(true, true, true, false);
                             CurrentPosition = "BottomRight";
