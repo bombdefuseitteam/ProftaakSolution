@@ -12,5 +12,5 @@
 - [ToDO] SQL > SQLConnection.cs: Houdt de SQL connectie staande
 
 ## Dependencies
-Firefox 57
-Windows 8+
+- Firefox 57
+- Windows 8+
