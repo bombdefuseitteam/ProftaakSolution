@@ -445,9 +445,13 @@ namespace DefuseIT_Game
         /// </summary>
         private void CorrectAnswer()
         {
-            GameManager.Score += 200;
-            VraagLabel.Text = "Correct! + 200 score";
-            VraagLabel.ForeColor = Color.Green;
+            MethodInvoker startForm = delegate
+            {
+                GameManager.Score += 200;
+                VraagLabel.Text = "Correct! + 200 score";
+                VraagLabel.ForeColor = Color.Green;
+            };
+            Invoke(startForm);
         }
 
         /// <summary>
@@ -455,11 +459,16 @@ namespace DefuseIT_Game
         /// </summary>
         private void WrongAnswer()
         {
-            GameManager.Score -= 50;
-            var label = VraagLabel.Text;
-            VraagLabel.Text = "ERROR! Try again! - 50 score";
-            Thread.Sleep(2000);
-            VraagLabel.Text = label;
+            MethodInvoker startForm = delegate
+            {
+                GameManager.Score -= 50;
+                var label = VraagLabel.Text;
+                VraagLabel.Text = "ERROR! Try again! - 50 score";
+                Thread.Sleep(2000);
+                VraagLabel.Text = label;
+            };
+            Invoke(startForm);
+
         }
 
         /// <summary>

@@ -7,6 +7,7 @@ using DefuseIT_Game.GameEvents;
 using System.Threading;
 using System.Linq;
 using dmxcontrol;
+using System.Windows.Forms;
 
 namespace DefuseIT_Game.Sockets
 {
@@ -36,6 +37,8 @@ namespace DefuseIT_Game.Sockets
         /// NetworkStream
         /// </summary>
         NetworkStream NStream;
+
+        string GlobalColor;
 
         /// <summary>
         /// Initialize SocketConnection
@@ -143,7 +146,7 @@ namespace DefuseIT_Game.Sockets
         }
 
 
-        GameEvents.GameManager GameEvent = new GameEvents.GameManager();
+        GameManager GameEvent = new GameEvents.GameManager();
         /// <summary>
         /// Start Socket Stream (Receive/Send)
         /// </summary>
@@ -178,10 +181,10 @@ namespace DefuseIT_Game.Sockets
                         {
                             color.allblue(4, 255);
                         }
+
                     }
 
                     GameManager.LastColor = ReturnData;
-
                 }
             }
         }

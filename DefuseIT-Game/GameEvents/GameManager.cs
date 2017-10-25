@@ -27,6 +27,9 @@ namespace DefuseIT_Game.GameEvents
         internal static string LastColor = "None";
 
 
+        internal void StartKeuze()
+        {
+        }
 
         /// <summary>
         /// Initiliaze scoremanager

@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Threading;
 using dmxcontrol;
 using Gecko;
+using System.Linq;
 
 namespace DefuseIT_Game
 {
@@ -34,6 +35,8 @@ namespace DefuseIT_Game
         /// W7 Refresh Score
         /// </summary>
         BackgroundWorker w6 = new BackgroundWorker();
+
+        BackgroundWorker w8 = new BackgroundWorker();
 
         /// <summary>
         /// Initialize alle onderdelen/methods.
@@ -75,6 +78,34 @@ namespace DefuseIT_Game
                 dmxcolor.allwhite(4, 255);
             }
 
+        }
+
+        private void GetColor(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                if (ScoreManager.Colors.Contains(GameManager.LastColor))
+                {
+                    if (w8.CancellationPending == true) //Check for Cancellation Request
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+
+                    MethodInvoker startForm = delegate
+                    {
+                        Hide();
+                        w8.CancelAsync();
+                        Controller.DisconnectGamepad();
+                        Socket.DisconnectStream();
+                        KeuzeScherm cS = new KeuzeScherm();
+                        cS.Closed += (s, args) => Close();
+                        cS.Show();
+                    };
+                    Invoke(startForm);
+                }
+            }
+            
         }
 
         /// <summary>
@@ -124,6 +155,10 @@ namespace DefuseIT_Game
             w6.DoWork += CheckScore;
             w6.WorkerSupportsCancellation = true;
             w6.RunWorkerAsync();
+
+            w8.DoWork += GetColor;
+            w8.WorkerSupportsCancellation = true;
+            w8.RunWorkerAsync();
         }
 
         /// <summary>
