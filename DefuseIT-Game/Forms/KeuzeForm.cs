@@ -32,7 +32,7 @@ namespace DefuseIT_Game
         /// <summary>
         /// ScoreManager
         /// </summary>
-        ScoreManager ScoreM = new ScoreManager();
+        GameManager ScoreM = new GameManager();
 
         /// <summary>
         /// W7 Refresh Score
@@ -198,7 +198,7 @@ namespace DefuseIT_Game
         /// <param name="args"></param>
         private void CheckScore(object sender, DoWorkEventArgs args)
         {
-            while (ScoreManager.Score > 0)
+            while (GameManager.Score > 0)
             {
                 if (w7.CancellationPending == true) //Check for Cancellation Request
                 {
@@ -219,7 +219,7 @@ namespace DefuseIT_Game
         {
             MethodInvoker UI = delegate
             {
-                ScoreLabel.Text = "Score: " + ScoreManager.Score;
+                ScoreLabel.Text = "Score: " + GameManager.Score;
             };
             Invoke(UI);
         }
@@ -445,7 +445,7 @@ namespace DefuseIT_Game
         /// </summary>
         private void CorrectAnswer()
         {
-            ScoreManager.Score += 200;
+            GameManager.Score += 200;
             VraagLabel.Text = "Correct! + 200 score";
             VraagLabel.ForeColor = Color.Green;
         }
@@ -455,7 +455,7 @@ namespace DefuseIT_Game
         /// </summary>
         private void WrongAnswer()
         {
-            ScoreManager.Score -= 50;
+            GameManager.Score -= 50;
             var label = VraagLabel.Text;
             VraagLabel.Text = "ERROR! Try again! - 50 score";
             Thread.Sleep(2000);

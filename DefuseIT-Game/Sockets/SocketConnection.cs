@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.ComponentModel;
 using DefuseIT_Game.XInput;
+using DefuseIT_Game.GameEvents;
 using System.Threading;
 using System.Linq;
 using dmxcontrol;
@@ -119,10 +120,7 @@ namespace DefuseIT_Game.Sockets
         /// <param name="args"></param>
         private void StartStream(object sender, DoWorkEventArgs args)
         {
-<<<<<<< HEAD
             StartConnection(Properties.Settings.Default.IPAdressSocket, Properties.Settings.Default.PortSocket, args);
-=======
->>>>>>> c6b95f74a6e8d007b41261b5ceee6617c921671b
         }
 
         /// <summary>
@@ -145,14 +143,13 @@ namespace DefuseIT_Game.Sockets
         }
 
 
-        GameEvents.ScoreManager scoremanager = new GameEvents.ScoreManager();
+        GameEvents.GameManager GameEvent = new GameEvents.GameManager();
         /// <summary>
         /// Start Socket Stream (Receive/Send)
         /// </summary>
         private void SocketStream(DoWorkEventArgs args)
         {
             StartWorker4();
-            string lastcolor = "none";
 
             while (SocketClient.Connected)
             {
@@ -170,11 +167,10 @@ namespace DefuseIT_Game.Sockets
                 int Count = NStream.Read(Receiving, 0, Receiving.Length);
                 string ReturnData = Encoding.ASCII.GetString(Receiving, 0, Count);
 
-                if (scoremanager.Colors.Contains(ReturnData))
+                if (GameEvent.Colors.Contains(ReturnData))
                 {
-                    if (lastcolor != ReturnData)
-                    {
-                        
+                    if (GameManager.LastColor != ReturnData)
+                    {    
                         SendMessage("Color Received: " + ReturnData);
                         dmxcon dmxcon = new dmxcon();
                         color color = new color();
@@ -184,7 +180,7 @@ namespace DefuseIT_Game.Sockets
                         }
                     }
 
-                    lastcolor = ReturnData;
+                    GameManager.LastColor = ReturnData;
 
                 }
             }

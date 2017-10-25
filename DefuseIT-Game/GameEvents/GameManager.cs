@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DefuseIT_Game.GameEvents
 {
-    class ScoreManager
+    class GameManager
     {
         /// <summary>
         /// Base Score
@@ -25,7 +25,7 @@ namespace DefuseIT_Game.GameEvents
         /// Last Found Color
         /// </summary>
         internal static string LastColor = "None";
-        
+
 
 
         /// <summary>
@@ -35,18 +35,6 @@ namespace DefuseIT_Game.GameEvents
         {
             Score = 1000;
             StartWorker();
-        }
-
-        /// <summary>
-        /// Controleert de gedecteerde kleur
-        /// </summary>
-        /// <param name="color"></param>
-        private void CheckColor(string color)
-        {
-            if (Colors.Contains(color) || LastColor != color)
-            {
-                //StartKeuzeScherm
-            }
         }
 
         /// <summary>

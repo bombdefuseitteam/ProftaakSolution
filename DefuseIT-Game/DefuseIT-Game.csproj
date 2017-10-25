@@ -91,7 +91,7 @@
     <Compile Include="GameEvents\Trivia.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GameEvents\ScoreManager.cs" />
+    <Compile Include="GameEvents\GameManager.cs" />
     <Compile Include="Sockets\SocketConnection.cs" />
     <Compile Include="SQL\SQLConnection.cs" />
     <Compile Include="XInput\Gamepad.cs" />

@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
 using dmxcontrol;
+using Gecko;
 
 namespace DefuseIT_Game
 {
@@ -27,7 +28,7 @@ namespace DefuseIT_Game
         /// <summary>
         /// ScoreManager
         /// </summary>
-        ScoreManager ScoreManager = new ScoreManager();
+        GameManager ScoreManager = new GameManager();
 
         /// <summary>
         /// W7 Refresh Score
@@ -58,6 +59,7 @@ namespace DefuseIT_Game
             GetSocketStatus();
             ScoreManager.Initialize();
             WebBrowser.Navigate(Properties.Settings.Default.WebcamUrl);
+            var cv = Xpcom.QueryInterface<nsIDocShell>(WebBrowser.WebBrowserFocus).GetContentViewerAttribute(); cv.SetFullZoomAttribute((float)1.6);
             StartWorker();
             
         }
@@ -152,7 +154,7 @@ namespace DefuseIT_Game
         /// <param name="args"></param>
         private void CheckScore(object sender, DoWorkEventArgs args)
         {
-            while (ScoreManager.Score > 0)
+            while (GameManager.Score > 0)
             {
                 if (w6.CancellationPending == true) //Check for Cancellation Request
                 {
@@ -173,7 +175,7 @@ namespace DefuseIT_Game
         {
             MethodInvoker UI = delegate
             {
-                ScoreLabel.Text = "Score: " + ScoreManager.Score;
+                ScoreLabel.Text = "Score: " + GameManager.Score;
             };
             Invoke(UI);
         }

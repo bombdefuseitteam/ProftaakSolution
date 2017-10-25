@@ -134,7 +134,7 @@ public class uDMX : IDisposable
             buffer = new byte[0];
 
         // Send data and get the result
-        if (_device.ControlTransfer(ref packet, buffer, buffer.Length, out transfered))
+        if (_device != null && _device.ControlTransfer(ref packet, buffer, buffer.Length, out transfered))
         {
             result = true;
         }
