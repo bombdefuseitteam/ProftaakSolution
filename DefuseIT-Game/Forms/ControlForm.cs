@@ -52,12 +52,12 @@ namespace DefuseIT_Game
         {
             Controller.Initialize();
             GetControllerStatus();
-            lightcontrol();
             Socket.Initialize();
+            lightcontrol();
             UiEvents();
             GetSocketStatus();
             ScoreManager.Initialize();
-            WebBrowser.Navigate("192.168.0.102");
+            WebBrowser.Navigate("192.168.2.183/stream/0");
             StartWorker();
             
         }

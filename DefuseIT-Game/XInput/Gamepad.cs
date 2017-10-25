@@ -108,7 +108,7 @@ namespace DefuseIT_Game.XInput
                     var state = GamePad.GetState().Gamepad;
                     var button = state.Buttons.ToString();
 
-                    int delay = 100;
+                    int delay = 150;
                     int deadzone = 4000;
 
                     if (w2.CancellationPending == true) //Check for Cancellation Request

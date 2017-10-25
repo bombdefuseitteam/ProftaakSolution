@@ -19,12 +19,12 @@ namespace DefuseIT_Game.GameEvents
         /// <summary>
         /// Checking for Colors
         /// </summary>
-        string[] Colors = { "Red", "Black", "Green" };
+        internal string[] Colors = { "Blue", "Groen", "Yellow", "Red" };
 
         /// <summary>
         /// Last Found Color
         /// </summary>
-        static string LastColor = "None";
+        internal static string LastColor = "None";
         
 
 

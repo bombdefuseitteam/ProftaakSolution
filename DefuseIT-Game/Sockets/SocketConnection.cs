@@ -4,6 +4,8 @@ using System.Text;
 using System.ComponentModel;
 using DefuseIT_Game.XInput;
 using System.Threading;
+using System.Linq;
+using dmxcontrol;
 
 namespace DefuseIT_Game.Sockets
 {
@@ -72,7 +74,7 @@ namespace DefuseIT_Game.Sockets
         /// <param name="args"></param>
         private void ListenToController(object sender, DoWorkEventArgs args)
         {
-            int delay = 100;
+            int delay = 150;
             if (Controller.GamePad == null) return;
 
             while (Controller.GamePad.IsConnected)
@@ -117,7 +119,7 @@ namespace DefuseIT_Game.Sockets
         /// <param name="args"></param>
         private void StartStream(object sender, DoWorkEventArgs args)
         {
-            StartConnection("192.168.0.103", 1337, args);
+            StartConnection("192.168.2.194", 1337, args);
         }
 
         /// <summary>
@@ -139,12 +141,15 @@ namespace DefuseIT_Game.Sockets
             }
         }
 
+
+        GameEvents.ScoreManager scoremanager = new GameEvents.ScoreManager();
         /// <summary>
         /// Start Socket Stream (Receive/Send)
         /// </summary>
         private void SocketStream(DoWorkEventArgs args)
         {
             StartWorker4();
+            string lastcolor = "none";
 
             while (SocketClient.Connected)
             {
@@ -156,17 +161,28 @@ namespace DefuseIT_Game.Sockets
                     break;
                 }
 
-                bool FirstConnection = true;
                 byte[] Receiving = new byte[10025];
            
                 NStream = SocketClient.GetStream();
                 int Count = NStream.Read(Receiving, 0, Receiving.Length);
                 string ReturnData = Encoding.ASCII.GetString(Receiving, 0, Count);
 
-                if (FirstConnection)
+                if (scoremanager.Colors.Contains(ReturnData))
                 {
-                    SendMessage("[!] D3FCLIENT: Connected");
-                    FirstConnection = false;
+                    if (lastcolor != ReturnData)
+                    {
+                        
+                        SendMessage("Color Received: " + ReturnData);
+                        dmxcon dmxcon = new dmxcon();
+                        color color = new color();
+                        if (dmxcon.dmx.IsOpen)
+                        {
+                            color.allblue(4, 255);
+                        }
+                    }
+
+                    lastcolor = ReturnData;
+
                 }
             }
         }
