@@ -145,8 +145,6 @@ namespace DefuseIT_Game.Sockets
             }
         }
 
-
-        GameManager GameEvent = new GameEvents.GameManager();
         /// <summary>
         /// Start Socket Stream (Receive/Send)
         /// </summary>
@@ -170,7 +168,7 @@ namespace DefuseIT_Game.Sockets
                 int Count = NStream.Read(Receiving, 0, Receiving.Length);
                 string ReturnData = Encoding.ASCII.GetString(Receiving, 0, Count);
 
-                if (GameEvent.Colors.Contains(ReturnData))
+                if (GameManager.Colors.Contains(ReturnData))
                 {
                     if (GameManager.LastColor != ReturnData)
                     {    
@@ -179,13 +177,48 @@ namespace DefuseIT_Game.Sockets
                         color color = new color();
                         if (dmxcon.dmx.IsOpen)
                         {
-                            color.allblue(4, 255);
+
+                            ColorChangerDmx(ReturnData, dmxcon, color);
                         }
 
                     }
 
                     GameManager.LastColor = ReturnData;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Change DMX Color
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="dmxcon"></param>
+        /// <param name="color"></param>
+        private void ColorChangerDmx(string data, dmxcon dmxcon, color color)
+        {
+            switch (data)
+            {
+                case "Blue":
+                    {
+                        color.allblue(4, 255);
+                    }
+                    break;
+                case "Green":
+                    {
+                        color.allgreen(4, 255);
+                    }
+                    break;
+                case "Yellow":
+                    {
+                        color.allwhite(4, 255);
+                    }
+                    break;
+                case "Red":
+                    {
+                        color.allred(4, 255);
+                    }
+                    break;
+
             }
         }
 

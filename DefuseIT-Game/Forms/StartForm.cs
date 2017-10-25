@@ -174,7 +174,7 @@ namespace DefuseIT_Game
                 Hide();
                 w1.CancelAsync();                       //Kill Gamepad Listener Backgroundworker
                 Controller.DisconnectGamepad();         //Kill Gamepad Backgroundworker
-                ControlScherm cS = new ControlScherm();
+                KeuzeScherm cS = new KeuzeScherm();
                 cS.Closed += (s, args) => Close();
                 cS.Show();
             };

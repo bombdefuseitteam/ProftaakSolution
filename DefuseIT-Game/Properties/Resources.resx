@@ -175,4 +175,28 @@
   <data name="AntwoordenDSelectedBox" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AntwoordenDSelectedBox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AntwoordenACorrect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenACorrect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenAWrong" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenAWrong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenBCorrect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenBCorrect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenBWrong" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenBWrong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenCCorrect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenCCorrect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenCWrong" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenCWrong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenDCorrect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenDCorrect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AntwoordenDWrong" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AntwoordenDWrong.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

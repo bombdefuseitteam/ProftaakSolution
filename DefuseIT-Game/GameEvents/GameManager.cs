@@ -17,26 +17,46 @@ namespace DefuseIT_Game.GameEvents
         internal static int Score;
 
         /// <summary>
+        /// Time
+        /// </summary>
+        internal static int Time;
+
+        /// <summary>
+        /// Foute antwoorden
+        /// </summary>
+        internal static int Fouten;
+
+        /// <summary>
         /// Checking for Colors
         /// </summary>
-        internal string[] Colors = { "Blue", "Groen", "Yellow", "Red" };
+        internal static string[] Colors = { "Blue", "Groen", "Yellow", "Red" };
 
         /// <summary>
         /// Last Found Color
         /// </summary>
         internal static string LastColor = "None";
 
+        /// <summary>
+        /// Current Color
+        /// </summary>
+        internal static string Color = "None";
 
-        internal void StartKeuze()
-        {
-        }
+        /// <summary>
+        /// Score Timer
+        /// </summary>
+        BackgroundWorker w7 = new BackgroundWorker();
+
 
         /// <summary>
         /// Initiliaze scoremanager
         /// </summary>
-        internal void Initialize()
+        internal void Initialize(bool setscore)
         {
-            Score = 1000;
+            if (setscore)
+            {
+                Score = 1000; //Base Score
+            }
+
             StartWorker();
         }
 
@@ -45,7 +65,7 @@ namespace DefuseIT_Game.GameEvents
         /// </summary>
         private void StartWorker()
         {
-            BackgroundWorker w7 = new BackgroundWorker();
+
             w7.DoWork += AssignScore;
             w7.WorkerSupportsCancellation = true;
             w7.RunWorkerAsync();
@@ -53,9 +73,17 @@ namespace DefuseIT_Game.GameEvents
 
         private void AssignScore(object sender, DoWorkEventArgs e)
         {
+
             while (Score > 0)
             {
-                Score -= 5;
+                if (w7.CancellationPending == true) //Check for Cancellation Request
+                {
+                    e.Cancel = true;
+                    break;
+                }
+
+                Time += 1;
+                Score -= 2;
                 Thread.Sleep(1000);
             }
         }

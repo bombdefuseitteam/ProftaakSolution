@@ -8,6 +8,8 @@ using DefuseIT_Game.GameEvents;
 using System.Diagnostics;
 using System.ComponentModel;
 using System.Threading;
+using System.IO;
+using System.Media;
 
 namespace DefuseIT_Game
 {
@@ -126,7 +128,7 @@ namespace DefuseIT_Game
             UiEvents();
             TriviaInitialize();
             GetSocketStatus();
-            ScoreM.Initialize(); //Remove
+            ScoreM.Initialize(true); //Remove
             StartWorkers();
 
         }
@@ -134,6 +136,7 @@ namespace DefuseIT_Game
         /// <summary>
         /// UI Color Hexcodes
         /// </summary>
+        Color Green = ColorTranslator.FromHtml("#00b526");
         Color Yellow = ColorTranslator.FromHtml("#e7af03");
         Color Gray = ColorTranslator.FromHtml("#2b2b2b");
         Color LightGray = ColorTranslator.FromHtml("#969696");
@@ -399,9 +402,9 @@ namespace DefuseIT_Game
                         var AnswerA = AntwoordLabelA.Text;
                         if (AnswerA == Correct1)
                         {
-                            CorrectAnswer();
+                            CorrectAnswer(AntwoordABox, Properties.Resources.AntwoordenACorrect);
                         }
-                        else WrongAnswer();
+                        else WrongAnswer(AntwoordABox, Properties.Resources.AntwoordenAWrong);
                     }
                     break;
                 case "B":
@@ -409,9 +412,9 @@ namespace DefuseIT_Game
                         var AnswerB = AntwoordLabelB.Text;
                         if (AnswerB == Correct1)
                         {
-                            CorrectAnswer();
+                            CorrectAnswer(AntwoordBBox, Properties.Resources.AntwoordenBCorrect);
                         }
-                        else WrongAnswer();
+                        else WrongAnswer(AntwoordBBox, Properties.Resources.AntwoordenBWrong);
                     }
                     break;
                 case "C":
@@ -419,9 +422,9 @@ namespace DefuseIT_Game
                         var AnswerC = AntwoordLabelC.Text;
                         if (AnswerC == Correct1)
                         {
-                            CorrectAnswer();
+                            CorrectAnswer(AntwoordCBox, Properties.Resources.AntwoordenCCorrect);
                         }
-                        else WrongAnswer();
+                        else WrongAnswer(AntwoordCBox, Properties.Resources.AntwoordenCWrong);
                     }
                     break;
                 case "D":
@@ -429,9 +432,9 @@ namespace DefuseIT_Game
                         var AnswerD = AntwoordLabelD.Text;
                         if (AnswerD == Correct1)
                         {
-                            CorrectAnswer();
+                            CorrectAnswer(AntwoordDBox, Properties.Resources.AntwoordenDCorrect);
                         }
-                        else WrongAnswer();
+                        else WrongAnswer(AntwoordDBox, Properties.Resources.AntwoordenDWrong);
                     }
                     break;
                 default:
@@ -443,32 +446,53 @@ namespace DefuseIT_Game
         /// <summary>
         /// Geeft score/doet dingen als het antwoord correct is.
         /// </summary>
-        private void CorrectAnswer()
+        private void CorrectAnswer(PictureBox pb, Image img)
         {
-            MethodInvoker startForm = delegate
+            MethodInvoker Label = delegate
             {
                 GameManager.Score += 200;
                 VraagLabel.Text = "Correct! + 200 score";
-                VraagLabel.ForeColor = Color.Green;
+                VraagLabel.ForeColor = Green;
+                pb.Image = img;
+                
             };
-            Invoke(startForm);
-        }
+            Invoke(Label);
+            Thread.Sleep(4000);
 
+            MethodInvoker Control = delegate
+            {
+                Hide();
+                w5.CancelAsync();
+                w7.CancelAsync();
+                Controller.DisconnectGamepad();
+                ControlScherm cS = new ControlScherm();
+                cS.Closed += (s, args) => Close();
+                cS.Show();
+            };
+            Invoke(Control);
+        }
+           
         /// <summary>
         /// Doet dingen als het antwoord fout is.
         /// </summary>
-        private void WrongAnswer()
+        private void WrongAnswer(PictureBox pb, Image img)
         {
-            MethodInvoker startForm = delegate
+            MethodInvoker Label = delegate
             {
                 GameManager.Score -= 50;
-                var label = VraagLabel.Text;
                 VraagLabel.Text = "ERROR! Try again! - 50 score";
-                Thread.Sleep(2000);
-                VraagLabel.Text = label;
+                VraagLabel.ForeColor = Color.Red;
+                pb.Image = img;
             };
-            Invoke(startForm);
+            Invoke(Label);
 
+            Thread.Sleep(1000);
+            MethodInvoker Label2 = delegate
+            {
+                VraagLabel.Text = Question[0];
+                VraagLabel.ForeColor = Yellow;
+            };
+            Invoke(Label2);
         }
 
         /// <summary>
@@ -537,7 +561,7 @@ namespace DefuseIT_Game
             Minimize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
 
             //SetVraagLabel Color
-            VraagLabel.ForeColor = Red;
+            VraagLabel.ForeColor = Yellow;
             VraagLabel.BackColor = Gray;
 
             //ScoreLabel Color

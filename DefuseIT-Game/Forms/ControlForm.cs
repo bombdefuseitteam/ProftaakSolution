@@ -29,7 +29,7 @@ namespace DefuseIT_Game
         /// <summary>
         /// ScoreManager
         /// </summary>
-        GameManager ScoreManager = new GameManager();
+        GameManager GameEvent = new GameManager();
 
         /// <summary>
         /// W7 Refresh Score
@@ -60,7 +60,7 @@ namespace DefuseIT_Game
             Socket.Initialize();
             UiEvents();
             GetSocketStatus();
-            ScoreManager.Initialize();
+            GameEvent.Initialize(true);
             WebBrowser.Navigate(Properties.Settings.Default.WebcamUrl);
             var cv = Xpcom.QueryInterface<nsIDocShell>(WebBrowser.WebBrowserFocus).GetContentViewerAttribute(); cv.SetFullZoomAttribute((float)1.6);
             StartWorker();
@@ -82,16 +82,19 @@ namespace DefuseIT_Game
 
         private void GetColor(object sender, DoWorkEventArgs e)
         {
+            var BombA = Trivia.Bombs[0]; //Blue
+            var BombB = Trivia.Bombs[1]; //Red
+            var BombC = Trivia.Bombs[2]; //Green
+
             while (true)
             {
-                if (ScoreManager.Colors.Contains(GameManager.LastColor))
+                if (GameManager.Color != GameManager.LastColor)
                 {
                     if (w8.CancellationPending == true) //Check for Cancellation Request
                     {
                         e.Cancel = true;
                         break;
                     }
-
                     MethodInvoker startForm = delegate
                     {
                         Hide();
