@@ -57,7 +57,7 @@ namespace DefuseIT_Game
             UiEvents();
             GetSocketStatus();
             ScoreManager.Initialize();
-            WebBrowser.Navigate("192.168.0.102");
+            WebBrowser.Navigate(Properties.Settings.Default.WebcamUrl);
             StartWorker();
             
         }
