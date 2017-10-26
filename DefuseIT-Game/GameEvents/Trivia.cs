@@ -55,6 +55,8 @@ namespace DefuseIT_Game.GameEvents
         /// </summary>
         internal static string[][] QuestionList = new string[][] { Question1, Question2, Question3 };
 
+        internal static List<Array> PreviousQuestions = new List<Array>();
+
 
         /// <summary>
         /// Bombs Array

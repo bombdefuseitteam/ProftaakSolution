@@ -11,6 +11,7 @@ using System.Threading;
 using System.IO;
 using System.Media;
 using dmxcontrol;
+using System.Linq;
 
 namespace DefuseIT_Game
 {
@@ -188,6 +189,7 @@ namespace DefuseIT_Game
         string[] Question;
 
         int answeredquestions = -1;
+
         /// <summary>
         /// Initialize Trivia Game
         /// </summary>
@@ -197,13 +199,38 @@ namespace DefuseIT_Game
             answeredquestions += 1;
             if (answeredquestions < 3)
             {
-                Question = Trivia.QuestionList[answeredquestions];
+                Question = RandomizedQuestion();
                 VraagLabel.Text = Question[0];
                 AntwoordLabelA.Text = Question[1];
                 AntwoordLabelB.Text = Question[2];
                 AntwoordLabelC.Text = Question[3];
                 AntwoordLabelD.Text = Question[4];
+                Trivia.PreviousQuestions.Add(Question);
             }
+        }
+
+        /// <summary>
+        /// Random vraag houdt rekening met alle vragen die er van te voren waren...
+        /// </summary>
+        /// <returns></returns>
+        private string[] RandomizedQuestion()
+        {
+
+            string[] RandomQuestion;
+            RandomQuestion = Trivia.QuestionList[Trivia.Randomizer.Next(0, Trivia.QuestionList.Length)];
+
+            while (Trivia.PreviousQuestions.Contains(RandomQuestion))
+            {
+                RandomQuestion = Trivia.QuestionList[Trivia.Randomizer.Next(0, Trivia.QuestionList.Length)];
+                if (!Trivia.PreviousQuestions.Contains(RandomQuestion))
+                {
+                    Trivia.PreviousQuestions.Add(RandomQuestion);
+                    return RandomQuestion;
+                }
+            }
+            return RandomQuestion;
+
+            
         }
 
         /// <summary>
