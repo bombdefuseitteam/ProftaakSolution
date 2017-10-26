@@ -3,13 +3,13 @@
   <Profiles />
   <Settings>
     <Setting Name="IPAdressSocket" Type="System.String" Scope="User">
-      <Value Profile="(Default)">127.0.0.1</Value>
+      <Value Profile="(Default)">192.168.2.194</Value>
     </Setting>
     <Setting Name="PortSocket" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1337</Value>
     </Setting>
     <Setting Name="WebcamUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">vanloon.io</Value>
+      <Value Profile="(Default)">192.168.2.10/stream/0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

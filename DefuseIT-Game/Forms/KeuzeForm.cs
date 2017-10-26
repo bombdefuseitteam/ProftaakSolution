@@ -187,18 +187,23 @@ namespace DefuseIT_Game
         /// </summary>
         string[] Question;
 
+        int answeredquestions = -1;
         /// <summary>
         /// Initialize Trivia Game
         /// </summary>
         /// <param name="question"> string array </param>
         private void TriviaInitialize()
         {
-            Question = Trivia.QuestionList[Trivia.Randomizer.Next(0, Trivia.QuestionList.Length)];
-            VraagLabel.Text = Question[0];
-            AntwoordLabelA.Text = Question[1];
-            AntwoordLabelB.Text = Question[2];
-            AntwoordLabelC.Text = Question[3];
-            AntwoordLabelD.Text = Question[4];
+            answeredquestions += 1;
+            if (answeredquestions < 3)
+            {
+                Question = Trivia.QuestionList[answeredquestions];
+                VraagLabel.Text = Question[0];
+                AntwoordLabelA.Text = Question[1];
+                AntwoordLabelB.Text = Question[2];
+                AntwoordLabelC.Text = Question[3];
+                AntwoordLabelD.Text = Question[4];
+            }
         }
 
         /// <summary>
@@ -405,14 +410,30 @@ namespace DefuseIT_Game
         {
             MethodInvoker Label = delegate
             {
+                
                 GameManager.Score += 200;
                 VraagLabel.Text = "Correct! + 200 score";
                 VraagLabel.ForeColor = Green;
-                pb.Image = img;
-                
+                pb.Image = img;               
             };
             Invoke(Label);
-            Thread.Sleep(4000);
+            Thread.Sleep(1000);
+
+            MethodInvoker Next = delegate
+            {
+                TriviaInitialize();
+            };
+            Invoke(Next);
+
+            MethodInvoker Label2 = delegate
+            {
+                VraagLabel.Text = Question[0];
+                VraagLabel.ForeColor = Yellow;
+            };
+            Invoke(Label2);
+
+
+            if (answeredquestions < 3) return;
 
             MethodInvoker Control = delegate
             {
@@ -496,7 +517,7 @@ namespace DefuseIT_Game
                     SocketStatus.Image = Properties.Resources.WIFICONNECTED;
                     break;
                 }
-                else if (sw.ElapsedMilliseconds > 101) break;
+                else if (sw.ElapsedMilliseconds > 200) break;
             }
 
         }

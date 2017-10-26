@@ -106,6 +106,8 @@ namespace DefuseIT_Game
                         cS.Show();
                     };
                     Invoke(startForm);
+                    break;
+                    
                 }
             }
             

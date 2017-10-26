@@ -25,7 +25,7 @@ namespace DefuseIT_Game.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("127.0.0.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.2.194")]
         public string IPAdressSocket {
             get {
                 return ((string)(this["IPAdressSocket"]));
@@ -49,7 +49,7 @@ namespace DefuseIT_Game.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("vanloon.io")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.2.10/stream/0")]
         public string WebcamUrl {
             get {
                 return ((string)(this["WebcamUrl"]));
