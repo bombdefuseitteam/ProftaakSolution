@@ -171,7 +171,8 @@ namespace DefuseIT_Game.Sockets
                 if (GameManager.Colors.Contains(ReturnData))
                 {
                     if (GameManager.LastColor != ReturnData)
-                    {    
+                    {
+                        GameManager.Color = ReturnData;
                         SendMessage("Color Received: " + ReturnData);
                         dmxcon dmxcon = new dmxcon();
                         color color = new color();
