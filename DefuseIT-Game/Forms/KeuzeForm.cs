@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.IO;
 using System.Media;
+using dmxcontrol;
 
 namespace DefuseIT_Game
 {
@@ -661,6 +662,7 @@ namespace DefuseIT_Game
         //Close Button.
         private void CloseApplication_Click(object sender, EventArgs e)
         {
+            dmxcon.allchannelsoff();
             Application.Exit();
 
         }

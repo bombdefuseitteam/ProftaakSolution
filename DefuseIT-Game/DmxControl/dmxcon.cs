@@ -18,7 +18,7 @@ namespace dmxcontrol
                 dmxcon.dmx.SetSingleChannel(chan, val);
             }
         }
-        internal void allchannelsoff()
+        internal static void allchannelsoff()
         {
             for (int i = 0; i < 27; i++)
             {

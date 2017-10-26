@@ -200,21 +200,25 @@ namespace DefuseIT_Game.Sockets
             {
                 case "Blue":
                     {
+                        color.allwhite(4, 0);
                         color.allblue(4, 255);
                     }
                     break;
                 case "Green":
                     {
+                        color.allwhite(4, 0);
                         color.allgreen(4, 255);
                     }
                     break;
                 case "Yellow":
                     {
+                        color.allwhite(4, 0);
                         color.allwhite(4, 255);
                     }
                     break;
                 case "Red":
                     {
+                        color.allwhite(4, 0);
                         color.allred(4, 255);
                     }
                     break;
