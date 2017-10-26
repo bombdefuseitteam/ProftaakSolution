@@ -53,52 +53,6 @@ namespace DefuseIT_Game
         /// </summary>
         string CurrentPosition;
 
-        /// <summary>
-        /// Randomizer van de vraag
-        /// </summary>
-        Random Randomizer = new Random();
-
-        /// <summary>
-        /// Question Template: Vraag, A, B, C, D, CorrectAntwoord
-        /// </summary>
-        static string[] Question1 = new string[] {
-            "Uit welke 2 cijfers bestaat binaire code?", //Vraag
-            "1 en 2", //A
-            "0 en 1", //B
-            "3 en 4", //C
-            "5 en 6", //D
-            "0 en 1"  //Antwoord
-        };
-
-        /// <summary>
-        /// Question Template: Vraag, A, B, C, D, CorrectAntwoord
-        /// </summary>
-        static string[] Question2 = new string[] {
-            "Wat krijg je als je mais verhit in een pan?",
-            "Ontplofte mais",
-            "Chips",
-            "Warme mais",
-            "Popcorn",
-            "Popcorn"
-        };
-
-        /// <summary>
-        /// Question Template: Vraag, A, B, C, D, CorrectAntwoord
-        /// </summary>
-        static string[] Question3 = new string[] {
-            "Wat is de kook temperatuur van water?",
-            "100 graden celcius",
-            "110 graden celcius",
-            "80 graden celcius",
-            "90 graden celcius",
-            "100 graden celcius"
-        };
-
-        /// <summary>
-        /// I heard you like arrays so we put an array inside of your array
-        /// </summary>
-        string[][] QuestionList = new string[][] { Question1, Question2, Question3 };
-
 
         /// <summary>
         /// Bombs Array
@@ -239,7 +193,7 @@ namespace DefuseIT_Game
         /// <param name="question"> string array </param>
         private void TriviaInitialize()
         {
-            Question = QuestionList[Randomizer.Next(0, QuestionList.Length)];
+            Question = Trivia.QuestionList[Trivia.Randomizer.Next(0, Trivia.QuestionList.Length)];
             VraagLabel.Text = Question[0];
             AntwoordLabelA.Text = Question[1];
             AntwoordLabelB.Text = Question[2];
