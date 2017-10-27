@@ -109,7 +109,7 @@ namespace DefuseIT_Game.XInput
                     var button = state.Buttons.ToString();
 
                     int delay = 150;
-                    int deadzone = 4000;
+                    int deadzone = 5000;
 
                     if (w2.CancellationPending == true) //Check for Cancellation Request
                     {
@@ -187,7 +187,7 @@ namespace DefuseIT_Game.XInput
             {
                 input /= 3000;
                 input += 11;
-                input = input * (255 / 10); //11 = dan 
+                input = 255 - ((255/10) * input);
             }
             return input;
         }
