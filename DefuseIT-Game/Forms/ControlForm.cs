@@ -104,18 +104,18 @@ namespace DefuseIT_Game
                         e.Cancel = true;
                         break;
                     }
+
                     MethodInvoker startForm = delegate
                     {
                         Hide();
-                        w8.CancelAsync();
                         Controller.DisconnectGamepad();
                         Socket.DisconnectStream();
                         KeuzeScherm cS = new KeuzeScherm();
                         cS.Closed += (s, args) => Close();
                         cS.Show();
+                        w8.CancelAsync();
                     };
                     Invoke(startForm);
-                    break;
                     
                 }
             }
