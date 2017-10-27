@@ -179,13 +179,15 @@ namespace DefuseIT_Game.XInput
             if (input > 0)
             {
                 input /= 3000;
-                input += (10 * (255/10));
+                input += 10;
+                input = input * (255 / 10);
             }
 
             if (input < 0)
             {
                 input /= 3000;
-                input += (11 * (255/10));
+                input += 11;
+                input = input * (255 / 10); //11 = dan 
             }
             return input;
         }
