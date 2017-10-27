@@ -54,6 +54,7 @@ namespace DefuseIT_Game
         /// </summary>
         string CurrentPosition;
 
+        bool AntiDouble = false;
 
         /// <summary>
         /// Bombs Array

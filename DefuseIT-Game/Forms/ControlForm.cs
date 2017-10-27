@@ -36,6 +36,11 @@ namespace DefuseIT_Game
         /// </summary>
         BackgroundWorker w6 = new BackgroundWorker();
 
+        /// <summary>
+        /// AntiDouble
+        /// </summary>
+        bool AntiDouble;
+
         BackgroundWorker w8 = new BackgroundWorker();
 
         /// <summary>
@@ -55,6 +60,7 @@ namespace DefuseIT_Game
         /// </summary>
         private void Initialize()
         {
+            AntiDouble = false;
             Controller.Initialize();
             GetControllerStatus();
             lightcontrol();
@@ -96,7 +102,7 @@ namespace DefuseIT_Game
             var BombB = Trivia.Bombs[1]; //Red
             var BombC = Trivia.Bombs[2]; //Green
 
-            while (true)
+            while (AntiDouble == false)
             {
                 if (GameManager.Color != GameManager.LastColor)
                 {
@@ -109,6 +115,7 @@ namespace DefuseIT_Game
                 }
             }
 
+            if (AntiDouble == true) return;
 
             Controller.DisconnectGamepad();
             Socket.DisconnectStream();
@@ -353,6 +360,7 @@ namespace DefuseIT_Game
         //Refresh Button Control Scherm Only
         private void Refresh_Click(object sender, MouseEventArgs e)
         {
+            AntiDouble = true;
             Controller.DisconnectGamepad();         //Disconnect Gamepad Thread
             Socket.DisconnectStream();              //Disconnect van Socket Stream
             ControlScherm obj = new ControlScherm();
