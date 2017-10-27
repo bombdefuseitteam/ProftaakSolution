@@ -85,7 +85,7 @@ namespace DefuseIT_Game
             UiEvents();
             TriviaInitialize();
             GetSocketStatus();
-            ScoreM.Initialize(true); //Remove
+            ScoreM.Initialize(false, false); //Remove
             StartWorkers();
 
         }
@@ -558,6 +558,7 @@ namespace DefuseIT_Game
         /// </summary>
         private void UiEvents()
         {
+            ScoreLabel.Text = "Score: " + GameManager.Score;
             //Remove Borders from Buttons.
             CloseApplication.FlatAppearance.BorderSize = 0;
             CloseApplication.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);

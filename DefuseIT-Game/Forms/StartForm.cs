@@ -21,6 +21,8 @@ namespace DefuseIT_Game
         /// BackgroundWorker (Listen to Controller)
         /// </summary>
         BackgroundWorker w1 = new BackgroundWorker();
+
+        GameManager gm = new GameManager();
         
 
         /// <summary>
@@ -34,6 +36,7 @@ namespace DefuseIT_Game
             GetControllerStatus();
             StartWorker();
             lightcontrol();
+            gm.Initialize(true, true);
         }
 
         /// <summary>
@@ -170,6 +173,7 @@ namespace DefuseIT_Game
         {
             MethodInvoker startForm = delegate
             {
+                GameManager.Score = 1000;
                 w1.CancelAsync();                       //Kill Gamepad Listener Backgroundworker
                 Controller.DisconnectGamepad();         //Kill Gamepad Backgroundworker
                 ControlScherm obj = new ControlScherm();

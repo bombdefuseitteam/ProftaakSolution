@@ -67,7 +67,7 @@ namespace DefuseIT_Game
             Socket.Initialize();
             UiEvents();
             GetSocketStatus();
-            GameEvent.Initialize(true);
+            GameEvent.Initialize(false, false);
             try
             {
                 WebBrowser.Navigate(Properties.Settings.Default.WebcamUrl);
@@ -245,7 +245,7 @@ namespace DefuseIT_Game
         /// </summary>
         private void UiEvents()
         {
-            
+            ScoreLabel.Text = "Score: " + GameManager.Score;
             //Remove Borders from Buttons.
             CloseApplication.FlatAppearance.BorderSize = 0;
             CloseApplication.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
@@ -292,6 +292,8 @@ namespace DefuseIT_Game
         /// <param name="e"></param>
         private void RestartGame_Click(object sender, EventArgs e)
         {
+            AntiDouble = true;
+            Controller.DisconnectGamepad();         //Disconnect Gamepad Thread
             Socket.DisconnectStream();                  //Disconnect van de Socket Stream
             StartScherm obj = new StartScherm();
             Hide();

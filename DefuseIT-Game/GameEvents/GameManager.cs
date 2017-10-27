@@ -50,13 +50,13 @@ namespace DefuseIT_Game.GameEvents
         /// <summary>
         /// Initiliaze scoremanager
         /// </summary>
-        internal void Initialize(bool setscore)
+        internal void Initialize(bool setscore, bool startworker)
         {
             if (setscore)
             {
                 Score = 1000; //Base Score
             }
-
+            if (startworker)
             StartWorker();
         }
 
