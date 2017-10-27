@@ -244,7 +244,7 @@ namespace DefuseIT_Game
 
             while (Controller.IsConnected)
             {
-                int? X = Controller.LefthumbX;
+                int? X = Controller.LefthumbX2;
                 int? Y = Controller.LeftThumbY;
 
                 if (w5.CancellationPending == true) //Check for Cancellation Request

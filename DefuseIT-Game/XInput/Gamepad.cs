@@ -33,6 +33,11 @@ namespace DefuseIT_Game.XInput
         internal int? LefthumbX;
 
         /// <summary>
+        /// LeftThumbX value
+        /// </summary>
+        internal int? LefthumbX2;
+
+        /// <summary>
         /// LeftThumbY value
         /// </summary>
         internal int? LeftThumbY;
@@ -127,6 +132,7 @@ namespace DefuseIT_Game.XInput
                     if (state.LeftThumbX > deadzone || state.LeftThumbX < -deadzone)
                     {
                         LefthumbX = NormalizeValue(state.LeftThumbX);
+                        LefthumbX2 = NormalizeValue(state.LeftThumbX);
                         Thread.Sleep(delay);
                     }
                     else
@@ -180,7 +186,7 @@ namespace DefuseIT_Game.XInput
             {
                 input /= 3000;
                 input += 10;
-                input = input * (255 / 10);
+                input = 255 + ((255/ 10) * input);
             }
 
             if (input < 0)
@@ -188,6 +194,22 @@ namespace DefuseIT_Game.XInput
                 input /= 3000;
                 input += 11;
                 input = 255 - ((255/10) * input);
+            }
+            return input;
+        }
+
+        private int NormalizeValue2(int input)
+        {
+            if (input > 0)
+            {
+                input /= 3000;
+                input += 10;
+            }
+
+            if (input < 0)
+            {
+                input /= 3000;
+                input += 11;
             }
             return input;
         }
