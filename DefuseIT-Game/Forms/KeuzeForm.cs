@@ -54,6 +54,9 @@ namespace DefuseIT_Game
         /// </summary>
         string CurrentPosition;
 
+        /// <summary>
+        /// Anti Double Form (Vorige Form kan pas closen als er een nieuwe aangemaakt is)
+        /// </summary>
         bool AntiDouble = false;
 
         /// <summary>
@@ -483,6 +486,7 @@ namespace DefuseIT_Game
         /// </summary>
         private void WrongAnswer(PictureBox pb, Image img)
         {
+            GameManager.Fouten += 1;
             MethodInvoker Label = delegate
             {
                 GameManager.Score -= 50;
@@ -493,6 +497,7 @@ namespace DefuseIT_Game
             Invoke(Label);
 
             Thread.Sleep(1000);
+
             MethodInvoker Label2 = delegate
             {
                 VraagLabel.Text = Question[0].ToUpper();

@@ -16,6 +16,7 @@ namespace DefuseIT_Game.GameEvents
         /// </summary>
         internal static int Score;
 
+        internal static bool KeepCounting = true;
         /// <summary>
         /// Time
         /// </summary>
@@ -74,7 +75,7 @@ namespace DefuseIT_Game.GameEvents
         private void AssignScore(object sender, DoWorkEventArgs e)
         {
 
-            while (Score > 0)
+            while (Score > 0 && KeepCounting)
             {
                 if (w7.CancellationPending == true) //Check for Cancellation Request
                 {

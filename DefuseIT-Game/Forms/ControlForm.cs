@@ -41,6 +41,11 @@ namespace DefuseIT_Game
         /// </summary>
         bool AntiDouble;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        bool DisplayEndscreen = false;
+
         BackgroundWorker w8 = new BackgroundWorker();
 
         /// <summary>
@@ -98,14 +103,22 @@ namespace DefuseIT_Game
 
         private void GetColor(object sender, DoWorkEventArgs e)
         {
-            var BombA = Trivia.Bombs[0]; //Blue
-            var BombB = Trivia.Bombs[1]; //Red
-            var BombC = Trivia.Bombs[2]; //Green
 
             while (AntiDouble == false)
             {
                 if (GameManager.Color != GameManager.LastColor)
                 {
+                    if (GameManager.Color == "Blue")
+                        Trivia.Bombs[0] = true;
+                    if (GameManager.Color == "Green")
+                        Trivia.Bombs[1] = true;
+                    if (GameManager.Color == "Yellow")
+                        Trivia.Bombs[2] = true;
+
+                    if (GameManager.Color == "Red" && Trivia.Bombs[0] == true && Trivia.Bombs[1] == true && Trivia.Bombs[2] == true)
+                    {
+                        DisplayEndscreen = true;
+                    }
                     if (w8.CancellationPending == true) //Check for Cancellation Request
                     {
                         e.Cancel = true;
@@ -114,6 +127,22 @@ namespace DefuseIT_Game
                     break;
                 }
             }
+
+
+            if (DisplayEndscreen == true)
+            {
+                GameManager.KeepCounting = false;
+                w6.CancelAsync();
+                MessageBox.Show("Hoeraah! Je hebt het spel uitgespeeld, goed bezig joh. Je score was: " + GameManager.Score + ", aantal fouten: " + GameManager.Fouten +  " en je tijd was: " + GameManager.Time + " seconden", "DefuseIT-Game");
+                return;
+            }
+
+
+
+
+
+
+
 
             if (AntiDouble == true) return;
 
