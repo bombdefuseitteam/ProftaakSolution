@@ -61,7 +61,16 @@ namespace DefuseIT_Game
             UiEvents();
             GetSocketStatus();
             GameEvent.Initialize(true);
-            WebBrowser.Navigate(Properties.Settings.Default.WebcamUrl);
+            try
+            {
+                WebBrowser.Navigate(Properties.Settings.Default.WebcamUrl);
+            }
+            catch (Exception)
+            {
+
+                
+            }
+
             var cv = Xpcom.QueryInterface<nsIDocShell>(WebBrowser.WebBrowserFocus).GetContentViewerAttribute(); cv.SetFullZoomAttribute((float)1.6);
             StartWorker();
             
