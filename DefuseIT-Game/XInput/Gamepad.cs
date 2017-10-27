@@ -142,7 +142,7 @@ namespace DefuseIT_Game.XInput
 
                     if (state.LeftThumbY > deadzone || state.LeftThumbY < -deadzone)
                     {
-                        LeftThumbY = NormalizeValue(state.LeftThumbY);
+                        LeftThumbY = NormalizeValue2(state.LeftThumbY);
                         Thread.Sleep(delay / 2);
                     }
                     else
