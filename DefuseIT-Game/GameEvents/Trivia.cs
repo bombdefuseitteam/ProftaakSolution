@@ -14,6 +14,17 @@ namespace DefuseIT_Game.GameEvents
         /// </summary>
         internal static Random Randomizer = new Random();
 
+        internal static string FixedSizeQuestion(string input)
+        {
+            string newline = input;
+            string lines = string.Join(Environment.NewLine, newline.Split()
+                .Select((word, index) => new { word, index })
+                .GroupBy(x => x.index / 9)
+                .Select(grp => string.Join(" ", grp.Select(x => x.word))));
+
+            return newline.ToUpper();
+        }
+
         /// <summary>
         /// Question Template: Vraag, A, B, C, D, CorrectAntwoord
         /// </summary>
@@ -103,7 +114,7 @@ namespace DefuseIT_Game.GameEvents
             "07", //D
             "06"  //Antwoord
         };
-
+       
         internal static string[] Question10 = new string[] {
             "Hoe noem je het kaartje in je telefoon dat gekoppeld is aan je telefoonnummer?", //Vraag
             "Smartphonecard", //A

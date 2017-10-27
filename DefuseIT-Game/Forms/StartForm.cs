@@ -29,7 +29,6 @@ namespace DefuseIT_Game
         public StartScherm()
         {
             InitializeComponent();
-            Xpcom.Initialize("Firefox");
             UiEvents();
             Controller.Initialize();
             GetControllerStatus();
@@ -171,12 +170,12 @@ namespace DefuseIT_Game
         {
             MethodInvoker startForm = delegate
             {
-                Hide();
                 w1.CancelAsync();                       //Kill Gamepad Listener Backgroundworker
                 Controller.DisconnectGamepad();         //Kill Gamepad Backgroundworker
-                ControlScherm cS = new ControlScherm();
-                cS.Closed += (s, args) => Close();
-                cS.Show();
+                ControlScherm obj = new ControlScherm();
+                Hide();
+                obj.Closed += (s, args) => Close();
+                obj.Show();
             };
             Invoke(startForm);
         }

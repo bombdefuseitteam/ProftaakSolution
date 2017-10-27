@@ -141,9 +141,9 @@
             // VraagLabel
             // 
             this.VraagLabel.Font = new System.Drawing.Font("Back In The USSR DL", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VraagLabel.Location = new System.Drawing.Point(349, 316);
+            this.VraagLabel.Location = new System.Drawing.Point(348, 283);
             this.VraagLabel.Name = "VraagLabel";
-            this.VraagLabel.Size = new System.Drawing.Size(1228, 72);
+            this.VraagLabel.Size = new System.Drawing.Size(1223, 135);
             this.VraagLabel.TabIndex = 10;
             this.VraagLabel.Text = "Vraag";
             this.VraagLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

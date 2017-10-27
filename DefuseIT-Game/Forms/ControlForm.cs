@@ -45,6 +45,7 @@ namespace DefuseIT_Game
         {
             InitializeComponent();
             //WindowState = FormWindowState.Maximized; < Uncomment for P1 Event
+            Xpcom.Initialize("Firefox");
             Initialize();
 
         }
@@ -104,22 +105,25 @@ namespace DefuseIT_Game
                         e.Cancel = true;
                         break;
                     }
-
-                    MethodInvoker startForm = delegate
-                    {
-                        Hide();
-                        Controller.DisconnectGamepad();
-                        Socket.DisconnectStream();
-                        KeuzeScherm cS = new KeuzeScherm();
-                        cS.Closed += (s, args) => Close();
-                        cS.Show();
-                        w8.CancelAsync();
-                    };
-                    Invoke(startForm);
-                    
+                    break;
                 }
             }
-            
+
+
+            Controller.DisconnectGamepad();
+            Socket.DisconnectStream();
+
+            MethodInvoker startForm = delegate
+            {
+                Hide();
+                w8.CancelAsync();
+                KeuzeScherm obj = new KeuzeScherm();
+                Hide();
+                obj.Closed += (s, args) => Close();
+                obj.Show();
+            };
+            Invoke(startForm);
+            return;
         }
 
         /// <summary>
@@ -281,11 +285,11 @@ namespace DefuseIT_Game
         /// <param name="e"></param>
         private void RestartGame_Click(object sender, EventArgs e)
         {
-            Hide();
             Socket.DisconnectStream();                  //Disconnect van de Socket Stream
-            StartScherm sScherm = new StartScherm();
-            sScherm.Closed += (s, args) => Close();
-            sScherm.Show();
+            StartScherm obj = new StartScherm();
+            Hide();
+            obj.Closed += (s, args) => Close();
+            obj.Show();
         }
 
         //Maximize Button.
@@ -349,12 +353,12 @@ namespace DefuseIT_Game
         //Refresh Button Control Scherm Only
         private void Refresh_Click(object sender, MouseEventArgs e)
         {
-            Hide();
             Controller.DisconnectGamepad();         //Disconnect Gamepad Thread
             Socket.DisconnectStream();              //Disconnect van Socket Stream
-            ControlScherm sScherm = new ControlScherm();
-            sScherm.Closed += (s, args) => Close();
-            sScherm.Show();
+            ControlScherm obj = new ControlScherm();
+            Hide();
+            obj.Closed += (s, args) => Close();
+            obj.Show();
         }
 
         private void Refresh_MouseLeave(object sender, EventArgs e)

@@ -200,7 +200,8 @@ namespace DefuseIT_Game
             if (answeredquestions < 3)
             {
                 Question = RandomizedQuestion();
-                VraagLabel.Text = Question[0];
+                string QLabel = Question[0].ToUpper();
+                VraagLabel.Text = Trivia.FixedSizeQuestion(QLabel.ToUpper());
                 AntwoordLabelA.Text = Question[1];
                 AntwoordLabelB.Text = Question[2];
                 AntwoordLabelC.Text = Question[3];
@@ -454,7 +455,7 @@ namespace DefuseIT_Game
 
             MethodInvoker Label2 = delegate
             {
-                VraagLabel.Text = Question[0];
+                VraagLabel.Text = Question[0].ToUpper();
                 VraagLabel.ForeColor = Yellow;
             };
             Invoke(Label2);
@@ -464,13 +465,14 @@ namespace DefuseIT_Game
 
             MethodInvoker Control = delegate
             {
-                Hide();
+
                 w5.CancelAsync();
                 w7.CancelAsync();
                 Controller.DisconnectGamepad();
-                ControlScherm cS = new ControlScherm();
-                cS.Closed += (s, args) => Close();
-                cS.Show();
+                ControlScherm obj = new ControlScherm();
+                Hide();
+                obj.Closed += (s, args) => Close();
+                obj.Show();
             };
             Invoke(Control);
         }
@@ -492,7 +494,7 @@ namespace DefuseIT_Game
             Thread.Sleep(1000);
             MethodInvoker Label2 = delegate
             {
-                VraagLabel.Text = Question[0];
+                VraagLabel.Text = Question[0].ToUpper();
                 VraagLabel.ForeColor = Yellow;
             };
             Invoke(Label2);
@@ -615,9 +617,10 @@ namespace DefuseIT_Game
         {
             Hide();
             Controller.DisconnectGamepad();
-            StartScherm sScherm = new StartScherm();
-            sScherm.Closed += (s, args) => Close();
-            sScherm.Show();
+            StartScherm obj = new StartScherm();
+            Hide();
+            obj.Closed += (s, args) => Close();
+            obj.Show();
         }
 
         //Maximize Button.
