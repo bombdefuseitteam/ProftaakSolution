@@ -48,6 +48,8 @@ namespace DefuseIT_Game
             lightcontrol();
             SetScoreList();
             gm.Initialize(true, true);
+
+            AudioManager.PlayAudio(true, Properties.Resources.BG3);
         }
 
         /// <summary>

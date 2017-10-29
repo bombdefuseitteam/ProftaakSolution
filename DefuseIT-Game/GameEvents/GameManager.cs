@@ -45,7 +45,7 @@ namespace DefuseIT_Game.GameEvents
         /// <summary>
         /// Score Timer
         /// </summary>
-        BackgroundWorker w7 = new BackgroundWorker();
+        internal static BackgroundWorker w7 = new BackgroundWorker();
 
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace DefuseIT_Game.GameEvents
             {
                 Score = 1000; //Base Score
             }
-            if (startworker)
+            if (startworker && !w7.IsBusy)
             StartWorker();
         }
 
@@ -66,7 +66,6 @@ namespace DefuseIT_Game.GameEvents
         /// </summary>
         private void StartWorker()
         {
-
             w7.DoWork += AssignScore;
             w7.WorkerSupportsCancellation = true;
             w7.RunWorkerAsync();

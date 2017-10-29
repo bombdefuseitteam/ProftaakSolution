@@ -97,6 +97,7 @@
     <Compile Include="Forms\StartForm.Designer.cs">
       <DependentUpon>StartForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameEvents\AudioManager.cs" />
     <Compile Include="GameEvents\Trivia.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -197,6 +198,9 @@
     <Content Include="Firefox\sandboxbroker.dll" />
     <Content Include="Firefox\softokn3.dll" />
     <Content Include="Firefox\xul.dll" />
+    <None Include="Resources\BG1.wav" />
+    <None Include="Resources\BG2.wav" />
+    <None Include="Resources\BG3.wav" />
     <None Include="Resources\Bevestig.png" />
     <None Include="Resources\BevestigHover.png" />
     <None Include="Resources\AntwoordenBCorrect.png" />
