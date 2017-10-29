@@ -198,7 +198,7 @@ namespace DefuseIT_Game.GameEvents
         };
 
         internal static string[] Question20 = new string[] {
-            "Welke kleur heeft het poppetje in het logo van Android, //Vraag
+            "Welke kleur heeft het poppetje in het logo van Android",
             "Blauw", //A
             "Groen", //B
             "Rood", //C
