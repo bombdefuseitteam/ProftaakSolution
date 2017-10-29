@@ -100,7 +100,7 @@ namespace DefuseIT_Game
             {
                 dmxcolor.allchannelsoff();
                 dmxcolor.alldimmer(4, 255);
-                dmxeffects.idle(4, "on");
+                dmxeffects.idle(5, "on");
             }
 
         }

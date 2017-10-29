@@ -42,7 +42,14 @@ namespace DefuseIT_Game
         /// W7 Refresh Score
         /// </summary>
         BackgroundWorker w7 = new BackgroundWorker();
-        
+
+        /// <summary>
+        /// DMX light control
+        /// </summary>
+        internal effects dmxeffects = new effects();
+        internal color dmxcolor = new color();
+        internal dmxcon dmxcon = new dmxcon();
+
 
         /// <summary>
         /// Het geselecteerde antwoord
@@ -440,6 +447,10 @@ namespace DefuseIT_Game
         /// </summary>
         private void CorrectAnswer(PictureBox pb, Image img)
         {
+            if (dmxcon.dmx.IsOpen)
+            {
+                dmxeffects.correctanswer(4, 3, "on");
+            }
             MethodInvoker Label = delegate
             {
                 
@@ -450,6 +461,11 @@ namespace DefuseIT_Game
             };
             Invoke(Label);
             Thread.Sleep(1000);
+
+            if (dmxcon.dmx.IsOpen)
+            {
+                dmxeffects.correctanswer(4, 3, "off");
+            }
 
             MethodInvoker Next = delegate
             {
@@ -486,7 +502,11 @@ namespace DefuseIT_Game
         /// </summary>
         private void WrongAnswer(PictureBox pb, Image img)
         {
-            GameManager.Fouten += 1;
+            if (dmxcon.dmx.IsOpen)
+            {
+                dmxeffects.wronganswer(4, 3,"on");
+            }
+            GameManager.Fouten += 3;
             MethodInvoker Label = delegate
             {
                 GameManager.Score -= 50;
@@ -498,6 +518,10 @@ namespace DefuseIT_Game
 
             Thread.Sleep(1000);
 
+            if (dmxcon.dmx.IsOpen)
+            {
+                dmxeffects.wronganswer(4, 3, "off");
+            }
             MethodInvoker Label2 = delegate
             {
                 VraagLabel.Text = Question[0].ToUpper();

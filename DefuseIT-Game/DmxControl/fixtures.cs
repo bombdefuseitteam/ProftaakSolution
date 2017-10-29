@@ -47,6 +47,7 @@ namespace dmxcontrol
         }
         int[] Channels(int lightfixt, int add)
         {
+            lightfixt = lightfixt + 1;
             int[] channelnumbers = new int[lightfixt];
             for (int i = 0; i < lightfixt; i++)
             {

@@ -18,6 +18,11 @@ namespace dmxcontrol
                 dmxcon.dmx.SetSingleChannel(chan, val);
             }
         }
+        internal void singleproc(int channel, byte val)
+        {
+            short chan = Convert.ToInt16(channel);
+            dmxcon.dmx.SetSingleChannel(chan, val);
+        }
         internal static void allchannelsoff()
         {
             for (int i = 0; i < 27; i++)

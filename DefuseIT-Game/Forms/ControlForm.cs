@@ -96,7 +96,17 @@ namespace DefuseIT_Game
             if (dmxcon.dmx.IsOpen)
             {
                 dmxeffects.idle(4, "off");
-                dmxcolor.allwhite(4, 255);
+                for (int i = 0; i < 2; i++)
+                {
+                    if (Trivia.Bombs[i])
+                    {
+                        dmxeffects.bombsdone(4, i);
+                    }
+                    else
+                    {
+                       dmxcolor.allwhite(4, 255);
+                    }
+                }
             }
 
         }

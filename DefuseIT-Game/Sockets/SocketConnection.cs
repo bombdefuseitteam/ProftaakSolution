@@ -6,7 +6,6 @@ using DefuseIT_Game.XInput;
 using DefuseIT_Game.GameEvents;
 using System.Threading;
 using System.Linq;
-using dmxcontrol;
 using System.Windows.Forms;
 
 namespace DefuseIT_Game.Sockets
@@ -174,56 +173,11 @@ namespace DefuseIT_Game.Sockets
                     {
                         GameManager.Color = ReturnData;
                         SendMessage("Color Received: " + ReturnData);
-                        dmxcon dmxcon = new dmxcon();
-                        color color = new color();
-                        if (dmxcon.dmx.IsOpen)
-                        {
-
-                            ColorChangerDmx(ReturnData, dmxcon, color);
-                        }
 
                     }
 
                     GameManager.LastColor = ReturnData;
                 }
-            }
-        }
-
-        /// <summary>
-        /// Change DMX Color
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="dmxcon"></param>
-        /// <param name="color"></param>
-        private void ColorChangerDmx(string data, dmxcon dmxcon, color color)
-        {
-            switch (data)
-            {
-                case "Blue":
-                    {
-                        color.allwhite(4, 0);
-                        color.allblue(4, 255);
-                    }
-                    break;
-                case "Green":
-                    {
-                        color.allwhite(4, 0);
-                        color.allgreen(4, 255);
-                    }
-                    break;
-                case "Yellow":
-                    {
-                        color.allwhite(4, 0);
-                        color.allwhite(4, 255);
-                    }
-                    break;
-                case "Red":
-                    {
-                        color.allwhite(4, 0);
-                        color.allred(4, 255);
-                    }
-                    break;
-
             }
         }
 
