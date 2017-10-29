@@ -32,6 +32,8 @@ namespace DefuseIT_Game.GameEvents
         /// </summary>
         internal static string[] Colors = { "Blue", "Green", "Yellow", "Red" };
 
+        internal static List<String> PreviousColors = new List<string>();
+
         /// <summary>
         /// Last Found Color
         /// </summary>

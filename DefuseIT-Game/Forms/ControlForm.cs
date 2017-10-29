@@ -72,7 +72,6 @@ namespace DefuseIT_Game
             Socket.Initialize();
             UiEvents();
             GetSocketStatus();
-            GameEvent.Initialize(false, false);
             try
             {
                 WebBrowser.Navigate(Properties.Settings.Default.WebcamUrl);
@@ -116,19 +115,35 @@ namespace DefuseIT_Game
 
             while (AntiDouble == false)
             {
-                if (GameManager.Color != GameManager.LastColor)
+                if (!GameManager.PreviousColors.Contains(GameManager.Color) && GameManager.Colors.Contains(GameManager.Color))
                 {
                     if (GameManager.Color == "Blue")
+                    {
                         Trivia.Bombs[0] = true;
-                    if (GameManager.Color == "Green")
-                        Trivia.Bombs[1] = true;
-                    if (GameManager.Color == "Yellow")
-                        Trivia.Bombs[2] = true;
+                        GameManager.PreviousColors.Add("Blue");
+                    }
 
-                    if (GameManager.Color == "Red" && Trivia.Bombs[0] == true && Trivia.Bombs[1] == true && Trivia.Bombs[2] == true)
+                    if (GameManager.Color == "Green")
+                    {
+                        GameManager.PreviousColors.Add("Green");
+                        Trivia.Bombs[1] = true;
+                    }
+
+                    if (GameManager.Color == "Yellow")
+                    {
+                        GameManager.PreviousColors.Add("Yellow");
+                        Trivia.Bombs[2] = true;
+                    }
+
+                    if (GameManager.Color == "Red" && Trivia.Bombs[0] && Trivia.Bombs[1] && Trivia.Bombs[2])
                     {
                         DisplayEndscreen = true;
+                        GameManager.PreviousColors.Add("Yellow");
                     }
+
+                    if (GameManager.Color == "Red" && Trivia.Bombs.Contains(false))
+                        return;
+
                     if (w8.CancellationPending == true) //Check for Cancellation Request
                     {
                         e.Cancel = true;
@@ -266,10 +281,8 @@ namespace DefuseIT_Game
                     args.Cancel = true;
                     break;
                 }
-
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
                 RefreshScore();
-
 
             }
         }

@@ -8,6 +8,7 @@ using DefuseIT_Game.SQL;
 using System.ComponentModel;
 using dmxcontrol;
 using Gecko;
+using System.Collections.Generic;
 
 namespace DefuseIT_Game
 {
@@ -47,6 +48,9 @@ namespace DefuseIT_Game
             StartWorker();
             lightcontrol();
             SetScoreList();
+            GameManager.Color = "None";
+            GameManager.KeepCounting = true;
+            GameManager.PreviousColors.Clear();
             gm.Initialize(true, true);
 
             AudioManager.PlayAudio(true, Properties.Resources.BG3);
@@ -205,12 +209,14 @@ namespace DefuseIT_Game
         /// <param name="e"></param>
         private void StartButton_Click(object sender, MouseEventArgs e)
         {
+
+            GameManager.Score = 1000;
+            GameManager.Time = 0;
+            GameManager.Fouten = 0;
+            Trivia.Bombs[0] = false; Trivia.Bombs[1] = false; Trivia.Bombs[2] = false;
+
             MethodInvoker startForm = delegate
             {
-                GameManager.Score = 1000;
-                GameManager.Time = 0;
-                GameManager.Fouten = 0;
-                Trivia.Bombs = new bool[] { false, false, false };
                 w1.CancelAsync();                       //Kill Gamepad Listener Backgroundworker
                 Controller.DisconnectGamepad();         //Kill Gamepad Backgroundworker
                 ControlScherm obj = new ControlScherm();

@@ -506,7 +506,7 @@ namespace DefuseIT_Game
             {
                 dmxeffects.wronganswer(4, 3,"on");
             }
-            GameManager.Fouten += 3;
+            GameManager.Fouten += 1;
             MethodInvoker Label = delegate
             {
                 GameManager.Score -= 50;
