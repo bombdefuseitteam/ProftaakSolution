@@ -97,8 +97,43 @@ namespace DefuseIT_Game
             GetSocketStatus();
             ScoreM.Initialize(false, false); //Remove
             StartWorkers();
+            lightcontrol();
 
         }
+        /// <summary>
+        /// Get Active light
+        /// </summary>
+        /// <returns></returns>
+        private int LightFixt()
+        {
+            int lightfixture;
+            if (GameManager.Color == "Blue")
+                lightfixture = 0;
+            else if (GameManager.Color == "Green")
+                lightfixture = 1;
+            else if (GameManager.Color == "Yellow")
+                lightfixture = 2;
+            else
+            {
+                lightfixture = 3;
+            }
+            return lightfixture;
+        }
+        /// <summary>
+        /// DMX Control
+        /// </summary>
+        private void lightcontrol()
+        {
+            if (dmxcon.dmx.IsOpen)
+            {
+                dmxcolor.allchannelsoff();
+                dmxcolor.alldimmer(4, 255);
+                dmxcolor.singlewhite(4, LightFixt(), 255);
+            }
+
+        }
+
+
 
         /// <summary>
         /// UI Color Hexcodes
@@ -449,7 +484,7 @@ namespace DefuseIT_Game
         {
             if (dmxcon.dmx.IsOpen)
             {
-                dmxeffects.correctanswer(4, 3, "on");
+                dmxeffects.correctanswer(4, LightFixt(), "on");
             }
             MethodInvoker Label = delegate
             {
@@ -464,7 +499,7 @@ namespace DefuseIT_Game
 
             if (dmxcon.dmx.IsOpen)
             {
-                dmxeffects.correctanswer(4, 3, "off");
+                dmxeffects.correctanswer(4, LightFixt(), "off");
             }
 
             MethodInvoker Next = delegate
@@ -504,7 +539,7 @@ namespace DefuseIT_Game
         {
             if (dmxcon.dmx.IsOpen)
             {
-                dmxeffects.wronganswer(4, 3,"on");
+                dmxeffects.wronganswer(4, LightFixt(), "on");
             }
             GameManager.Fouten += 1;
             MethodInvoker Label = delegate
@@ -520,7 +555,7 @@ namespace DefuseIT_Game
 
             if (dmxcon.dmx.IsOpen)
             {
-                dmxeffects.wronganswer(4, 3, "off");
+                dmxeffects.wronganswer(4, LightFixt(), "off");
             }
             MethodInvoker Label2 = delegate
             {

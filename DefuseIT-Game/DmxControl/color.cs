@@ -35,6 +35,12 @@ namespace dmxcontrol
             int[] channels = fixtures.WhiteChannels(fixt);
             dmxcon.proc(fixt, val, channels);
         }
+        internal void singlewhite(int fixt, int fixtnum, byte val)
+        {
+            int[] channels = fixtures.WhiteChannels(fixt);
+            int whitechannel = channels[fixtnum];
+            dmxcon.singleproc(whitechannel, val);
+        }
         internal void allchannelsoff()
         {
             dmxcon.allchannelsoff();

@@ -87,6 +87,9 @@ namespace DefuseIT_Game
             
         }
 
+        /// <summary>
+        /// Controlls dmx lights
+        /// </summary>
         internal effects dmxeffects = new effects();
         internal color dmxcolor = new color();
         internal dmxcon dmxcon = new dmxcon();
@@ -95,17 +98,19 @@ namespace DefuseIT_Game
             if (dmxcon.dmx.IsOpen)
             {
                 dmxeffects.idle(4, "off");
-                for (int i = 0; i < 2; i++)
+                for (int i = 0; i < 3; i++)
                 {
                     if (Trivia.Bombs[i])
                     {
                         dmxeffects.bombsdone(4, i);
+                        dmxcolor.singlewhite(4, i, 0);
                     }
                     else
                     {
-                       dmxcolor.allwhite(4, 255);
+                        dmxcolor.singlewhite(4, i, 255);
                     }
                 }
+                dmxcolor.singlewhite(4, 3, 255);
             }
 
         }
@@ -137,6 +142,7 @@ namespace DefuseIT_Game
 
                     if (GameManager.Color == "Red" && Trivia.Bombs[0] && Trivia.Bombs[1] && Trivia.Bombs[2])
                     {
+                        dmxeffects.bombsdone(4, 3);
                         DisplayEndscreen = true;
                         GameManager.PreviousColors.Add("Yellow");
                     }
