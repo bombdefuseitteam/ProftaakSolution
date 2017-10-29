@@ -129,22 +129,28 @@ namespace DefuseIT_Game
             }
 
 
-            if (DisplayEndscreen == true)
+            if (DisplayEndscreen)
             {
                 GameManager.KeepCounting = false;
                 w6.CancelAsync();
-                MessageBox.Show("Hoeraah! Je hebt het spel uitgespeeld, goed bezig joh. Je score was: " + GameManager.Score + ", aantal fouten: " + GameManager.Fouten +  " en je tijd was: " + GameManager.Time + " seconden", "DefuseIT-Game");
+
+                MethodInvoker EindForm = delegate
+                {
+                    Hide();
+                    Controller.DisconnectGamepad();
+                    Socket.DisconnectStream();
+                    w8.CancelAsync();
+                    EindScherm obj = new EindScherm();
+                    Hide();
+                    obj.Closed += (s, args) => Close();
+                    obj.Show();
+                };
+                Invoke(EindForm);
                 return;
             }
 
 
-
-
-
-
-
-
-            if (AntiDouble == true) return;
+            if (AntiDouble || DisplayEndscreen) return;
 
             Controller.DisconnectGamepad();
             Socket.DisconnectStream();

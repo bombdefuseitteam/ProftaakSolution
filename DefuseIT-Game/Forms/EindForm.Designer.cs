@@ -1,6 +1,6 @@
 ﻿namespace DefuseIT_Game
 {
-    partial class StartScherm
+    partial class EindScherm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartScherm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EindScherm));
             this.ControllerStatus = new System.Windows.Forms.PictureBox();
             this.Maximize = new System.Windows.Forms.Button();
             this.Minimize = new System.Windows.Forms.Button();
             this.CloseApplication = new System.Windows.Forms.Button();
-            this.StartButton = new System.Windows.Forms.PictureBox();
             this.AssemblyName = new System.Windows.Forms.Label();
             this.StartSchermBackground = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.ScoreListBox = new System.Windows.Forms.ListBox();
+            this.NaamTextBox = new System.Windows.Forms.TextBox();
+            this.EndScoreLabel = new System.Windows.Forms.Label();
+            this.BevestigBox = new System.Windows.Forms.PictureBox();
+            this.AantalFoutenLabel = new System.Windows.Forms.Label();
+            this.EindTijdLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StartButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartSchermBackground)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BevestigBox)).BeginInit();
             this.SuspendLayout();
             // 
             // ControllerStatus
@@ -95,15 +98,6 @@
             this.CloseApplication.UseVisualStyleBackColor = false;
             this.CloseApplication.Click += new System.EventHandler(this.CloseApplication_Click);
             // 
-            // StartButton
-            // 
-            this.StartButton.Image = ((System.Drawing.Image)(resources.GetObject("StartButton.Image")));
-            this.StartButton.Location = new System.Drawing.Point(622, 873);
-            this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(689, 188);
-            this.StartButton.TabIndex = 3;
-            this.StartButton.TabStop = false;
-            // 
             // AssemblyName
             // 
             this.AssemblyName.AutoSize = true;
@@ -134,40 +128,81 @@
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             // 
-            // ScoreListBox
+            // NaamTextBox
             // 
-            this.ScoreListBox.BackColor = System.Drawing.Color.DimGray;
-            this.ScoreListBox.Font = new System.Drawing.Font("Back In The USSR DL", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScoreListBox.FormattingEnabled = true;
-            this.ScoreListBox.ItemHeight = 36;
-            this.ScoreListBox.Location = new System.Drawing.Point(633, 347);
-            this.ScoreListBox.Name = "ScoreListBox";
-            this.ScoreListBox.Size = new System.Drawing.Size(678, 472);
-            this.ScoreListBox.TabIndex = 9;
+            this.NaamTextBox.BackColor = System.Drawing.Color.Black;
+            this.NaamTextBox.Font = new System.Drawing.Font("Back In The USSR DL", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NaamTextBox.Location = new System.Drawing.Point(566, 903);
+            this.NaamTextBox.Name = "NaamTextBox";
+            this.NaamTextBox.Size = new System.Drawing.Size(507, 63);
+            this.NaamTextBox.TabIndex = 9;
+            this.NaamTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // StartScherm
+            // EndScoreLabel
+            // 
+            this.EndScoreLabel.Font = new System.Drawing.Font("Back In The USSR DL", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EndScoreLabel.Location = new System.Drawing.Point(788, 560);
+            this.EndScoreLabel.Name = "EndScoreLabel";
+            this.EndScoreLabel.Size = new System.Drawing.Size(367, 80);
+            this.EndScoreLabel.TabIndex = 10;
+            this.EndScoreLabel.Text = "+SCORE+";
+            this.EndScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BevestigBox
+            // 
+            this.BevestigBox.Image = ((System.Drawing.Image)(resources.GetObject("BevestigBox.Image")));
+            this.BevestigBox.Location = new System.Drawing.Point(1147, 874);
+            this.BevestigBox.Name = "BevestigBox";
+            this.BevestigBox.Size = new System.Drawing.Size(434, 106);
+            this.BevestigBox.TabIndex = 11;
+            this.BevestigBox.TabStop = false;
+            // 
+            // AantalFoutenLabel
+            // 
+            this.AantalFoutenLabel.Font = new System.Drawing.Font("Back In The USSR DL", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AantalFoutenLabel.Location = new System.Drawing.Point(746, 706);
+            this.AantalFoutenLabel.Name = "AantalFoutenLabel";
+            this.AantalFoutenLabel.Size = new System.Drawing.Size(518, 45);
+            this.AantalFoutenLabel.TabIndex = 14;
+            this.AantalFoutenLabel.Text = "aantal Fouten: 10";
+            this.AantalFoutenLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // EindTijdLabel
+            // 
+            this.EindTijdLabel.Font = new System.Drawing.Font("Back In The USSR DL", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EindTijdLabel.Location = new System.Drawing.Point(746, 756);
+            this.EindTijdLabel.Name = "EindTijdLabel";
+            this.EindTijdLabel.Size = new System.Drawing.Size(518, 45);
+            this.EindTijdLabel.TabIndex = 15;
+            this.EindTijdLabel.Text = "Tijd: 180 seconden";
+            this.EindTijdLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // EindScherm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
-            this.Controls.Add(this.ScoreListBox);
+            this.Controls.Add(this.EindTijdLabel);
+            this.Controls.Add(this.AantalFoutenLabel);
+            this.Controls.Add(this.BevestigBox);
+            this.Controls.Add(this.EndScoreLabel);
+            this.Controls.Add(this.NaamTextBox);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.ControllerStatus);
             this.Controls.Add(this.Maximize);
             this.Controls.Add(this.Minimize);
             this.Controls.Add(this.CloseApplication);
-            this.Controls.Add(this.StartButton);
             this.Controls.Add(this.AssemblyName);
             this.Controls.Add(this.StartSchermBackground);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "StartScherm";
+            this.Name = "EindScherm";
             this.Text = "DefuseIT-Game";
             ((System.ComponentModel.ISupportInitialize)(this.ControllerStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.StartButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.StartSchermBackground)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BevestigBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,13 +212,16 @@
 
         private System.Windows.Forms.PictureBox StartSchermBackground;
         private System.Windows.Forms.Label AssemblyName;
-        private System.Windows.Forms.PictureBox StartButton;
         private System.Windows.Forms.Button CloseApplication;
         private System.Windows.Forms.Button Minimize;
         private System.Windows.Forms.Button Maximize;
         private System.Windows.Forms.PictureBox ControllerStatus;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.ListBox ScoreListBox;
+        private System.Windows.Forms.TextBox NaamTextBox;
+        private System.Windows.Forms.Label EndScoreLabel;
+        private System.Windows.Forms.PictureBox BevestigBox;
+        private System.Windows.Forms.Label AantalFoutenLabel;
+        private System.Windows.Forms.Label EindTijdLabel;
     }
 }
 

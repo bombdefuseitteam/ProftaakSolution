@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using DefuseIT_Game.XInput;
 using DefuseIT_Game.GameEvents;
+using DefuseIT_Game.SQL;
 using System.ComponentModel;
 using dmxcontrol;
 using Gecko;
@@ -22,7 +23,16 @@ namespace DefuseIT_Game
         /// </summary>
         BackgroundWorker w1 = new BackgroundWorker();
 
+        /// <summary>
+        /// GameManager
+        /// </summary>
         GameManager gm = new GameManager();
+
+        /// <summary>
+        /// SQL
+        /// </summary>
+        SQLConnection connection = new SQLConnection();
+        
         
 
         /// <summary>
@@ -36,6 +46,7 @@ namespace DefuseIT_Game
             GetControllerStatus();
             StartWorker();
             lightcontrol();
+            SetScoreList();
             gm.Initialize(true, true);
         }
 
@@ -60,6 +71,13 @@ namespace DefuseIT_Game
             SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
         }
 
+        /// <summary>
+        /// Set Highscore List
+        /// </summary>
+        private void SetScoreList()
+        {
+            ScoreListBox.DataSource = connection.Select();
+        }
         /// <summary>
         /// Haalt de status van de controller op.
         /// </summary>
@@ -125,6 +143,16 @@ namespace DefuseIT_Game
         }
 
         /// <summary>
+        /// UI Color Hexcodes
+        /// </summary>
+        Color Green = ColorTranslator.FromHtml("#00b526");
+        Color Yellow = ColorTranslator.FromHtml("#e7af03");
+        Color Gray = ColorTranslator.FromHtml("#2b2b2b");
+        Color LightGray = ColorTranslator.FromHtml("#969696");
+        Color DarkGray = ColorTranslator.FromHtml("#222222");
+        Color Red = ColorTranslator.FromHtml("#de0100");
+
+        /// <summary>
         /// Luistert naar alle UI events.
         /// </summary>
         private void UiEvents()
@@ -137,6 +165,10 @@ namespace DefuseIT_Game
             Maximize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
             Minimize.FlatAppearance.BorderSize = 0;
             Minimize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
+
+            ScoreListBox.BorderStyle = BorderStyle.None;
+            ScoreListBox.BackColor = Gray;
+            ScoreListBox.ForeColor = Yellow;
 
             //Drag Window.
             StartSchermBackground.MouseDown += StartSchermBackground_MouseDown;
@@ -174,6 +206,9 @@ namespace DefuseIT_Game
             MethodInvoker startForm = delegate
             {
                 GameManager.Score = 1000;
+                GameManager.Time = 0;
+                GameManager.Fouten = 0;
+                Trivia.Bombs = new bool[] { false, false, false };
                 w1.CancelAsync();                       //Kill Gamepad Listener Backgroundworker
                 Controller.DisconnectGamepad();         //Kill Gamepad Backgroundworker
                 ControlScherm obj = new ControlScherm();
