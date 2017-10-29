@@ -115,14 +115,6 @@ namespace DefuseIT_Game.GameEvents
             "06"  //Antwoord
         };
        
-        internal static string[] Question10 = new string[] {
-            "Hoe noem je het kaartje in je telefoon dat gekoppeld is aan je telefoonnummer?", //Vraag
-            "Smartphonecard", //A
-            "Smartcard", //B
-            "Slimkaart", //C
-            "Simkaart", //D
-            "Simkaart"  //Antwoord
-        };
 
         internal static string[] Question11 = new string[] {
             "Hoeveel dagen doet de aarde erover om 1 keer om de zon te draaien?", //Vraag
@@ -206,21 +198,12 @@ namespace DefuseIT_Game.GameEvents
         };
 
         internal static string[] Question20 = new string[] {
-            "Welke kleur heeft het poppetje in het logo van Android, het besturingsysteem van Google?", //Vraag
+            "Welke kleur heeft het poppetje in het logo van Android, //Vraag
             "Blauw", //A
             "Groen", //B
             "Rood", //C
             "Geel", //D
             "Groen"  //Antwoord
-        };
-
-        internal static string[] Question21 = new string[] {
-            "Welke kleur heeft geld spreekwoordelijk wanneer er geen belasting over is betaald?", //Vraag
-            "Wit", //A
-            "Grijs", //B
-            "Rood", //C
-            "Zwart", //D
-            "Zwart"  //Antwoord
         };
 
         internal static string[] Question22 = new string[] {
@@ -245,8 +228,8 @@ namespace DefuseIT_Game.GameEvents
         /// <summary>
         /// I heard you like arrays so we put an array inside of your array
         /// </summary>
-        internal static string[][] QuestionList = new string[][] { Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9,
-        Question10, Question11, Question12, Question13, Question14, Question15, Question16, Question17, Question18, Question19, Question20, Question21, Question22, Question23};
+        internal static string[][] QuestionList = new string[][] { Question1, Question2, Question3, Question4, Question5, Question6, Question7, Question8, Question9
+        , Question11, Question12, Question13, Question14, Question15, Question16, Question17, Question18, Question19, Question20, Question22, Question23};
 
         internal static List<Array> PreviousQuestions = new List<Array>();
 
