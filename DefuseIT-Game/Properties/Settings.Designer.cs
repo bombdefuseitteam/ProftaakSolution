@@ -25,7 +25,7 @@ namespace DefuseIT_Game.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("192.168.2.133")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.2.194")]
         public string IPAdressSocket {
             get {
                 return ((string)(this["IPAdressSocket"]));

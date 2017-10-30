@@ -609,7 +609,7 @@ namespace DefuseIT_Game
 
             for (int i = 0; ; i++)
             {
-                if (Socket.SocketClient.Connected && sw.ElapsedMilliseconds > 100)
+                if (sw.ElapsedMilliseconds > 100)
                 {
                     SocketStatus.Image = Properties.Resources.WIFICONNECTED;
                     break;
