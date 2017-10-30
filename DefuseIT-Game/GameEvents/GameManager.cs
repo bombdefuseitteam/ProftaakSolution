@@ -59,6 +59,7 @@ namespace DefuseIT_Game.GameEvents
             {
                 Score = 1000; //Base Score
             }
+            Thread.Sleep(1000);
             if (startworker && !w7.IsBusy)
             StartWorker();
         }
@@ -85,7 +86,7 @@ namespace DefuseIT_Game.GameEvents
                 }
 
                 Time += 1;
-                Score -= 2;
+                Score -= 15;
                 Thread.Sleep(1000);
             }
         }

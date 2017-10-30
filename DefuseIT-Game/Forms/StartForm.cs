@@ -53,7 +53,7 @@ namespace DefuseIT_Game
             GameManager.PreviousColors.Clear();
             gm.Initialize(true, true);
 
-            AudioManager.PlayAudio(true, Properties.Resources.BG3);
+            AudioManager.PlayAudio(true, Properties.Resources.BG1);
         }
 
         /// <summary>

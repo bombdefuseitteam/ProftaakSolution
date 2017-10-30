@@ -245,6 +245,7 @@ namespace DefuseIT_Game
             answeredquestions += 1;
             if (answeredquestions < 3)
             {
+                
                 Question = RandomizedQuestion();
                 string QLabel = Question[0].ToUpper();
                 VraagLabel.Text = Trivia.FixedSizeQuestion(QLabel.ToUpper());
@@ -254,6 +255,8 @@ namespace DefuseIT_Game
                 AntwoordLabelD.Text = Question[4];
                 Trivia.PreviousQuestions.Add(Question);
             }
+            else AudioManager.PlayAudio(false, Properties.Resources.Defused);
+
         }
 
         /// <summary>
@@ -489,7 +492,7 @@ namespace DefuseIT_Game
             MethodInvoker Label = delegate
             {
                 
-                GameManager.Score += 200;
+                GameManager.Score += 400;
                 VraagLabel.Text = "Correct! + 200 score";
                 VraagLabel.ForeColor = Green;
                 pb.Image = img;               
@@ -544,7 +547,7 @@ namespace DefuseIT_Game
             GameManager.Fouten += 1;
             MethodInvoker Label = delegate
             {
-                GameManager.Score -= 50;
+                GameManager.Score -= 150;
                 VraagLabel.Text = "ERROR! Try again! - 50 score";
                 VraagLabel.ForeColor = Color.Red;
                 pb.Image = img;
