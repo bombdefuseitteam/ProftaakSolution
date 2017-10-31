@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Net.Sockets;
-using System.Text;
-using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using DefuseIT_Game.XInput;
 using DefuseIT_Game.GameEvents;
+using DefuseIT_Game.SQL;
+using System.ComponentModel;
 using System.Threading;
 using System.Linq;
-using System.Windows.Forms;
 using System.Net;
+using System.Net.Sockets;
+using System.Text;
 
 namespace DefuseIT_Game.Sockets
 {
@@ -134,7 +137,7 @@ namespace DefuseIT_Game.Sockets
         }
 
         IPEndPoint ep = new IPEndPoint(IPAddress.Parse(Properties.Settings.Default.IPAdressSocket), Properties.Settings.Default.PortSocket); // endpoint where server is listening (testing localy)
-        IPEndPoint ep2 = new IPEndPoint(IPAddress.Any, 1337);
+        IPEndPoint ep2 = new IPEndPoint(IPAddress.Parse("192.168.2.194"), 1337);
 
         /// <summary>
         /// Start Socket Stream (Receive/Send)
@@ -144,25 +147,22 @@ namespace DefuseIT_Game.Sockets
             ListenClient = new UdpClient();
             SocketClient = new UdpClient();
             StartWorker4();
-            ListenClient.Client.Bind(new IPEndPoint(IPAddress.Any, 1337));
+            ListenClient.Client.Bind(new IPEndPoint(IPAddress.Parse("192.168.2.194"), 1337));
 
             while (true)
             {
-                try
+                //Checks for Cancellation
+                if (w3.CancellationPending == true)
                 {
-                    //Checks for Cancellation
-                    if (w3.CancellationPending == true)
-                    {
-                        args.Cancel = true;
-                        break;
-                    }
+                    args.Cancel = true;
+                    break;
+                }
 
 
-                    byte[] connection = ListenClient.Receive(ref ep2);
+                byte[] connection = ListenClient.Receive(ref ep2);
+                if (connection != null || connection.Length != 0)
+                {
                     string ReturnData = Encoding.ASCII.GetString(connection);
-
-
-
 
                     if (GameManager.Colors.Contains(ReturnData))
                     {
@@ -174,14 +174,9 @@ namespace DefuseIT_Game.Sockets
                         GameManager.LastColor = ReturnData;
                     }
                 }
-                catch (Exception)
-                {
-
-                    
-                }
-  
             }
 
+            ListenClient.Close();
         }
 
         /// <summary>
@@ -202,8 +197,6 @@ namespace DefuseIT_Game.Sockets
         /// </summary>
         internal void DisconnectStream()
         {
-
-            ListenClient.Close();
             SendMessage("[!] D3FCLIENT: Disconnected");
             w3.CancelAsync();
             if (w4.WorkerSupportsCancellation) //Omdat W4 aangemaakt wordt in W3

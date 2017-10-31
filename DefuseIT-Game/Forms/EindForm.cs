@@ -32,6 +32,7 @@ namespace DefuseIT_Game
         /// </summary>
         public EindScherm()
         {
+            KeyPreview = true;
             InitializeComponent();
             UiEvents();
             EndScoreLabel.Text = "+" + GameManager.Score + "+";
@@ -147,25 +148,36 @@ namespace DefuseIT_Game
             BevestigBox.MouseEnter += BevestigBox_MouseEnter;
             BevestigBox.MouseLeave += BevestigBox_MouseLeave;
             BevestigBox.Click += BevestigBox_Click;
+
+            NaamTextBox.KeyDown += NaamTextBox_KeyDown1;
+            
            
+        }
+
+        private void NaamTextBox_KeyDown1(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                BevestigBox_Click(BevestigBox, null);
+            }
         }
 
         private void BevestigBox_Click(object sender, EventArgs e)
         {
-                if (NaamTextBox.Text == "")
-                {
-                    MessageBox.Show("Geen naam gevonden! Heeft u wel uw naam ingevuld?", "DefuseIT-Game");
+            if (NaamTextBox.Text == "")
+            {
+                MessageBox.Show("Geen naam gevonden! Heeft u wel uw naam ingevuld?", "DefuseIT-Game");
 
-                }
-                else
-                {
-                    connection.Insert(NaamTextBox.Text, GameManager.Score);
-                    Hide();
-                    StartScherm obj = new StartScherm();
-                    Hide();
-                    obj.Closed += (s, args) => Close();
-                    obj.Show();
-                }
+            }
+            else
+            {
+                connection.Insert(NaamTextBox.Text, GameManager.Score);
+                Hide();
+                StartScherm obj = new StartScherm();
+                Hide();
+                obj.Closed += (s, args) => Close();
+                obj.Show();
+            }
 
             
         }

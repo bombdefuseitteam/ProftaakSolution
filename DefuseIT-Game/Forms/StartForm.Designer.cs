@@ -137,12 +137,13 @@
             // ScoreListBox
             // 
             this.ScoreListBox.BackColor = System.Drawing.Color.DimGray;
-            this.ScoreListBox.Font = new System.Drawing.Font("Back In The USSR DL", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScoreListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ScoreListBox.Font = new System.Drawing.Font("Back In The USSR DL", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ScoreListBox.FormattingEnabled = true;
-            this.ScoreListBox.ItemHeight = 36;
+            this.ScoreListBox.ItemHeight = 41;
             this.ScoreListBox.Location = new System.Drawing.Point(633, 347);
             this.ScoreListBox.Name = "ScoreListBox";
-            this.ScoreListBox.Size = new System.Drawing.Size(678, 472);
+            this.ScoreListBox.Size = new System.Drawing.Size(678, 451);
             this.ScoreListBox.TabIndex = 9;
             // 
             // StartScherm

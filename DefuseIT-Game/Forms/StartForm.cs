@@ -172,6 +172,9 @@ namespace DefuseIT_Game
             Minimize.FlatAppearance.BorderSize = 0;
             Minimize.FlatAppearance.BorderColor = Color.FromArgb(0, Color.Red);
 
+            ScoreListBox.SelectionMode = SelectionMode.None;
+            ScoreListBox.BorderStyle = BorderStyle.None;
+
             ScoreListBox.BorderStyle = BorderStyle.None;
             ScoreListBox.BackColor = Gray;
             ScoreListBox.ForeColor = Yellow;

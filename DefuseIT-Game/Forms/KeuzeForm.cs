@@ -255,7 +255,6 @@ namespace DefuseIT_Game
                 AntwoordLabelD.Text = Question[4];
                 Trivia.PreviousQuestions.Add(Question);
             }
-            else AudioManager.PlayAudio(false, Properties.Resources.Defused);
 
         }
 
